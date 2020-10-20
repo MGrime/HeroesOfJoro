@@ -1,0 +1,7 @@
+SIZE DEFINITIONS
+
+Small consitutes 15 x 15 max
+
+Medium goes from 16 -> 30
+
+Large 30 - > 45
