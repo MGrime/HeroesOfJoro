@@ -281,7 +281,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 2
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -592,7 +592,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 2
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -649,10 +649,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6524025687221987566}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6688058556319845488}
+  - {fileID: 75782796789034588}
   m_Father: {fileID: 7324951885846715835}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -783,55 +785,55 @@ MonoBehaviour:
   - m_Vertices: 0b0000000e00000012000000
   m_SharedTextures: []
   m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 16, y: 0, z: 0}
-  - {x: 0, y: 1, z: 0}
-  - {x: 16, y: 1, z: 0}
-  - {x: 16, y: 0, z: 0}
-  - {x: 16, y: 0, z: -4}
-  - {x: 16, y: 1, z: 0}
-  - {x: 16, y: 1, z: -4}
-  - {x: 16, y: 0, z: -4}
-  - {x: 0, y: 0, z: -4}
-  - {x: 16, y: 1, z: -4}
-  - {x: 0, y: 1, z: -4}
-  - {x: 0, y: 0, z: -4}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 1, z: -4}
-  - {x: 0, y: 1, z: 0}
-  - {x: 0, y: 1, z: 0}
-  - {x: 16, y: 1, z: 0}
-  - {x: 0, y: 1, z: -4}
-  - {x: 16, y: 1, z: -4}
-  - {x: 0, y: 0, z: -4}
-  - {x: 16, y: 0, z: -4}
-  - {x: 0, y: 0, z: 0}
-  - {x: 16, y: 0, z: 0}
+  - {x: -8, y: -0.5, z: 2}
+  - {x: 8, y: -0.5, z: 2}
+  - {x: -8, y: 0.5, z: 2}
+  - {x: 8, y: 0.5, z: 2}
+  - {x: 8, y: -0.5, z: 2}
+  - {x: 8, y: -0.5, z: -2}
+  - {x: 8, y: 0.5, z: 2}
+  - {x: 8, y: 0.5, z: -2}
+  - {x: 8, y: -0.5, z: -2}
+  - {x: -8, y: -0.5, z: -2}
+  - {x: 8, y: 0.5, z: -2}
+  - {x: -8, y: 0.5, z: -2}
+  - {x: -8, y: -0.5, z: -2}
+  - {x: -8, y: -0.5, z: 2}
+  - {x: -8, y: 0.5, z: -2}
+  - {x: -8, y: 0.5, z: 2}
+  - {x: -8, y: 0.5, z: 2}
+  - {x: 8, y: 0.5, z: 2}
+  - {x: -8, y: 0.5, z: -2}
+  - {x: 8, y: 0.5, z: -2}
+  - {x: -8, y: -0.5, z: -2}
+  - {x: 8, y: -0.5, z: -2}
+  - {x: -8, y: -0.5, z: 2}
+  - {x: 8, y: -0.5, z: 2}
   m_Textures0:
-  - {x: 0, y: 0}
-  - {x: -16, y: 0}
-  - {x: 0, y: 1}
-  - {x: -16, y: 1}
-  - {x: 0, y: 0}
-  - {x: -4, y: 0}
-  - {x: 0, y: 1}
-  - {x: -4, y: 1}
-  - {x: 16, y: 0}
-  - {x: 0, y: 0}
-  - {x: 16, y: 1}
-  - {x: 0, y: 1}
-  - {x: 4, y: 0}
-  - {x: 0, y: 0}
-  - {x: 4, y: 1}
-  - {x: 0, y: 1}
-  - {x: 0, y: 0}
-  - {x: 16, y: 0}
-  - {x: 0, y: -4}
-  - {x: 16, y: -4}
-  - {x: 0, y: -4}
-  - {x: -16, y: -4}
-  - {x: 0, y: 0}
-  - {x: -16, y: 0}
+  - {x: 8, y: -0.5}
+  - {x: -8, y: -0.5}
+  - {x: 8, y: 0.5}
+  - {x: -8, y: 0.5}
+  - {x: 2, y: -0.5}
+  - {x: -2, y: -0.5}
+  - {x: 2, y: 0.5}
+  - {x: -2, y: 0.5}
+  - {x: 8, y: -0.5}
+  - {x: -8, y: -0.5}
+  - {x: 8, y: 0.5}
+  - {x: -8, y: 0.5}
+  - {x: 2, y: -0.5}
+  - {x: -2, y: -0.5}
+  - {x: 2, y: 0.5}
+  - {x: -2, y: 0.5}
+  - {x: -8, y: 2}
+  - {x: 8, y: 2}
+  - {x: -8, y: -2}
+  - {x: 8, y: -2}
+  - {x: 8, y: -2}
+  - {x: -8, y: -2}
+  - {x: 8, y: 2}
+  - {x: -8, y: 2}
   m_Textures2: []
   m_Textures3: []
   m_Tangents:
@@ -903,7 +905,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 2
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -956,14 +958,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8010332231243704153}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8, y: -0.5, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9037026900972479008}
   - {fileID: 3672575231788406581}
-  m_Father: {fileID: 7324951885846715835}
-  m_RootOrder: 2
+  m_Father: {fileID: 2755625763561338673}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8530160743770931895
 GameObject:
@@ -988,14 +990,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8530160743770931895}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8, y: -0.5, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3796205974099433617}
   - {fileID: 7314627368598164638}
-  m_Father: {fileID: 7324951885846715835}
-  m_RootOrder: 1
+  m_Father: {fileID: 2755625763561338673}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8750066043980172721
 GameObject:
@@ -1027,8 +1029,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2755625763561338673}
-  - {fileID: 6688058556319845488}
-  - {fileID: 75782796789034588}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1049,6 +1049,7 @@ MonoBehaviour:
   - {fileID: 1785690103638483533}
   _validators:
   - {fileID: 7472537021588904913}
+  _pivotObject: {fileID: 6524025687221987566}
 --- !u!65 &7472537021588904913
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1092,7 +1093,7 @@ PrefabInstance:
     - target: {fileID: 7070700531101394971, guid: d055b2e47bf60dd40ac88463ace6fbab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7070700531101394971, guid: d055b2e47bf60dd40ac88463ace6fbab,
         type: 3}
@@ -1189,7 +1190,7 @@ PrefabInstance:
     - target: {fileID: 7070700531101394971, guid: d055b2e47bf60dd40ac88463ace6fbab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7070700531101394971, guid: d055b2e47bf60dd40ac88463ace6fbab,
         type: 3}

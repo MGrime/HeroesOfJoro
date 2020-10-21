@@ -8,6 +8,7 @@ public class DungeonPiece : MonoBehaviour
 
     [SerializeField] private NodeConnector[] _nodeConnectors;
     [SerializeField] private BoxCollider[] _validators;
+    [SerializeField] private GameObject _pivotObject;
 
     #endregion
 
@@ -16,6 +17,12 @@ public class DungeonPiece : MonoBehaviour
     {
         get => _nodeConnectors;
         set => _nodeConnectors = value;
+    }
+
+    public GameObject Pivot
+    {
+        get => _pivotObject;
+        set => _pivotObject = value;
     }
 
     #endregion
