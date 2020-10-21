@@ -777,7 +777,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4935929588026580945}
   - component: {fileID: 4935929588026580944}
-  - component: {fileID: 4253057276611595637}
   m_Layer: 0
   m_Name: Room_2
   m_TagString: Untagged
@@ -816,22 +815,8 @@ MonoBehaviour:
   - {fileID: 891797817873166683}
   - {fileID: 891797816083472210}
   _validators:
-  - {fileID: 4253057276611595637}
+  - {fileID: 0}
   _pivotObject: {fileID: 4935929589785433604}
-  _myConnectorType: 1
---- !u!65 &4253057276611595637
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4935929588026580946}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 15, y: 6, z: 8}
-  m_Center: {x: 7.5, y: 4, z: -4}
 --- !u!1 &4935929588435682959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1533,6 +1518,7 @@ GameObject:
   - component: {fileID: 4935929589785433601}
   - component: {fileID: 4935929589785433602}
   - component: {fileID: 4935929589785433603}
+  - component: {fileID: 6272065010983981456}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -1834,6 +1820,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!65 &6272065010983981456
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4935929589785433604}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 15, y: 6, z: 8}
+  m_Center: {x: 0, y: 3.5, z: 0}
 --- !u!1 &8004616710890096194
 GameObject:
   m_ObjectHideFlags: 0

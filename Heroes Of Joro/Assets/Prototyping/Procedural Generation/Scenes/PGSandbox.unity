@@ -233,11 +233,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa237aee85c0c464f8fdfcc983b00f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roomPrefabs:
+  _piecePrefabs:
   - {fileID: 6741811308964005666, guid: a7d6611d3323acf4e9c002bd78b79a93, type: 3}
   - {fileID: 4935929588026580946, guid: c39c4a3b75b7870458a840792742a7f3, type: 3}
   - {fileID: 8728194758648020940, guid: a89bdda2a706bc64e9561158932936a3, type: 3}
-  _hallwayPrefabs:
+  - {fileID: 8750066043980172721, guid: 35480deb62e4b2f408c9b8f3c17ec4a8, type: 3}
+  - {fileID: 8750066043980172721, guid: 35480deb62e4b2f408c9b8f3c17ec4a8, type: 3}
   - {fileID: 8750066043980172721, guid: 35480deb62e4b2f408c9b8f3c17ec4a8, type: 3}
 --- !u!4 &1584605833
 Transform:

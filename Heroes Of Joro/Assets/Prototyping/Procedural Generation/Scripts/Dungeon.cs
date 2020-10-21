@@ -136,75 +136,48 @@ public class Dungeon : MonoBehaviour
         // Take a connector
         NodeConnector connector = _activeConnectors.Dequeue();
 
+        Debug.Log("Root: " + connector.name);
+
         DungeonPiece dungeonPiece = null;
-        dungeonPiece = Instantiate(_piecePrefabs[_random.Next(0, _piecePrefabs.Length)].GetComponent<DungeonPiece>());
-
-        // Check to supress errors in VS
-        if (dungeonPiece != null)
+        // Dont Connect the same pieces together
+        while (dungeonPiece == null)
         {
-            int positionOfSelectedNode = 0;
-
-            // Select connector 
-            NodeConnector linkingConnector = null;
-
-            foreach (NodeConnector node in dungeonPiece.Nodes)
+            GameObject picked = _piecePrefabs[_random.Next(0, _piecePrefabs.Length)];
+            if (picked.GetComponent<DungeonPiece>().name == connector.transform.parent.parent.parent.name) // This item is always nested 3 times
             {
-                if (node.transform.forward != connector.transform.forward)
-                {
-                    linkingConnector = node;
-                    break;
-                }
-
-                ++positionOfSelectedNode;
+                break;
             }
 
-            // Rotate so orientation is correct
-            // 1. Get Z of linking connector
-            Vector3 localZLink = linkingConnector.transform.forward;
-            Debug.Log(linkingConnector.transform.forward);
-
-            // 2. Get Z of root connector
-            Vector3 localZRoot = connector.transform.forward;
-            Debug.Log(connector.transform.forward);
-
-
-            // 3. Work out rotation needed to align
-            double angleRootLink = (180.0 / Math.PI) * Math.Acos(Vector3.Dot(localZLink, localZRoot));
-
-            // Stops low float errors
-            if (angleRootLink > 1.0f)
-            {
-                // 4. Rotate dungeon piece using pivot piece
-                dungeonPiece.Pivot.transform.Rotate(0.0f, (float)-angleRootLink, 0.0f);
-            }
-
-            // Now we position
-            // 1. Get Offset from linkingConnector to root object position
-            Vector3 linkConnectorOffset;
-            if (angleRootLink >= 1.0f)
-            {
-                linkConnectorOffset = dungeonPiece.transform.position - linkingConnector.transform.position;
-            }
-            else
-            {
-                linkConnectorOffset = linkingConnector.transform.position - dungeonPiece.transform.position;
-            }
-
-            // 2. Move root object to position of connector
-            dungeonPiece.transform.position = connector.transform.position;
-
-            // 3. Move by offset
-            dungeonPiece.transform.position += linkConnectorOffset;
-            dungeonPiece.transform.position -= linkingConnector.transform.forward;  // Move back one
-
-            for (int i = 0; i < dungeonPiece.Nodes.Length; ++i)
-            {
-                if (i != positionOfSelectedNode)
-                {
-                    _activeConnectors.Enqueue(dungeonPiece.Nodes[i]);
-                }
-            }
+            dungeonPiece = Instantiate(picked).GetComponent<DungeonPiece>();
         }
+
+        // Now we need to process the new piece
+
+        // Move entire room into position of the activeConnector
+
+        // Pick a random connector to use as the linker
+        NodeConnector linkConnector = dungeonPiece.Nodes[_random.Next(0, dungeonPiece.Nodes.Length)];
+
+        Debug.Log("Link: " + linkConnector.name);
+
+        // Rotate so the two connectors are pointing into each other (work out how to rotate them to be the same then do the inverse rotation)
+        float rotateAmount =(float)(180.0 / Math.PI * Math.Acos(Vector3.Dot(connector.transform.forward, linkConnector.transform.forward)));
+
+        Debug.Log("Rotate: " + rotateAmount);
+
+        // This is just a comprehensive check. Realistically the amount should be 0.0f or 90.0f
+        if (rotateAmount > 0.0f && rotateAmount < 180.0f)
+        {
+            // Rotate by inverse of amount
+            dungeonPiece.Pivot.transform.Rotate(0.0f,rotateAmount * -1.0f,0.0f);
+        }
+        else
+        {
+            // Rotate 180 as they are already the same direction
+            dungeonPiece.Pivot.transform.Rotate(0.0f, 180.0f, 0.0f);
+        }
+
+
 
     }
 
