@@ -143,7 +143,7 @@ public class Dungeon : MonoBehaviour
         while (dungeonPiece == null)
         {
             GameObject picked = _piecePrefabs[_random.Next(0, _piecePrefabs.Length)];
-            if (picked.GetComponent<DungeonPiece>().name == connector.transform.parent.parent.parent.name) // This item is always nested 3 times
+            if (picked.GetComponent<DungeonPiece>().name + "Clone" == connector.transform.parent.parent.parent.name) // This item is always nested 3 times
             {
                 break;
             }
@@ -163,10 +163,10 @@ public class Dungeon : MonoBehaviour
         // Rotate so the two connectors are pointing into each other (work out how to rotate them to be the same then do the inverse rotation)
         float rotateAmount =(float)(180.0 / Math.PI * Math.Acos(Vector3.Dot(connector.transform.forward, linkConnector.transform.forward)));
 
-        Debug.Log("Rotate: " + rotateAmount);
+        Debug.Log("Rotate: " + rotateAmount); 
 
         // This is just a comprehensive check. Realistically the amount should be 0.0f or 90.0f
-        if (rotateAmount > 0.0f && rotateAmount < 180.0f)
+        if (!float.IsNaN(rotateAmount))
         {
             // Rotate by inverse of amount
             dungeonPiece.Pivot.transform.Rotate(0.0f,rotateAmount * -1.0f,0.0f);
@@ -177,6 +177,20 @@ public class Dungeon : MonoBehaviour
             dungeonPiece.Pivot.transform.Rotate(0.0f, 180.0f, 0.0f);
         }
 
+        // Now need to move into the correct position
+
+        // 1. Take position of linking connector and get position 1 forward in forward
+        Vector3 newConnectorPos = connector.transform.position + connector.transform.forward;   // This is the location the new connector will sit
+
+        // 2. Move overall object to the new connectorPos
+        dungeonPiece.transform.position = newConnectorPos;
+
+        // 3. Move by offset of connector
+        Vector3 offsetPosition = dungeonPiece.transform.position;
+        offsetPosition.x -= linkConnector.transform.position.x;
+        offsetPosition.z -= linkConnector.transform.position.z;
+
+        dungeonPiece.transform.position = offsetPosition;
 
 
     }
