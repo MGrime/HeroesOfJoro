@@ -143,7 +143,7 @@ public class Dungeon : MonoBehaviour
         while (dungeonPiece == null)
         {
             GameObject picked = _piecePrefabs[_random.Next(0, _piecePrefabs.Length)];
-            if (picked.GetComponent<DungeonPiece>().name + "Clone" == connector.transform.parent.parent.parent.name) // This item is always nested 3 times
+            if (picked.GetComponent<DungeonPiece>().name.Contains(connector.transform.parent.parent.parent.name)) // This item is always nested 3 times
             {
                 break;
             }
@@ -161,36 +161,59 @@ public class Dungeon : MonoBehaviour
         Debug.Log("Link: " + linkConnector.name);
 
         // Rotate so the two connectors are pointing into each other (work out how to rotate them to be the same then do the inverse rotation)
-        float rotateAmount =(float)(180.0 / Math.PI * Math.Acos(Vector3.Dot(connector.transform.forward, linkConnector.transform.forward)));
+        float rotateDeterminant = Vector3.Dot(linkConnector.transform.forward, connector.transform.forward);
+        Debug.Log("Rotate: " + rotateDeterminant);
 
-        Debug.Log("Rotate: " + rotateAmount); 
-
-        // This is just a comprehensive check. Realistically the amount should be 0.0f or 90.0f
-        if (!float.IsNaN(rotateAmount))
+        // This means they are point the same
+        if (Mathf.Approximately(1.0f,rotateDeterminant))
         {
-            // Rotate by inverse of amount
-            dungeonPiece.Pivot.transform.Rotate(0.0f,rotateAmount * -1.0f,0.0f);
+            dungeonPiece.Pivot.transform.rotation = Quaternion.Euler(
+                new Vector3(
+                    dungeonPiece.Pivot.transform.rotation.eulerAngles.x,
+                    180.0f,
+                    dungeonPiece.Pivot.transform.rotation.eulerAngles.z
+                ));
+            Debug.Log("Rotated 180");
         }
         else
         {
-            // Rotate 180 as they are already the same direction
-            dungeonPiece.Pivot.transform.Rotate(0.0f, 180.0f, 0.0f);
+            float rotateAmount = 360.0f - (float)(180.0f / Math.PI * Math.Acos(rotateDeterminant));
+
+            dungeonPiece.Pivot.transform.rotation = Quaternion.Euler(
+                new Vector3(
+                    dungeonPiece.Pivot.transform.rotation.eulerAngles.x,
+                    rotateAmount,
+                    dungeonPiece.Pivot.transform.rotation.eulerAngles.z
+                ));
+
+            Debug.Log("Rotated inverse!");
         }
+
+        
 
         // Now need to move into the correct position
 
         // 1. Take position of linking connector and get position 1 forward in forward
-        Vector3 newConnectorPos = connector.transform.position + connector.transform.forward;   // This is the location the new connector will sit
+        Vector3 newConnectorPos = connector.transform.position /*+ connector.transform.forward*/;   // This is the location the new connector will sit
 
-        // 2. Move overall object to the new connectorPos
-        dungeonPiece.transform.position = newConnectorPos;
+        // 2. Place root at connector post
+        dungeonPiece.Pivot.transform.position = newConnectorPos;
 
-        // 3. Move by offset of connector
-        Vector3 offsetPosition = dungeonPiece.transform.position;
-        offsetPosition.x -= linkConnector.transform.position.x;
-        offsetPosition.z -= linkConnector.transform.position.z;
+        // 3. Move by the distance between the conncctors
+        Vector3 movementVector = linkConnector.transform.position - newConnectorPos;
+        dungeonPiece.Pivot.transform.position -= movementVector;
 
-        dungeonPiece.transform.position = offsetPosition;
+        // Add new connectors 
+        foreach (NodeConnector node in dungeonPiece.Nodes)
+        {
+            if (node == linkConnector)
+            {
+                continue;
+            }
+            _activeConnectors.Enqueue(node);
+        }
+
+        //TODO : IMPLEMENT COLLISION CHECKS
 
 
     }
