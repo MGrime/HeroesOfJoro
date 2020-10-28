@@ -164,37 +164,42 @@ public class Dungeon : MonoBehaviour
         float rotateDeterminant = Vector3.Dot(linkConnector.transform.forward, connector.transform.forward);
         Debug.Log("Rotate: " + rotateDeterminant);
 
-        // This means they are point the same
-        if (Mathf.Approximately(1.0f,rotateDeterminant))
+        // If it is equal to 1 they are facing the same way so rotate 180
+        // If it is equal to 0 then it is at a 90 degree angle. Rotate by 90. Then check again. If 1 we are done, if -1 rotate by 180
+        // If it is equal to -1 then they are already at the correct angles
+        if (Mathf.Approximately(rotateDeterminant,1.0f))
         {
-            dungeonPiece.Pivot.transform.rotation = Quaternion.Euler(
-                new Vector3(
-                    dungeonPiece.Pivot.transform.rotation.eulerAngles.x,
-                    180.0f,
-                    dungeonPiece.Pivot.transform.rotation.eulerAngles.z
-                ));
-            Debug.Log("Rotated 180");
+            Debug.Log("Rotated 180!");
+
+            dungeonPiece.Pivot.transform.Rotate(0.0f,180.0f,0.0f,Space.World);
         }
-        else
+        else if (Mathf.Approximately(rotateDeterminant, 0.0f))
         {
-            float rotateAmount = 360.0f - (float)(180.0f / Math.PI * Math.Acos(rotateDeterminant));
+            dungeonPiece.Pivot.transform.Rotate(0.0f,90.0f,0.0f,Space.World);
 
-            dungeonPiece.Pivot.transform.rotation = Quaternion.Euler(
-                new Vector3(
-                    dungeonPiece.Pivot.transform.rotation.eulerAngles.x,
-                    rotateAmount,
-                    dungeonPiece.Pivot.transform.rotation.eulerAngles.z
-                ));
+            rotateDeterminant = Vector3.Dot(linkConnector.transform.forward, connector.transform.forward);
 
-            Debug.Log("Rotated inverse!");
+            // Just need to check for 1. It is either 1 or -1
+            if (Mathf.Approximately(rotateDeterminant, 1.0f))
+            {
+                dungeonPiece.Pivot.transform.Rotate(0.0f,180.0f,0.0f,Space.World);
+                Debug.Log("Rotated 90 then an extra 180!");
+            }
+            else
+            {
+                Debug.Log("Rotated 90 and hit correct angle!");
+            }
+        }
+        else if (Mathf.Approximately(rotateDeterminant, -1.0f))
+        {
+            Debug.Log("Already correct!");
         }
 
-        
 
         // Now need to move into the correct position
 
         // 1. Take position of linking connector and get position 1 forward in forward
-        Vector3 newConnectorPos = connector.transform.position /*+ connector.transform.forward*/;   // This is the location the new connector will sit
+        Vector3 newConnectorPos = connector.transform.position /*+ (connector.transform.forward * 2.0f)*/;   // This is the location the new connector will sit
 
         // 2. Place root at connector post
         dungeonPiece.Pivot.transform.position = newConnectorPos;
