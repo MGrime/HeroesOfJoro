@@ -27,4 +27,13 @@ public class DungeonPiece : MonoBehaviour
 
     #endregion
 
+    #region Functions
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+    }
+
+    #endregion
+
 }

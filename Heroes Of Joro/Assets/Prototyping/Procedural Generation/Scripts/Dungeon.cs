@@ -153,6 +153,8 @@ public class Dungeon : MonoBehaviour
 
         // Now we need to process the new piece
 
+        // First we need to validate that it isn't colliding. If it is then we delete it and close off the connector
+
         // Move entire room into position of the activeConnector
 
         // Pick a random connector to use as the linker
@@ -173,26 +175,26 @@ public class Dungeon : MonoBehaviour
 
             dungeonPiece.Pivot.transform.Rotate(0.0f,180.0f,0.0f,Space.World);
         }
-        else if (Mathf.Approximately(rotateDeterminant, 0.0f))
+        else if (Mathf.Approximately(rotateDeterminant, -1.0f))
         {
-            dungeonPiece.Pivot.transform.Rotate(0.0f,90.0f,0.0f,Space.World);
+            Debug.Log("Already correct!");
+        }
+        else
+        {
+            dungeonPiece.Pivot.transform.Rotate(0.0f, 90.0f, 0.0f, Space.World);
 
             rotateDeterminant = Vector3.Dot(linkConnector.transform.forward, connector.transform.forward);
 
             // Just need to check for 1. It is either 1 or -1
             if (Mathf.Approximately(rotateDeterminant, 1.0f))
             {
-                dungeonPiece.Pivot.transform.Rotate(0.0f,180.0f,0.0f,Space.World);
+                dungeonPiece.Pivot.transform.Rotate(0.0f, 180.0f, 0.0f, Space.World);
                 Debug.Log("Rotated 90 then an extra 180!");
             }
             else
             {
                 Debug.Log("Rotated 90 and hit correct angle!");
             }
-        }
-        else if (Mathf.Approximately(rotateDeterminant, -1.0f))
-        {
-            Debug.Log("Already correct!");
         }
 
 
@@ -217,8 +219,6 @@ public class Dungeon : MonoBehaviour
             }
             _activeConnectors.Enqueue(node);
         }
-
-        //TODO : IMPLEMENT COLLISION CHECKS
 
 
     }

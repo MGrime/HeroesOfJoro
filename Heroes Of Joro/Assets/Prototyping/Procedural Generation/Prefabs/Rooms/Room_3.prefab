@@ -2639,7 +2639,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7473652049985490225}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 6, z: 18}
@@ -2652,7 +2652,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7473652049985490225}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 7, y: 6, z: 9.919693}
@@ -3381,8 +3381,8 @@ MonoBehaviour:
   - {fileID: 6915576561375705588}
   - {fileID: 6688036848668687950}
   _validators:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3196242081948580042}
+  - {fileID: 3196242081948580042}
   _pivotObject: {fileID: 7473652049985490225}
 --- !u!1 &8894233005698204325
 GameObject:
