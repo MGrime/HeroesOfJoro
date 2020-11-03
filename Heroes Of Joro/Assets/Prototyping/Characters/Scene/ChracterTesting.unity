@@ -145,7 +145,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155324637}
-  m_LocalRotation: {x: 0.35582605, y: 0.00000025310976, z: -0.0000006137061, w: 0.93455225}
+  m_LocalRotation: {x: 0.35582605, y: 0.00000020762792, z: -0.0000005963891, w: 0.93455225}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1196,6 +1196,49 @@ Transform:
   m_Father: {fileID: 1415200269}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1617989041
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1617989043}
+  - component: {fileID: 1617989042}
+  m_Layer: 0
+  m_Name: MouseCaptureScript
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1617989042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617989041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb5ba33de06e064e850f00c35c9bbbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1617989043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617989041}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.915977, y: 0.79846394, z: -2.678511}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1695417831 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -840777845830954692, guid: c37ebdcea518a354b86bcf13bed45a12,
@@ -1715,12 +1758,12 @@ PrefabInstance:
     - target: {fileID: 415845339247680389, guid: c37ebdcea518a354b86bcf13bed45a12,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000014384654
+      value: -0.000000040041318
       objectReference: {fileID: 0}
     - target: {fileID: 415845339247680389, guid: c37ebdcea518a354b86bcf13bed45a12,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000000559674
+      value: 0.000000015579161
       objectReference: {fileID: 0}
     - target: {fileID: 415845339247680389, guid: c37ebdcea518a354b86bcf13bed45a12,
         type: 3}
