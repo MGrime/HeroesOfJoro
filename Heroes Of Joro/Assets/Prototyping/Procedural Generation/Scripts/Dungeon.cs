@@ -153,9 +153,8 @@ public class Dungeon : MonoBehaviour
 
         // Now we need to process the new piece
 
-        // First we need to validate that it isn't colliding. If it is then we delete it and close off the connector
-
-        // Move entire room into position of the activeConnector
+        // 0. Set the validators to trigger mode
+        dungeonPiece.SetTriggerState(true);
 
         // Pick a random connector to use as the linker
         NodeConnector linkConnector = dungeonPiece.Nodes[_random.Next(0, dungeonPiece.Nodes.Length)];
@@ -210,14 +209,27 @@ public class Dungeon : MonoBehaviour
         Vector3 movementVector = linkConnector.transform.position - newConnectorPos;
         dungeonPiece.Pivot.transform.position -= movementVector;
 
-        // Add new connectors 
-        foreach (NodeConnector node in dungeonPiece.Nodes)
+        // 4. At this point on trigger enter will collide and invalid the piece if needed
+        // If this component isnt found the prefab is wrong.
+        if (dungeonPiece.Pivot.GetComponent<DungeonValidator>().Valid)
         {
-            if (node == linkConnector)
+            // Add new connectors 
+            foreach (NodeConnector node in dungeonPiece.Nodes)
             {
-                continue;
+                if (node == linkConnector)
+                {
+                    continue;
+                }
+                _activeConnectors.Enqueue(node);
             }
-            _activeConnectors.Enqueue(node);
+
+            // Change back trigger state
+            dungeonPiece.SetTriggerState(false);
+        }
+        else
+        {
+            // Delete it
+            DestroyImmediate(dungeonPiece.gameObject);
         }
 
 

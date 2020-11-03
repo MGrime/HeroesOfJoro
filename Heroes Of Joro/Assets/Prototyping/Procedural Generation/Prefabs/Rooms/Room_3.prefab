@@ -2148,6 +2148,8 @@ GameObject:
   - component: {fileID: 6097498644676480816}
   - component: {fileID: 3196242081948580042}
   - component: {fileID: 1254048458436004788}
+  - component: {fileID: 7982580844063268674}
+  - component: {fileID: 5750868150736248699}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -2639,7 +2641,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7473652049985490225}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 6, z: 18}
@@ -2652,11 +2654,40 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7473652049985490225}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 7, y: 6, z: 9.919693}
   m_Center: {x: -5.0038157, y: 3.5, z: 4}
+--- !u!54 &7982580844063268674
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7473652049985490225}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &5750868150736248699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7473652049985490225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2122dbe5da0c1f4db1936ba4b65b94a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Valid: 1
 --- !u!1 &7631728816119269543
 GameObject:
   m_ObjectHideFlags: 0
@@ -3958,12 +3989,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d055b2e47bf60dd40ac88463ace6fbab, type: 3}
---- !u!4 &4761794930776302436 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7070700531101394971, guid: d055b2e47bf60dd40ac88463ace6fbab,
-    type: 3}
-  m_PrefabInstance: {fileID: 2320875433729166207}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7506052820676990492 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5197079944523341155, guid: d055b2e47bf60dd40ac88463ace6fbab,
@@ -3976,3 +4001,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6526168210ac614a93997dd18b1fde9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &4761794930776302436 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7070700531101394971, guid: d055b2e47bf60dd40ac88463ace6fbab,
+    type: 3}
+  m_PrefabInstance: {fileID: 2320875433729166207}
+  m_PrefabAsset: {fileID: 0}

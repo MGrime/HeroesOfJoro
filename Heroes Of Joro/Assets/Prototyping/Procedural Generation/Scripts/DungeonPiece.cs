@@ -29,9 +29,17 @@ public class DungeonPiece : MonoBehaviour
 
     #region Functions
 
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
+        _validators = _pivotObject.GetComponents<BoxCollider>();
+    }
 
+    public void SetTriggerState(bool state)
+    {
+        foreach (BoxCollider box in _validators)
+        {
+            box.isTrigger = state;
+        }
     }
 
     #endregion
