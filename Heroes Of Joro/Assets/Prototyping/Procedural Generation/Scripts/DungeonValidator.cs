@@ -13,14 +13,14 @@ public class DungeonValidator : MonoBehaviour
         // So set a bool for the dungeon class to use
          Valid = false;
 
-         Debug.Log("COLLIDING\n");
+         //Debug.Log("COLLIDING\n");
     }
 
     private void OnTriggerExit(Collider other)
     {
         Valid = true;
 
-        Debug.Log("EXIT COLLIDING\n");
+        //Debug.Log("EXIT COLLIDING\n");
     }
 
 }

@@ -134,7 +134,7 @@ public class Dungeon : MonoBehaviour
         // Take a connector
         NodeConnector connector = _activeConnectors.Dequeue();
 
-        Debug.Log("Root: " + connector.name);
+        //Debug.Log("Root: " + connector.name);
 
         DungeonPiece dungeonPiece = null;
         // Dont Connect the same pieces together
@@ -157,26 +157,22 @@ public class Dungeon : MonoBehaviour
         // Pick a random connector to use as the linker
         NodeConnector linkConnector = dungeonPiece.Nodes[_random.Next(0, dungeonPiece.Nodes.Length)];
 
-        Debug.Log("Link: " + linkConnector.name);
+        //Debug.Log("Link: " + linkConnector.name);
 
         // Rotate so the two connectors are pointing into each other (work out how to rotate them to be the same then do the inverse rotation)
         float rotateDeterminant = Vector3.Dot(linkConnector.transform.forward, connector.transform.forward);
-        Debug.Log("Rotate: " + rotateDeterminant);
+        //Debug.Log("Rotate: " + rotateDeterminant);
 
         // If it is equal to 1 they are facing the same way so rotate 180
         // If it is equal to 0 then it is at a 90 degree angle. Rotate by 90. Then check again. If 1 we are done, if -1 rotate by 180
         // If it is equal to -1 then they are already at the correct angles
         if (Mathf.Approximately(rotateDeterminant,1.0f))
         {
-            Debug.Log("Rotated 180!");
+           // Debug.Log("Rotated 180!");
 
             dungeonPiece.Pivot.transform.Rotate(0.0f,180.0f,0.0f,Space.World);
         }
-        else if (Mathf.Approximately(rotateDeterminant, -1.0f))
-        {
-            Debug.Log("Already correct!");
-        }
-        else
+        else if (!Mathf.Approximately(rotateDeterminant, -1.0f))
         {
             dungeonPiece.Pivot.transform.Rotate(0.0f, 90.0f, 0.0f, Space.World);
 
@@ -186,11 +182,7 @@ public class Dungeon : MonoBehaviour
             if (Mathf.Approximately(rotateDeterminant, 1.0f))
             {
                 dungeonPiece.Pivot.transform.Rotate(0.0f, 180.0f, 0.0f, Space.World);
-                Debug.Log("Rotated 90 then an extra 180!");
-            }
-            else
-            {
-                Debug.Log("Rotated 90 and hit correct angle!");
+                //Debug.Log("Rotated 90 then an extra 180!");
             }
         }
 
