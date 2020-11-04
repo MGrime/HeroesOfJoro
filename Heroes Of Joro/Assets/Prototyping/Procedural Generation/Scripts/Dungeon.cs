@@ -30,14 +30,12 @@ public class Dungeon : MonoBehaviour
 
         StartGeneration();
 
+
     }
 
-    private void Update()
+    private void Update() 
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ProcessSection();
-        }
+        StartCoroutine("ProcessSection");
     }
 
 
@@ -131,7 +129,7 @@ public class Dungeon : MonoBehaviour
 #endregion
     }
 
-    private void ProcessSection()
+    private IEnumerator ProcessSection()
     {
         // Take a connector
         NodeConnector connector = _activeConnectors.Dequeue();
@@ -200,7 +198,7 @@ public class Dungeon : MonoBehaviour
         // Now need to move into the correct position
 
         // 1. Take position of linking connector and get position 1 forward in forward
-        Vector3 newConnectorPos = connector.transform.position /*+ (connector.transform.forward * 2.0f)*/;   // This is the location the new connector will sit
+        Vector3 newConnectorPos = connector.transform.position + (connector.transform.forward);   // This is the location the new connector will sit
 
         // 2. Place root at connector post
         dungeonPiece.Pivot.transform.position = newConnectorPos;
@@ -208,6 +206,9 @@ public class Dungeon : MonoBehaviour
         // 3. Move by the distance between the conncctors
         Vector3 movementVector = linkConnector.transform.position - newConnectorPos;
         dungeonPiece.Pivot.transform.position -= movementVector;
+
+        // Wait until next physics update to ensure trigger works
+        yield return new WaitForFixedUpdate();
 
         // 4. At this point on trigger enter will collide and invalid the piece if needed
         // If this component isnt found the prefab is wrong.
@@ -232,7 +233,7 @@ public class Dungeon : MonoBehaviour
             DestroyImmediate(dungeonPiece.gameObject);
         }
 
-
+        yield return null;
     }
 
     #endregion
