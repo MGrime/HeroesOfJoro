@@ -42,6 +42,14 @@ public class DungeonPiece : MonoBehaviour
         }
     }
 
+    public void SetValidatorsState(bool state)
+    {
+        foreach (BoxCollider box in _validators)
+        {
+            box.enabled = state;
+        }
+    }
+
     #endregion
 
 }

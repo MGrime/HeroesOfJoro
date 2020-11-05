@@ -12,6 +12,11 @@ public class Dungeon : MonoBehaviour
     #region Editor Fields
 
     [SerializeField] private GameObject[] _piecePrefabs;
+
+    [SerializeField] private uint _dungeonSize;
+
+    [SerializeField] private ThirdPersonMovementScript _player;
+
     #endregion
 
     #region Private Data
@@ -19,6 +24,8 @@ public class Dungeon : MonoBehaviour
     private List<DungeonPiece> _builtPieces;
     private Queue<NodeConnector> _activeConnectors;
     private Random _random;
+    private uint _count;
+    private bool _complete;
 
     #endregion
 
@@ -30,12 +37,34 @@ public class Dungeon : MonoBehaviour
 
         StartGeneration();
 
+        _complete = false;
 
     }
 
     private void Update() 
     {
-        StartCoroutine("ProcessSection");
+        if (!_complete)
+        {
+            if (_count < _dungeonSize)
+            {
+                StartCoroutine("ProcessSection");
+                ++_count;
+            }
+            else
+            {
+                // When its done
+                foreach (DungeonPiece piece in _builtPieces)
+                {
+                    piece.SetValidatorsState(false);
+                }
+
+                _player.transform.position = _builtPieces[0].Pivot.transform.position + new Vector3(0.0f, 2.46f, 0.0f);
+
+                _complete = true;
+
+
+            }
+        }
     }
 
 
@@ -218,6 +247,8 @@ public class Dungeon : MonoBehaviour
 
             // Change back trigger state
             dungeonPiece.SetTriggerState(false);
+
+            _builtPieces.Add(dungeonPiece);
         }
         else
         {

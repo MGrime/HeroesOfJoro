@@ -240,6 +240,7 @@ MonoBehaviour:
   - {fileID: 8750066043980172721, guid: 35480deb62e4b2f408c9b8f3c17ec4a8, type: 3}
   - {fileID: 8750066043980172721, guid: 35480deb62e4b2f408c9b8f3c17ec4a8, type: 3}
   - {fileID: 8750066043980172721, guid: 35480deb62e4b2f408c9b8f3c17ec4a8, type: 3}
+  _dungeonSize: 200
 --- !u!4 &1584605833
 Transform:
   m_ObjectHideFlags: 0
