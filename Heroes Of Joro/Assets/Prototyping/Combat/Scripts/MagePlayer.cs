@@ -29,12 +29,15 @@ public class MagePlayer : MonoBehaviour
         {
             _selectedSpellIndex = 0;
         }
+
+        // Will enable on game start
+        enabled = false;
     }
 
     private void Update()
     {
         // TODO: USE THE NEW INPUT SYSTEM TO SUPPORT ALL CONTROL TYPES
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && _selectedSpellIndex != -1)
         {
             FireActiveSpell();
         }

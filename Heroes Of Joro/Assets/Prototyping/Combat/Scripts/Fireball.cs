@@ -23,13 +23,37 @@ public class Fireball : SpellBase
     private void Start()
     {
         _rigidBody.velocity = transform.forward * 20.0f;
+
+        _particleVfx.Play(false);
+    }
+
+    private IEnumerator DestroySpellCheck()
+    {
+        while (true)
+        {
+            if (!_explosionVfx.isPlaying)
+            {
+                DestroyImmediate(gameObject);
+                yield break;
+            }
+
+            yield return null;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "Player")
+        if (other.tag != "Player" && other.tag != "Spell")
         {
-            Destroy(gameObject);
+            _particleVfx.Stop();
+
+            // Kill all momentum
+            _rigidBody.velocity = Vector3.zero;
+
+            _explosionVfx.Play(false);
+
+            // Set off destroy check
+            StartCoroutine("DestroySpellCheck");
         }
     }
 

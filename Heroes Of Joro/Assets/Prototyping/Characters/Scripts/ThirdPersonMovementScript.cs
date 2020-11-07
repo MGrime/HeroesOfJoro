@@ -22,6 +22,15 @@ public class ThirdPersonMovementScript : MonoBehaviour
 
     #region Functions
 
+    private void Start()
+    {
+        // Lock cursor to fix movement
+        Cursor.lockState = CursorLockMode.Locked;
+
+        // Start with no control. Dungeon will enable when complete
+        enabled = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
