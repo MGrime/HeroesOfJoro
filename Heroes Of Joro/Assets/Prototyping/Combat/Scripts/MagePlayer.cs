@@ -22,6 +22,31 @@ public class MagePlayer : MonoBehaviour
     #endregion
 
     #region Functions
+    private void Start()
+    {
+        // Start at the base of the spell array
+        if (_spells.Length > 0)
+        {
+            _selectedSpellIndex = 0;
+        }
+    }
+
+    private void Update()
+    {
+        // TODO: USE THE NEW INPUT SYSTEM TO SUPPORT ALL CONTROL TYPES
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            FireActiveSpell();
+        }
+    }
+
+    private void FireActiveSpell()
+    {
+        // Create a new spell object
+        GameObject newSpellObject = Instantiate(_spells[_selectedSpellIndex].gameObject,_physicalPlayer.transform.position,_physicalPlayer.transform.rotation);
+
+        // This spell script controls the behaviour. Thats the beauty of an extra level of abstraction
+    }
 
 
 

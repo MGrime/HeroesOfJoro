@@ -15,7 +15,7 @@ public class Dungeon : MonoBehaviour
 
     [SerializeField] private uint _dungeonSize;
 
-    [SerializeField] private ThirdPersonMovementScript _player;
+    [SerializeField] private GameObject _player;
 
     #endregion
 
@@ -75,7 +75,7 @@ public class Dungeon : MonoBehaviour
         _random = new Random(DateTime.Now.Millisecond);
 
         // Place first room and pull DungeonPiece component
-        _builtPieces.Add(Instantiate(_piecePrefabs[_random.Next(0, _piecePrefabs.Length)].GetComponent<DungeonPiece>())) ;
+        _builtPieces.Add(Instantiate(_piecePrefabs[_random.Next(0, _piecePrefabs.Length)],transform).GetComponent<DungeonPiece>());
 
         // Add its connectors to queue
         foreach (NodeConnector node in _builtPieces[0].Nodes)
@@ -175,7 +175,7 @@ public class Dungeon : MonoBehaviour
                 break;
             }
 
-            dungeonPiece = Instantiate(picked).GetComponent<DungeonPiece>();
+            dungeonPiece = Instantiate(picked,transform).GetComponent<DungeonPiece>();
         }
 
         // Now we need to process the new piece
