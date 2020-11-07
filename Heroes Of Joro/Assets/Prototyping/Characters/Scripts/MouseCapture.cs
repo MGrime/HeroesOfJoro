@@ -8,7 +8,9 @@ public class MouseCapture : MonoBehaviour
     {
         //Press the space bar to apply no locking to the Cursor
         if (Input.GetKey(KeyCode.Space))
+        {
             Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     void OnGUI()
