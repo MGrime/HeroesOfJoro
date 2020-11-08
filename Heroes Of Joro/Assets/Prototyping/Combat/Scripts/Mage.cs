@@ -35,8 +35,9 @@ public class Mage : MonoBehaviour
     private float _health;
     private float _mana;
 
-    private Slider _healthBar = null;
-    private Slider _manaBar = null;
+    private Slider _healthBar;
+    private Slider _manaBar;
+    private Text _activeSpell;
 
     #endregion
 
@@ -61,6 +62,7 @@ public class Mage : MonoBehaviour
         // Find is okay on start
         _healthBar = GameObject.Find("Health Bar").GetComponent<Slider>();
         _manaBar = GameObject.Find("Mana Bar").GetComponent<Slider>();
+        _activeSpell = GameObject.Find("Active Spell").GetComponent<Text>();
     }
 
     private void Update()
@@ -116,6 +118,8 @@ public class Mage : MonoBehaviour
         {
             // Get type
             SpellBase selectedSpell = _spells[_selectedSpellIndex];
+            _activeSpell.text = "Spell: " + selectedSpell.name;
+
 
             if (selectedSpell.GetSpellType() == SpellBase.SpellType.Targeting)
             {
