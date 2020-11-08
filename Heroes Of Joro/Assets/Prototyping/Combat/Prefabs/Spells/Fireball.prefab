@@ -48,7 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae967fa6e4bf1046bad8425ae0c4f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spellType: 0
   _damage: 10
+  _manaCost: 20
   _particleVfx: {fileID: 1326331115976932381}
   _explosionVfx: {fileID: 5342461627829437439}
   _collisionZone: {fileID: 4657388604259904425}

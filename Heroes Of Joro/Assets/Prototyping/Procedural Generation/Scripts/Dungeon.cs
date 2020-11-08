@@ -63,7 +63,7 @@ public class Dungeon : MonoBehaviour
                 _complete = true;
                 // Enable movement
                 _player.GetComponentInChildren<ThirdPersonMovementScript>().enabled = true;
-                _player.GetComponent<MagePlayer>().enabled = true;
+                _player.GetComponent<Mage>().enabled = true;
 
             }
         }

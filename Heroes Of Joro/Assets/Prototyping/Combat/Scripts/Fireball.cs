@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
+
+// This is a projectile spell
+// It does damage on hit
+
+
 public class Fireball : SpellBase
 {
     #region Editor Fields
@@ -51,6 +56,8 @@ public class Fireball : SpellBase
             _rigidBody.velocity = Vector3.zero;
 
             _explosionVfx.Play(false);
+
+            // Send damage message here!
 
             // Set off destroy check
             StartCoroutine("DestroySpellCheck");
