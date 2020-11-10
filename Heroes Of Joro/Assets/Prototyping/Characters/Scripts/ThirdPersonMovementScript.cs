@@ -34,6 +34,13 @@ public class ThirdPersonMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        #region Debug keys
+
+        //Debug key to enable movement in character testing scene
+        if (Input.GetKey(KeyCode.P)) enabled = true;
+        else if (Input.GetKey(KeyCode.P) && enabled) enabled = false;
+
+        #endregion
         // Get the input on both axis
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
@@ -65,7 +72,7 @@ public class ThirdPersonMovementScript : MonoBehaviour
             // We aren't moving so stop the animation
             _playerAnimator.SetBool("Moving", false);
         }
-
+       
     }
 
     #endregion
