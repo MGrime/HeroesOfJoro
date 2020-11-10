@@ -21,6 +21,12 @@ public class Mage : MonoBehaviour
 
     [SerializeField] private float _maxMana = 100.0f;
 
+    // UI
+
+    [SerializeField] private Slider _healthBar;
+    [SerializeField] private Slider _manaBar;
+    [SerializeField] private Text _activeSpell;
+
     #endregion
 
     #region Private Data
@@ -34,10 +40,6 @@ public class Mage : MonoBehaviour
     // Store current health/mana
     private float _health;
     private float _mana;
-
-    private Slider _healthBar;
-    private Slider _manaBar;
-    private Text _activeSpell;
 
     #endregion
 
@@ -58,11 +60,6 @@ public class Mage : MonoBehaviour
 
         // Disable until we know targeting spell equiped
         _reticle.enabled = false;
-
-        // Find is okay on start
-        _healthBar = GameObject.Find("Health Bar").GetComponent<Slider>();
-        _manaBar = GameObject.Find("Mana Bar").GetComponent<Slider>();
-        _activeSpell = GameObject.Find("Active Spell").GetComponent<Text>();
     }
 
     private void Update()
@@ -110,15 +107,25 @@ public class Mage : MonoBehaviour
         }
             
         // Update bars
-        _healthBar.value = _health / _maxHealth;
-        _manaBar.value = _mana / _maxMana;
+        if (_healthBar)
+        {
+            _healthBar.value = _health / _maxHealth;
+        }
+
+        if (_manaBar)
+        {
+            _manaBar.value = _mana / _maxMana;
+        }
 
         // Create a new spell object
         if (_selectedSpellIndex != -1)  // Catch incorrect prefab
         {
             // Get type
             SpellBase selectedSpell = _spells[_selectedSpellIndex];
-            _activeSpell.text = "Spell: " + selectedSpell.name;
+            if (_activeSpell)
+            {
+                _activeSpell.text = "Spell: " + selectedSpell.name;
+            }
 
 
             if (selectedSpell.GetSpellType() == SpellBase.SpellType.Targeting)

@@ -14,5 +14,12 @@ public class PlayerManager : MonoBehaviour
         _instance = this;
     }
     #endregion
-    public GameObject _playerTracker;
+    public GameObject PlayerTracker;
+
+    private void Start()
+    {
+        // TODO: THIS IS BECAUSE OF SOMETHING I DID IN PROC GEN. OBVIOUSLY NEEDS TO TWEAK FOR OTHER PLAYER TYPES
+        PlayerTracker.GetComponent<Mage>().enabled = true;
+        PlayerTracker.GetComponentInChildren<ThirdPersonMovementScript>().enabled = true;
+    }
 }
