@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = System.Random;
 
 // This class processes the most stuff
@@ -17,6 +18,9 @@ public class Dungeon : MonoBehaviour
 
     [SerializeField] private GameObject _player;
 
+    [SerializeField] private GameObject _enemyNode;
+
+
     #endregion
 
     #region Private Data
@@ -26,6 +30,9 @@ public class Dungeon : MonoBehaviour
     private Random _random;
     private uint _count;
     private bool _complete;
+    private List<NavMeshSurface> _surfaces;
+    
+
 
     #endregion
 
@@ -34,6 +41,9 @@ public class Dungeon : MonoBehaviour
     {
         _builtPieces = new List<DungeonPiece>();
         _activeConnectors = new Queue<NodeConnector>();
+        _surfaces = new List< NavMeshSurface>();
+        
+
 
         StartGeneration();
 
@@ -61,6 +71,17 @@ public class Dungeon : MonoBehaviour
                 _player.transform.position = _builtPieces[0].Pivot.transform.position + new Vector3(0.0f, 2.46f, 0.0f);
 
                 _complete = true;
+                //Build NavMesh
+                int index = 0;
+                foreach(DungeonPiece piece in _builtPieces)
+                {
+                    _surfaces.Add(piece.gameObject.GetComponent<NavMeshSurface>());
+                    _surfaces[index].BuildNavMesh();
+                    
+                    index++;
+                }
+                //Create enemies
+                CreateEnemyNode();
                 // Enable movement
                 _player.GetComponentInChildren<ThirdPersonMovementScript>().enabled = true;
                 _player.GetComponent<Mage>().enabled = true;
@@ -68,7 +89,10 @@ public class Dungeon : MonoBehaviour
             }
         }
     }
-
+    private void CreateEnemyNode()
+    {
+        _enemyNode.transform.position= _builtPieces[18].Pivot.transform.position;
+    }
 
 
     // Generates a level

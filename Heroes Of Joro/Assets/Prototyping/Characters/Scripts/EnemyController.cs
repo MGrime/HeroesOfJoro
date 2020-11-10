@@ -17,11 +17,12 @@ public class EnemyController : MonoBehaviour
     #endregion
     #region Functions
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _target = PlayerManager._instance.PlayerTracker.transform;
         _agent = GetComponent<NavMeshAgent>();
         _startingPosition = transform.position;
+        _patrolPoint.transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z + 5.0f);
         _switchPoints = true;
     }
 
