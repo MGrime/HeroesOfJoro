@@ -92,6 +92,7 @@ public class Dungeon : MonoBehaviour
     private void CreateEnemyNode()
     {
         _enemyNode.transform.position= _builtPieces[18].Pivot.transform.position;
+        _enemyNode.GetComponentInChildren<EnemyController>().enabled = true;    // Enable enemy controller
     }
 
 
