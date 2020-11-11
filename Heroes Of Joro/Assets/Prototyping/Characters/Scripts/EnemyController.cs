@@ -21,9 +21,14 @@ public class EnemyController : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         _startingPosition = transform.position;
-        _patrolPoint.transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z + 5.0f);
-        _switchPoints = true;
         enabled = false;
+    }
+
+    public void Enable()
+    {
+        _patrolPoint.transform.position += new Vector3(0.0f,0.0f,5.0f);
+        _switchPoints = true;
+        enabled = true;
     }
 
     // Update is called once per frame

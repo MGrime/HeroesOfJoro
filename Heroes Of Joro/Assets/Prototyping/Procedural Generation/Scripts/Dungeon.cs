@@ -18,7 +18,7 @@ public class Dungeon : MonoBehaviour
 
     [SerializeField] private GameObject _player;
 
-    [SerializeField] private GameObject _enemyNode;
+    [SerializeField] private GameObject _enemyPrefab;
 
 
     #endregion
@@ -31,7 +31,7 @@ public class Dungeon : MonoBehaviour
     private uint _count;
     private bool _complete;
     private List<NavMeshSurface> _surfaces;
-    
+    private List<GameObject> _enemyClones;
 
 
     #endregion
@@ -41,9 +41,8 @@ public class Dungeon : MonoBehaviour
     {
         _builtPieces = new List<DungeonPiece>();
         _activeConnectors = new Queue<NodeConnector>();
-        _surfaces = new List< NavMeshSurface>();
-        
-
+        _surfaces = new List<NavMeshSurface>();
+        _enemyClones = new List<GameObject>();
 
         StartGeneration();
 
@@ -71,15 +70,6 @@ public class Dungeon : MonoBehaviour
                 _player.transform.position = _builtPieces[0].Pivot.transform.position + new Vector3(0.0f, 2.46f, 0.0f);
 
                 _complete = true;
-                //Build NavMesh
-                int index = 0;
-                foreach(DungeonPiece piece in _builtPieces)
-                {
-                    _surfaces.Add(piece.gameObject.GetComponent<NavMeshSurface>());
-                    _surfaces[index].BuildNavMesh();
-                    
-                    index++;
-                }
                 //Create enemies
                 CreateEnemyNode();
                 // Enable movement
@@ -91,8 +81,8 @@ public class Dungeon : MonoBehaviour
     }
     private void CreateEnemyNode()
     {
-        _enemyNode.transform.position= _builtPieces[18].Pivot.transform.position;
-        _enemyNode.GetComponentInChildren<EnemyController>().enabled = true;    // Enable enemy controller
+        _enemyClones.Add(Instantiate(_enemyPrefab, _builtPieces[_builtPieces.Count / 2].Pivot.transform.position,Quaternion.identity));
+        _enemyClones[0].GetComponentInChildren<EnemyController>().Enable();
     }
 
 
@@ -202,6 +192,9 @@ public class Dungeon : MonoBehaviour
             dungeonPiece.SetTriggerState(false);
 
             _builtPieces.Add(dungeonPiece);
+
+            _surfaces.Add(dungeonPiece.gameObject.GetComponent<NavMeshSurface>());
+            _surfaces[_surfaces.Count - 1].BuildNavMesh();
         }
         else
         {
