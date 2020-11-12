@@ -323,3 +323,4 @@ MonoBehaviour:
   _lookRadius: 10
   _smoothRotation: 5
   _patrolPoint: {fileID: 8716310828055599868}
+  distanceToPlayer: 0

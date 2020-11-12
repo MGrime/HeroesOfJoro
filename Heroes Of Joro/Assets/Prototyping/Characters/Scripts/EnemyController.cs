@@ -21,17 +21,20 @@ public class EnemyController : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         _startingPosition = transform.position;
-        enabled = false;
+        //enabled = false;
     }
 
     public void Enable()
     {
+        enabled = true;
         _patrolPoint.transform.position += new Vector3(0.0f,0.0f,5.0f);
         _switchPoints = true;
-        enabled = true;
+        _target = PlayerManager._instance.PlayerTracker.transform;
+
     }
 
     // Update is called once per frame
+    public float distanceToPlayer;
     void Update()
     {
         if (!_target)
@@ -39,7 +42,7 @@ public class EnemyController : MonoBehaviour
             _target = PlayerManager._instance.PlayerTracker.transform;
         }
 
-        float distanceToPlayer = Vector3.Distance(_target.position, transform.position);
+         distanceToPlayer = Vector3.Distance(_target.position, transform.position);
         float distanceToStart = Vector3.Distance(_startingPosition, transform.position);
         float distanceToPoint = Vector3.Distance(_patrolPoint.transform.position, transform.position);
 

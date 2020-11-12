@@ -16,7 +16,9 @@ public class PlayerManager : MonoBehaviour
     {
         _instance = this;
         // TODO: THIS IS BECAUSE OF SOMETHING I DID IN PROC GEN. OBVIOUSLY NEEDS TO TWEAK FOR OTHER PLAYER TYPES
+        //To make it easier instead of tracking the player track the camera which has access to the player being controlled
         PlayerTracker.GetComponent<Mage>().enabled = true;
         PlayerTracker.GetComponentInChildren<ThirdPersonMovementScript>().enabled = true;
+        
     }
 }

@@ -37,7 +37,7 @@ public class ThirdPersonMovementScript : MonoBehaviour
         #region Debug keys
 
         //Debug key to enable movement in character testing scene
-        if (Input.GetKey(KeyCode.P)) enabled = true;
+        if (Input.GetKey(KeyCode.P) && !enabled) enabled = true;
         else if (Input.GetKey(KeyCode.P) && enabled) enabled = false;
 
         #endregion
