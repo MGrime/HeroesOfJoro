@@ -472,9 +472,11 @@ MonoBehaviour:
   - {fileID: 8844580558485870772, guid: 44633dd5afafa8c40968c3738a42b7a0, type: 3}
   - {fileID: 6166827851350160613, guid: bbc44f7eaf81d8e419541057918b2799, type: 3}
   - {fileID: 4815709540597530685, guid: e0f4127edfd6a7e4eb0ac524d0d78c85, type: 3}
+  - {fileID: 1300230304268256673, guid: f001b5914a5c57b46b84e6bec0453bc6, type: 3}
   - {fileID: 8750066043980172721, guid: 35480deb62e4b2f408c9b8f3c17ec4a8, type: 3}
-  - {fileID: 8750066043980172721, guid: 35480deb62e4b2f408c9b8f3c17ec4a8, type: 3}
-  _dungeonSize: 200
+  _startingPiece: {fileID: 1300230304268256673, guid: f001b5914a5c57b46b84e6bec0453bc6,
+    type: 3}
+  _dungeonSize: 128
   _player: {fileID: 770610583}
   _enemyPrefab: {fileID: 8716310827570620369, guid: f4325968290290b4cb6ae1498dee02c3,
     type: 3}
@@ -1045,7 +1047,7 @@ PrefabInstance:
     - target: {fileID: 6545949466846933274, guid: a652998442906b549ad80529e095eaca,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.000000022351742
+      value: 0.000000011175871
       objectReference: {fileID: 0}
     - target: {fileID: 6545949466846933274, guid: a652998442906b549ad80529e095eaca,
         type: 3}
@@ -1055,7 +1057,7 @@ PrefabInstance:
     - target: {fileID: 6545949466846933274, guid: a652998442906b549ad80529e095eaca,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.00001335144
+      value: 0.0000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 6545949467251079374, guid: a652998442906b549ad80529e095eaca,
         type: 3}

@@ -13,6 +13,7 @@ public class Dungeon : MonoBehaviour
     #region Editor Fields
 
     [SerializeField] private GameObject[] _piecePrefabs;
+    [SerializeField] private GameObject _startingPiece;
 
     [SerializeField] private uint _dungeonSize;
 
@@ -95,7 +96,7 @@ public class Dungeon : MonoBehaviour
         _random = new Random(DateTime.Now.Millisecond);
 
         // Place first room and pull DungeonPiece component
-        _builtPieces.Add(Instantiate(_piecePrefabs[_random.Next(0, _piecePrefabs.Length)],transform).GetComponent<DungeonPiece>());
+        _builtPieces.Add(Instantiate(_startingPiece).GetComponent<DungeonPiece>());
 
         // Add its connectors to queue
         foreach (NodeConnector node in _builtPieces[0].Nodes)

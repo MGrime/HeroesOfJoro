@@ -1840,8 +1840,6 @@ MonoBehaviour:
   _nodeConnectors:
   - {fileID: 2894568054376059694}
   - {fileID: 6011624196664569979}
-  _validators:
-  - {fileID: 0}
   _pivotObject: {fileID: 5121024064359866765}
 --- !u!114 &7942687790090834428
 MonoBehaviour:
@@ -1871,7 +1869,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 1f82ccea315c21a4790997e6c0a1e9f1, type: 2}
 --- !u!1 &8111904925333314814
 GameObject:
   m_ObjectHideFlags: 0

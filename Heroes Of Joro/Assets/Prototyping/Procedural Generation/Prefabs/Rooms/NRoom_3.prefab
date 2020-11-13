@@ -123,9 +123,6 @@ MonoBehaviour:
   - {fileID: 2973919641146589588}
   - {fileID: 4471215249017382490}
   - {fileID: 1751391688260283522}
-  _validators:
-  - {fileID: 0}
-  - {fileID: 0}
   _pivotObject: {fileID: 6760345314043637755}
 --- !u!114 &8753369816703886628
 MonoBehaviour:
@@ -155,7 +152,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: f4b82691f6b509647aa915344f653c68, type: 2}
 --- !u!1 &5560472638193068996
 GameObject:
   m_ObjectHideFlags: 0
