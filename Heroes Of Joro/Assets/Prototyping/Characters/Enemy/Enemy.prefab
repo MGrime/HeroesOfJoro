@@ -323,4 +323,7 @@ MonoBehaviour:
   _lookRadius: 10
   _smoothRotation: 5
   _patrolPoint: {fileID: 8716310828055599868}
+  _switchPoints: 0
   distanceToPlayer: 0
+  distanceToStart: 0
+  distanceToPoint: 0

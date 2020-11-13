@@ -7,13 +7,13 @@ public class EnemyController : MonoBehaviour
     #region Editor Fields
     [SerializeField] private float _lookRadius = 10.0f;
     [SerializeField] private float _smoothRotation = 5.0f;
-    [SerializeField] private GameObject _patrolPoint;
+    [SerializeField] public GameObject _patrolPoint;
     #endregion
     #region Private Data
     private Transform _target;
     private NavMeshAgent _agent;
     private Vector3 _startingPosition;
-    private bool _switchPoints;
+    public bool _switchPoints;
     #endregion
     #region Functions
     // Start is called before the first frame update
@@ -34,7 +34,10 @@ public class EnemyController : MonoBehaviour
     }
 
     // Update is called once per frame
+    //Will change them to private later need them there for debugging
     public float distanceToPlayer;
+    public float distanceToStart;
+    public float distanceToPoint;
     void Update()
     {
         if (!_target)
@@ -43,8 +46,8 @@ public class EnemyController : MonoBehaviour
         }
 
          distanceToPlayer = Vector3.Distance(_target.position, transform.position);
-        float distanceToStart = Vector3.Distance(_startingPosition, transform.position);
-        float distanceToPoint = Vector3.Distance(_patrolPoint.transform.position, transform.position);
+         distanceToStart = Vector3.Distance(_startingPosition, transform.position);
+         distanceToPoint = Vector3.Distance(_patrolPoint.transform.position, transform.position);
 
         if (distanceToPlayer <= _lookRadius)
         {

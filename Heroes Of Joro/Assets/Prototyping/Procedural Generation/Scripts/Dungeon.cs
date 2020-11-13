@@ -85,8 +85,19 @@ public class Dungeon : MonoBehaviour
     }
     private void CreateEnemyNode()
     {
-        _enemyClones.Add(Instantiate(_enemyPrefab, _builtPieces[_builtPieces.Count / 2].Pivot.transform.position,Quaternion.identity));
-        _enemyClones[0].GetComponentInChildren<EnemyController>().Enable();
+        //Once we can tell which rooms are connected to the enemy spawn room Ill implement this algorithm:
+        //1. Spawn enemies based on the number of rooms connected and slightly adjusted i.e. randomise it so some casses have more enemies some less 
+        //2. Place patrol points in each connected room
+        //3. The amount of rooms will be random at first but once difficulty level applies it will change according to that
+
+        int index = 0;
+        foreach (DungeonPiece piece in _builtPieces)
+        {
+            _enemyClones.Add(Instantiate(_enemyPrefab, _builtPieces[index].Pivot.transform.position, Quaternion.identity));
+            _enemyClones[index].GetComponentInChildren<EnemyController>().Enable();
+            _enemyClones[index].GetComponentInChildren<EnemyController>()._patrolPoint.transform.position = _builtPieces[index + 1].Pivot.transform.position;
+             index++;
+         }
     }
 
 

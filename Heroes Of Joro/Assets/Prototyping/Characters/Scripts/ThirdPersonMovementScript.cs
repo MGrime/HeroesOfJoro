@@ -9,8 +9,11 @@ public class ThirdPersonMovementScript : MonoBehaviour
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private Transform _playerCamera;
     [SerializeField] private Animator _playerAnimator;
-    [SerializeField] private float _moveSpeed = 10.0f;
+    [SerializeField] private float _moveSpeed = 100.0f;
     [SerializeField] private float _turnSmoothTime = 0.1f;
+    [SerializeField] private float _gravity = 10.0f;
+    [SerializeField] private float _vSpeed = 0.0f;
+
 
     #endregion
 
@@ -62,8 +65,10 @@ public class ThirdPersonMovementScript : MonoBehaviour
 
             // Move the model in the direction
             Vector3 moveDirection = Quaternion.Euler(0.0f, targetAngle, 0.0f) * Vector3.forward;
+            _vSpeed-= _gravity * Time.deltaTime;
+            moveDirection.y = _vSpeed;
             _characterController.Move(moveDirection.normalized * _moveSpeed * Time.deltaTime);
-
+            _vSpeed = 0;
             // Set the animation to play
             _playerAnimator.SetBool("Moving", true);
         }
