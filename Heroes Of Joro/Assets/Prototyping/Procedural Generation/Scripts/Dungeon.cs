@@ -56,8 +56,11 @@ public class Dungeon : MonoBehaviour
         {
             if (_count < _dungeonSize)
             {
-                StartCoroutine("ProcessSection");
-                ++_count;
+                //if (Input.GetKeyDown(KeyCode.Space))
+                //{
+                    StartCoroutine("ProcessSection");
+                    ++_count;
+                //}
             }
             else
             {
@@ -124,6 +127,7 @@ public class Dungeon : MonoBehaviour
         // Now we need to process the new piece
 
         // 0. Set the validators to trigger mode
+        dungeonPiece.Initalise();
         dungeonPiece.SetTriggerState(true);
 
         // Pick a random connector to use as the linker
@@ -162,7 +166,7 @@ public class Dungeon : MonoBehaviour
         // Now need to move into the correct position
 
         // 1. Take position of linking connector and get position 1 forward in forward
-        Vector3 newConnectorPos = connector.transform.position + (connector.transform.forward);   // This is the location the new connector will sit
+        Vector3 newConnectorPos = connector.transform.position /*+ connector.transform.forward*/;   // This is the location the new connector will sit
 
         // 2. Place root at connector post
         dungeonPiece.Pivot.transform.position = newConnectorPos;
@@ -176,9 +180,11 @@ public class Dungeon : MonoBehaviour
 
         // 4. At this point on trigger enter will collide and invalid the piece if needed
         // If this component isnt found the prefab is wrong.
-        if (dungeonPiece.Pivot.GetComponent<DungeonValidator>().Valid)
+        bool valid = dungeonPiece.Pivot.GetComponent<DungeonValidator>().Valid;
+        Debug.Log("Placement: " + valid);
+        if (valid)
         {
-            // Add new connectors 
+            // Add new connectors  
             foreach (NodeConnector node in dungeonPiece.Nodes)
             {
                 if (node == linkConnector)

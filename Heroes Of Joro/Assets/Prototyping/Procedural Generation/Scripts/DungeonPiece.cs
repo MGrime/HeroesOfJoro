@@ -7,7 +7,7 @@ public class DungeonPiece : MonoBehaviour
     #region Editor Fields
 
     [SerializeField] private NodeConnector[] _nodeConnectors;
-    [SerializeField] private BoxCollider[] _validators;
+    private BoxCollider[] _validators;
     [SerializeField] private GameObject _pivotObject;
 
     #endregion
@@ -29,8 +29,9 @@ public class DungeonPiece : MonoBehaviour
 
     #region Functions
 
-    private void Start()
+    public void Initalise()
     {
+        _validators = new BoxCollider[_pivotObject.GetComponents<BoxCollider>().Length];
         _validators = _pivotObject.GetComponents<BoxCollider>();
     }
 
@@ -44,6 +45,11 @@ public class DungeonPiece : MonoBehaviour
 
     public void SetValidatorsState(bool state)
     {
+        if (_validators == null)
+        {
+            Initalise();
+        }
+
         foreach (BoxCollider box in _validators)
         {
             box.enabled = state;
