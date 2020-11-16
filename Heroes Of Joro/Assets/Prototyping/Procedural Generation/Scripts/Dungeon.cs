@@ -21,6 +21,7 @@ public class Dungeon : MonoBehaviour
 
     [SerializeField] private GameObject _enemyPrefab;
 
+    [SerializeField] private GameManager _gameManager;
 
     #endregion
 
@@ -79,6 +80,8 @@ public class Dungeon : MonoBehaviour
                 // Enable movement
                 _player.GetComponentInChildren<ThirdPersonMovementScript>().enabled = true;
                 _player.GetComponent<Mage>().enabled = true;
+
+                _gameManager.LoadingFinished();
 
             }
         }
