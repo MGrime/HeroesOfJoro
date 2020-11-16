@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4314fe121a7ed1a40b91e82719857755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _physicalPlayer: {fileID: 6545949466566277158}
+  _physicalPlayer: {fileID: 0}
   _spells:
   - {fileID: 4569553060908324738, guid: 0206dcf957e351b45a1489a29b4966cd, type: 3}
   - {fileID: 1787956836036324107, guid: 5191bfcd4a3960f4fbecf09661c02b18, type: 3}
@@ -52,6 +52,9 @@ MonoBehaviour:
   _castCooldown: 2
   _maxHealth: 100
   _maxMana: 100
+  _healthBar: {fileID: 0}
+  _manaBar: {fileID: 0}
+  _activeSpell: {fileID: 0}
 --- !u!1001 &7831375474571420704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -164,7 +167,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 3925239863076330502, guid: 9efc8a296d202e04ca56bd6d483e103c,
+        type: 3}
+      propertyPath: _characterController
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3925239863076330503, guid: 9efc8a296d202e04ca56bd6d483e103c, type: 3}
+    - {fileID: 3925239863076330502, guid: 9efc8a296d202e04ca56bd6d483e103c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9efc8a296d202e04ca56bd6d483e103c, type: 3}
 --- !u!4 &6545949466566277157 stripped
 Transform:
@@ -172,18 +182,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7831375474571420704}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6545949466566277158 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3925239863076330502, guid: 9efc8a296d202e04ca56bd6d483e103c,
-    type: 3}
-  m_PrefabInstance: {fileID: 7831375474571420704}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dab022b7a9d679b4eb08b99262658b02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &6120679402704476005 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4062150092349059909, guid: 9efc8a296d202e04ca56bd6d483e103c,

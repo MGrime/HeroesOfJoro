@@ -96,8 +96,14 @@ public class Dungeon : MonoBehaviour
             _enemyClones.Add(Instantiate(_enemyPrefab, _builtPieces[index].Pivot.transform.position, Quaternion.identity));
             _enemyClones[index].GetComponentInChildren<EnemyController>().Enable();
             _enemyClones[index].GetComponentInChildren<EnemyController>()._patrolPoint.transform.position = _builtPieces[index + 1].Pivot.transform.position;
-             index++;
-         }
+
+            ++index;
+
+            if (index >= _builtPieces.Count - 1)
+            {
+                --index;
+            }
+        }
     }
 
 
@@ -193,7 +199,7 @@ public class Dungeon : MonoBehaviour
         // 4. At this point on trigger enter will collide and invalid the piece if needed
         // If this component isnt found the prefab is wrong.
         bool valid = dungeonPiece.Pivot.GetComponent<DungeonValidator>().Valid;
-        Debug.Log("Placement: " + valid);
+        //Debug.Log("Placement: " + valid);
         if (valid)
         {
             // Add new connectors  
