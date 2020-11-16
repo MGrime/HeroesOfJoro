@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Prototyping/UI/Scenes/PGMainMenu.unity
+    guid: 15bcde0e756ae0045939940c55a9cca5
+  - enabled: 1
+    path: Assets/Prototyping/Procedural Generation/Scenes/PGSandbox.unity
+    guid: 1fbeb473d70a51743a2be6deeb525f78
   m_configObjects: {}
