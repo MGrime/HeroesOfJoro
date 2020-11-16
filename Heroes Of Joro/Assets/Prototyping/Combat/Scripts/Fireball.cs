@@ -16,10 +16,13 @@ public class Fireball : SpellBase
     [SerializeField] private ParticleSystem _explosionVfx;
     [SerializeField] private Collider _collisionZone;
     [SerializeField] private Rigidbody _rigidBody;
+    [SerializeField] private AudioSource _sound;
 
     #endregion
 
     #region Private Data
+
+    private static float _effectVolume = -1.0f;
 
     #endregion
 
@@ -30,6 +33,18 @@ public class Fireball : SpellBase
         _rigidBody.velocity = transform.forward * 20.0f;
 
         _particleVfx.Play(false);
+
+        if (Mathf.Approximately(_effectVolume, -1.0f))
+        {
+            if (PlayerPrefs.HasKey("SoundEffectVolume"))
+            {
+                _effectVolume = PlayerPrefs.GetFloat("SoundEffectVolume");
+            }
+        }
+
+        _sound.volume = _effectVolume;
+
+        _sound.Play();
     }
 
     private IEnumerator DestroySpellCheck()
@@ -62,6 +77,11 @@ public class Fireball : SpellBase
             // Set off destroy check
             StartCoroutine("DestroySpellCheck");
         }
+    }
+
+    public void PlaySound()
+    {
+        _sound.Play();
     }
 
     #endregion

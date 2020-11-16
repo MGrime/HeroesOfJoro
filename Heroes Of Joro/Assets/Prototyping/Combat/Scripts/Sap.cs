@@ -13,6 +13,7 @@ public class Sap : SpellBase
     [SerializeField] private Collider _collisionZone;
     [SerializeField] private Rigidbody _rigidBody;
     [SerializeField] private uint _pulseCount;
+    [SerializeField] private AudioSource _sound;
 
     #endregion
 
@@ -21,6 +22,8 @@ public class Sap : SpellBase
     private uint _remainingPulses;
 
     private List<Collider> _inRangeEnemies;
+
+    private float _effectVolume;
 
     #endregion
 
@@ -32,6 +35,17 @@ public class Sap : SpellBase
 
         // Init list
         _inRangeEnemies = new List<Collider>();
+
+
+        if (Mathf.Approximately(_effectVolume, -1.0f))
+        {
+            if (PlayerPrefs.HasKey("SoundEffectVolume"))
+            {
+                _effectVolume = PlayerPrefs.GetFloat("SoundEffectVolume");
+            }
+        }
+
+        _sound.volume = _effectVolume;
     }
 
     private void Update()
@@ -43,6 +57,7 @@ public class Sap : SpellBase
             if (!_particleVfx.isPlaying)
             {
                 _particleVfx.Play();
+                _sound.Play();
                 --_remainingPulses;
 
                 // Send damage to all eneimies in range
