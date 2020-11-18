@@ -41,6 +41,8 @@ public class Mage : MonoBehaviour
     private float _health;
     private float _mana;
 
+    //Enemy Damage
+    private int _enemyDamage;
     #endregion
 
     #region Functions
@@ -61,6 +63,7 @@ public class Mage : MonoBehaviour
         // Disable until we know targeting spell equiped
         _reticle.enabled = false;
     }
+
 
     private void Update()
     {
@@ -158,6 +161,22 @@ public class Mage : MonoBehaviour
 
     }
 
+    public void ReceiveDamage(int damage)
+    {
+        _enemyDamage = damage;
+
+        if (_health > 0)
+        {
+            _health -= damage;
+            Debug.Log("Damage received:" + damage);
+
+        }
+        else if (_health <= 0)
+        {
+            //Destroy(gameObject);
+            //TO DO: change this so it sends a message to GameOver function in the GameManager class
+        }
+    }
     private void FireProjectileSpell()
     {
         // Create a new spell object
