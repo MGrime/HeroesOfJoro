@@ -17,7 +17,6 @@ public class Fireball : SpellBase
     [SerializeField] private Collider _collisionZone;
     [SerializeField] private Rigidbody _rigidBody;
     [SerializeField] private AudioSource _sound;
-    [SerializeField] private int _fireDamage = 50;
     #endregion
 
     #region Private Data
@@ -30,6 +29,8 @@ public class Fireball : SpellBase
 
     private void Start()
     {
+        SetDamage(50);
+
         _rigidBody.velocity = transform.forward * 20.0f;
 
         _particleVfx.Play(false);
@@ -76,7 +77,7 @@ public class Fireball : SpellBase
             Debug.Log("Sent damage to " + other.name);
             if (other.name == "EnemyControls")
             {
-                other.gameObject.SendMessage("SetDamage", _fireDamage);
+                other.gameObject.SendMessage("SetDamage", GetDamage());
                 other.gameObject.SendMessage("ReduceHealth");
             }
             // Set off destroy check

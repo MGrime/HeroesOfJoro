@@ -14,7 +14,6 @@ public class Sap : SpellBase
     [SerializeField] private Rigidbody _rigidBody;
     [SerializeField] private uint _pulseCount;
     [SerializeField] private AudioSource _sound;
-    [SerializeField] private int _sapDamage = 20;
     #endregion
 
     #region Private Data
@@ -30,6 +29,8 @@ public class Sap : SpellBase
     #region Functions
     private void Start()
     {
+        SetDamage(20);
+
         // Set pulses
         _remainingPulses = _pulseCount;
 
@@ -69,7 +70,7 @@ public class Sap : SpellBase
                         Debug.Log("Sent damage to " + enemy.name);
                         if (enemy.name == "EnemyControls")
                         {
-                            enemy.gameObject.SendMessage("SetDamage", _sapDamage);
+                            enemy.gameObject.SendMessage("SetDamage", GetDamage());
                             enemy.gameObject.SendMessage("ReduceHealth");
                         }
                     }

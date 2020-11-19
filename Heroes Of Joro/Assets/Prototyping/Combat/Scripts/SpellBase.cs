@@ -32,13 +32,13 @@ public class SpellBase : MonoBehaviour
     }
 
 
-    [SerializeField] private float _damage = 0.0f;
-    public void SetDamage(float newDamage)
+    [SerializeField] private int _damage = 0;
+    public void SetDamage(int newDamage)
     {
         _damage = newDamage;
     }
 
-    public float GetDamage()
+    public int GetDamage()
     {
         return _damage;
     }
