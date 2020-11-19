@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
@@ -106,6 +107,16 @@ public class EnemyController : MonoBehaviour
     public void SetDamage(int damage)
     {
         _playerDamage = damage;
+
+        // Flash the enemy red when they get hit
+        Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in renderers)
+        {
+            r.material.color = Color.red;
+        }
+        StartCoroutine(UndoDamageFlash());
+
+
     }
     public void ReduceHealth()
     {
@@ -114,6 +125,19 @@ public class EnemyController : MonoBehaviour
             _enemyHealth -= _playerDamage;
             if (_enemyHealth <= 0)  Destroy(gameObject);
         }
+    }
+
+    public IEnumerator UndoDamageFlash()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        // Now after a second set back to wait
+        Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in renderers)
+        {
+            r.material.color = Color.white;
+        }
+
     }
 
    
