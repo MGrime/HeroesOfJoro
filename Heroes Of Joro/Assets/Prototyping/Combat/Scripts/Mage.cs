@@ -177,6 +177,19 @@ public class Mage : MonoBehaviour
             //TO DO: change this so it sends a message to GameOver function in the GameManager class
         }
     }
+
+    public void PickupMana()
+    {
+        if (_mana < _maxMana - 50.0f)
+        {
+            _mana += 50.0f;
+        }
+        else
+        {
+            _mana = _maxMana;
+        }
+    }
+
     private void FireProjectileSpell()
     {
         // Create a new spell object

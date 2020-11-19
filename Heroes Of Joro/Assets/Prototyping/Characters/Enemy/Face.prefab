@@ -94,11 +94,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb7ae715258055e449ab51953d9fded3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _throwFace: 0
   _projectileSpeed: 10
   _distanceTo: 1
+  _distanceAway: 2
   _enemyDamage: 5
-  _attackTime: 0
+  _timeAlive: 3
+  distanceToPlayer: 0
+  _dealDamage: 1
 --- !u!65 &5269984232182106659
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -107,7 +109,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6291415789267001813}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.1, y: 1.1, z: 1.1}

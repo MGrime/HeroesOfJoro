@@ -20,6 +20,8 @@ public class EnemyAttack : MonoBehaviour
     {
         _target = PlayerManager._instance.PlayerTracker.transform;
         _targetPos = _target.position;
+
+        GetComponent<Rigidbody>().AddTorque(new Vector3(0.0f, 40.0f));
     }
 
     // Update is called once per frame
@@ -35,7 +37,7 @@ public class EnemyAttack : MonoBehaviour
 
     }
 
-    public void OnCollisionEnter(Collision other)
+    public void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collision entered!");
 

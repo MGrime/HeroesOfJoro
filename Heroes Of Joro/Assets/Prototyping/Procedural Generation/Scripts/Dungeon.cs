@@ -23,6 +23,8 @@ public class Dungeon : MonoBehaviour
 
     [SerializeField] private GameManager _gameManager;
 
+    [SerializeField] private PickupBase[] _pickupPrefabs;
+
     #endregion
 
     #region Private Data
@@ -77,6 +79,10 @@ public class Dungeon : MonoBehaviour
                 _complete = true;
                 //Create enemies
                 CreateEnemyNode();
+
+                // TODO: UPDATE TO BE BETTER
+                CreatePickups();
+
                 // Enable movement
                 _player.GetComponentInChildren<ThirdPersonMovementScript>().enabled = true;
                 _player.GetComponent<Mage>().enabled = true;
@@ -86,6 +92,13 @@ public class Dungeon : MonoBehaviour
             }
         }
     }
+    private void CreatePickups()
+    {
+        // For now spawn a pickup in the middle room
+        Instantiate(_pickupPrefabs[0].gameObject, _builtPieces[0].Pivot.transform.position + new Vector3(3.0f,2.0f,3.0f), _pickupPrefabs[0].gameObject.transform.rotation);
+    }
+
+
     private void CreateEnemyNode()
     {
         //Once we can tell which rooms are connected to the enemy spawn room Ill implement this algorithm:

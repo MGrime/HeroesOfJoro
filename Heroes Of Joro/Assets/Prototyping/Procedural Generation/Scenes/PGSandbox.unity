@@ -185,7 +185,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &190812238
 GameObject:
@@ -268,7 +268,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 44.84, y: 0, z: 0}
 --- !u!1 &434361712
 GameObject:
@@ -846,6 +846,8 @@ MonoBehaviour:
   _enemyPrefab: {fileID: 8716310827570620369, guid: f4325968290290b4cb6ae1498dee02c3,
     type: 3}
   _gameManager: {fileID: 1531725287}
+  _pickupPrefabs:
+  - {fileID: 6331201530738293283, guid: 881a38b0b9256a54eaa13f558c3879bf, type: 3}
 --- !u!4 &1584605833
 Transform:
   m_ObjectHideFlags: 0
@@ -858,7 +860,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1735895579
 GameObject:
@@ -955,7 +957,7 @@ RectTransform:
   - {fileID: 434361713}
   - {fileID: 1923326042}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1052,7 +1054,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 58.5, y: -38.65, z: -152}
 --- !u!1 &1923326041
 GameObject:
@@ -1428,7 +1430,7 @@ PrefabInstance:
     - target: {fileID: 2296838712038802340, guid: a652998442906b549ad80529e095eaca,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2296838712038802340, guid: a652998442906b549ad80529e095eaca,
         type: 3}
@@ -1503,12 +1505,12 @@ PrefabInstance:
     - target: {fileID: 6545949466846933274, guid: a652998442906b549ad80529e095eaca,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.000000022351742
+      value: 0.000000011175871
       objectReference: {fileID: 0}
     - target: {fileID: 6545949466846933274, guid: a652998442906b549ad80529e095eaca,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.00001335144
+      value: 0.000005722046
       objectReference: {fileID: 0}
     - target: {fileID: 6545949466846933274, guid: a652998442906b549ad80529e095eaca,
         type: 3}
