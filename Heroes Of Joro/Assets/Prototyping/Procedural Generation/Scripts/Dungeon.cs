@@ -96,6 +96,7 @@ public class Dungeon : MonoBehaviour
     {
         // For now spawn a pickup in the middle room
         Instantiate(_pickupPrefabs[0].gameObject, _builtPieces[0].Pivot.transform.position + new Vector3(3.0f,2.0f,3.0f), _pickupPrefabs[0].gameObject.transform.rotation);
+        Instantiate(_pickupPrefabs[1].gameObject, _builtPieces[0].Pivot.transform.position - new Vector3(3.0f, 2.0f, 3.0f), _pickupPrefabs[1].gameObject.transform.rotation);
     }
 
 

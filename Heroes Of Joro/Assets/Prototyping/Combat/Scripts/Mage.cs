@@ -190,6 +190,18 @@ public class Mage : MonoBehaviour
         }
     }
 
+    public void PickupHealth()
+    {
+        if (_health < _maxHealth - 50.0f)
+        {
+            _health += 50.0f;
+        }
+        else
+        {
+            _health = _maxHealth;
+        }
+    }
+
     private void FireProjectileSpell()
     {
         // Create a new spell object

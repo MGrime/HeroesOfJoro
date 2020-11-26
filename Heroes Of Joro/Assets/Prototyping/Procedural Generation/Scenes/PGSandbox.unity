@@ -848,6 +848,7 @@ MonoBehaviour:
   _gameManager: {fileID: 1531725287}
   _pickupPrefabs:
   - {fileID: 6331201530738293283, guid: 881a38b0b9256a54eaa13f558c3879bf, type: 3}
+  - {fileID: 7563100155314604026, guid: b249c375cd0440242bf43e0ec10d7b7a, type: 3}
 --- !u!4 &1584605833
 Transform:
   m_ObjectHideFlags: 0
@@ -1505,12 +1506,12 @@ PrefabInstance:
     - target: {fileID: 6545949466846933274, guid: a652998442906b549ad80529e095eaca,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.000000011175871
+      value: 0.000000022351742
       objectReference: {fileID: 0}
     - target: {fileID: 6545949466846933274, guid: a652998442906b549ad80529e095eaca,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.000005722046
+      value: 0.00001335144
       objectReference: {fileID: 0}
     - target: {fileID: 6545949466846933274, guid: a652998442906b549ad80529e095eaca,
         type: 3}
