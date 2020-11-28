@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 190812241}
   - component: {fileID: 190812240}
   - component: {fileID: 190812239}
+  - component: {fileID: 190812242}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -270,6 +271,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 44.84, y: 0, z: 0}
+--- !u!45 &190812242
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190812238}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: c82a334cf5a5e47978749c210cee72a7, type: 2}
 --- !u!1 &434361712
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -816,6 +826,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1359023279}
   m_CullTransparentMesh: 0
+--- !u!1 &1449769303 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3351548229290681845, guid: a652998442906b549ad80529e095eaca,
+    type: 3}
+  m_PrefabInstance: {fileID: 2296838711689532989}
+  m_PrefabAsset: {fileID: 0}
+--- !u!45 &1449769304
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449769303}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: c82a334cf5a5e47978749c210cee72a7, type: 2}
 --- !u!1 &1531725284
 GameObject:
   m_ObjectHideFlags: 0
