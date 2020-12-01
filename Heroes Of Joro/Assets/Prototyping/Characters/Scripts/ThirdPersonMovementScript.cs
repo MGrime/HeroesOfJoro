@@ -8,11 +8,13 @@ public class ThirdPersonMovementScript : MonoBehaviour
 
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private Transform _playerCamera;
-    [SerializeField] private Animator _playerAnimator;
-    [SerializeField] private float _moveSpeed = 100.0f;
+    [SerializeField] private const float _Speed = 10.0f;
+    [SerializeField] private float _runSpeed = 30.0f;
+    [SerializeField] private float _moveSpeed = 10.0f;
     [SerializeField] private float _turnSmoothTime = 0.1f;
     [SerializeField] private float _gravity = 10.0f;
     [SerializeField] private float _vSpeed = 0.0f;
+    //[SerializeField] private Animator _playerAnimator;
 
 
     #endregion
@@ -62,22 +64,22 @@ public class ThirdPersonMovementScript : MonoBehaviour
 
             // Set the new smoother angle
             transform.rotation = Quaternion.Euler(0.0f, angle, 0.0f);
-
+         
             // Move the model in the direction
             Vector3 moveDirection = Quaternion.Euler(0.0f, targetAngle, 0.0f) * Vector3.forward;
             _vSpeed-= _gravity * Time.deltaTime;
             moveDirection.y = _vSpeed;
+            if (Input.GetKeyDown(KeyCode.LeftShift)) _moveSpeed = _runSpeed;
+            if (Input.GetKeyUp(KeyCode.LeftShift)) _moveSpeed = _Speed;
+           
+
             _characterController.Move(moveDirection.normalized * _moveSpeed * Time.deltaTime);
             _vSpeed = 0;
-            // Set the animation to play
-            _playerAnimator.SetBool("Moving", true);
-        }
-        else
-        {
-            // We aren't moving so stop the animation
-            _playerAnimator.SetBool("Moving", false);
+            
+
         }
        
+
     }
 
     #endregion
