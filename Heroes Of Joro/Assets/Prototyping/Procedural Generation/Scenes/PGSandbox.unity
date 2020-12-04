@@ -1094,7 +1094,9 @@ MonoBehaviour:
   - {fileID: 8750066043980172721, guid: 35480deb62e4b2f408c9b8f3c17ec4a8, type: 3}
   _startingPiece: {fileID: 1300230304268256673, guid: f001b5914a5c57b46b84e6bec0453bc6,
     type: 3}
-  _dungeonSize: 128
+  _doorPlug: {fileID: 3199487631391129335, guid: 2f925732d419aa047a1c8ec8b82ee38f,
+    type: 3}
+  _dungeonSize: 32
   _player: {fileID: 1410157769}
   _enemyPrefab: {fileID: 8716310827570620369, guid: f4325968290290b4cb6ae1498dee02c3,
     type: 3}

@@ -14,6 +14,7 @@ public class Dungeon : MonoBehaviour
 
     [SerializeField] private GameObject[] _piecePrefabs;
     [SerializeField] private GameObject _startingPiece;
+    [SerializeField] private GameObject _doorPlug;
 
     [SerializeField] private uint _dungeonSize;
 
@@ -90,6 +91,10 @@ public class Dungeon : MonoBehaviour
                 _gameManager.LoadingFinished();
 
             }
+        }
+        else
+        {
+            enabled = false;
         }
     }
     private void CreatePickups()
@@ -250,6 +255,14 @@ public class Dungeon : MonoBehaviour
         {
             // Delete it
             DestroyImmediate(dungeonPiece.gameObject);
+
+            // Plug the gap
+            GameObject plug = Instantiate(_doorPlug);
+
+            plug.transform.rotation = connector.transform.rotation;
+            plug.transform.position = connector.transform.position;
+            plug.transform.position = plug.transform.position + new Vector3(0.0f, 2.5f, 0.0f) - (connector.transform.forward * 0.5f);
+
         }
 
         yield return null;
