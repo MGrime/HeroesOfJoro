@@ -14,6 +14,7 @@ public class ThirdPersonMovementScript : MonoBehaviour
     [SerializeField] private float _turnSmoothTime = 0.1f;
     [SerializeField] private float _gravity = 10.0f;
     [SerializeField] private float _vSpeed = 0.0f;
+    [SerializeField] private bool _toWalk = true;
     //[SerializeField] private Animator _playerAnimator;
 
 
@@ -31,7 +32,7 @@ public class ThirdPersonMovementScript : MonoBehaviour
     {
         // Lock cursor to fix movement
         Cursor.lockState = CursorLockMode.Locked;
-
+        _toWalk = true;
         // Start with no control. Dungeon will enable when complete
         enabled = false;
     }
@@ -69,8 +70,16 @@ public class ThirdPersonMovementScript : MonoBehaviour
             Vector3 moveDirection = Quaternion.Euler(0.0f, targetAngle, 0.0f) * Vector3.forward;
             _vSpeed-= _gravity * Time.deltaTime;
             moveDirection.y = _vSpeed;
-            if (Input.GetKeyDown(KeyCode.LeftShift)) _moveSpeed = _runSpeed;
-            if (Input.GetKeyUp(KeyCode.LeftShift)) _moveSpeed = _Speed;
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                _moveSpeed = _runSpeed;
+                _toWalk = false;
+            }
+            else if (!_toWalk)
+            {
+                _moveSpeed = _Speed;
+                _toWalk = true;
+            }
            
 
             _characterController.Move(moveDirection.normalized * _moveSpeed * Time.deltaTime);
