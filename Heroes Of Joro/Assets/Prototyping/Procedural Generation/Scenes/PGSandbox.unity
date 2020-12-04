@@ -642,37 +642,37 @@ PrefabInstance:
     - target: {fileID: 1974644042219318076, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.35582608
+      value: 0.35582605
       objectReference: {fileID: 0}
     - target: {fileID: 1974644042219318076, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000024644908
+      value: 0.00000021428862
       objectReference: {fileID: 0}
     - target: {fileID: 1974644042219318076, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000061117
+      value: -0.00000059892506
       objectReference: {fileID: 0}
     - target: {fileID: 1974644042584051672, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 2.5664204e-10
+      value: 2.5664199e-10
       objectReference: {fileID: 0}
     - target: {fileID: 4733487790357193082, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.3625987
+      value: 0.36259866
       objectReference: {fileID: 0}
     - target: {fileID: 4733487790357193082, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000019242458
+      value: -0.000000019242455
       objectReference: {fileID: 0}
     - target: {fileID: 4733487790357193082, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000007486801
+      value: 0.000000007486799
       objectReference: {fileID: 0}
     - target: {fileID: 4733487790357193082, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
         type: 3}
@@ -766,6 +766,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b21b4ceb1b73474f887efb0b7aed52c, type: 3}
+--- !u!1 &906337505 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4733487790357193083, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
+    type: 3}
+  m_PrefabInstance: {fileID: 906337504}
+  m_PrefabAsset: {fileID: 0}
+--- !u!45 &906337506
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906337505}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: c82a334cf5a5e47978749c210cee72a7, type: 2}
 --- !u!1 &1143574634
 GameObject:
   m_ObjectHideFlags: 0
