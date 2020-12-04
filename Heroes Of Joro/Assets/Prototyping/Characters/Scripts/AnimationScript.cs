@@ -5,7 +5,7 @@ using UnityEngine;
 public class AnimationScript : MonoBehaviour
 {
     [SerializeField] private Animator _playerAnimator;
-    [SerializeField] private bool _toWalk;
+    [SerializeField] private bool _toWalk=true;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +37,7 @@ public class AnimationScript : MonoBehaviour
                 _playerAnimator.SetBool("isRunning", true);
                 _toWalk = false;
             }
-            if (Input.GetKeyUp(KeyCode.LeftShift)) _toWalk = true;
+            else if (!_toWalk) _toWalk = true;
         }
         //Transition to idle
         else 
