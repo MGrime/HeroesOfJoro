@@ -88,6 +88,9 @@ public class Dungeon : MonoBehaviour
                 _player.GetComponentInChildren<ThirdPersonMovementScript>().enabled = true;
                 _player.GetComponent<Mage>().enabled = true;
 
+                // Plug all remaining doors
+                PlugGaps();
+
                 _gameManager.LoadingFinished();
 
             }
@@ -97,6 +100,20 @@ public class Dungeon : MonoBehaviour
             enabled = false;
         }
     }
+
+    private void PlugGaps()
+    {
+        foreach (NodeConnector connector in _activeConnectors)
+        {
+            // Plug the gap
+            GameObject plug = Instantiate(_doorPlug);
+
+            plug.transform.rotation = connector.transform.rotation;
+            plug.transform.position = connector.transform.position;
+            plug.transform.position = plug.transform.position + new Vector3(0.0f, 2.5f, 0.0f) - (connector.transform.forward * 0.5f);
+        }
+    }
+
     private void CreatePickups()
     {
         // For now spawn a pickup in the middle room
