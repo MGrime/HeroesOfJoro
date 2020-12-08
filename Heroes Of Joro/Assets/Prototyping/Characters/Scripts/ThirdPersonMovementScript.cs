@@ -15,6 +15,8 @@ public class ThirdPersonMovementScript : MonoBehaviour
     [SerializeField] private float _gravity = 10.0f;
     [SerializeField] private float _vSpeed = 0.0f;
     [SerializeField] private bool _toWalk = true;
+    [SerializeField] private bool _isStopping = false;
+
     //[SerializeField] private Animator _playerAnimator;
 
 
@@ -55,7 +57,7 @@ public class ThirdPersonMovementScript : MonoBehaviour
         Vector3 direction = new Vector3(horizontal, 0.0f, vertical).normalized;
 
         // If the direction is not null we are moving
-        if (direction.magnitude >= 0.1f)
+        if (direction.magnitude >= 0.1f )
         {
             // Calculate the angle we will finish at
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _playerCamera.eulerAngles.y;
@@ -77,11 +79,19 @@ public class ThirdPersonMovementScript : MonoBehaviour
             }
             else if (!_toWalk)
             {
-                _moveSpeed = _Speed;
-                _toWalk = true;
+                while (_moveSpeed > _Speed)
+                {
+                    _moveSpeed *= 0.05f*Time.deltaTime;//Gradually decrease speed 
+
+                }
+                if (_moveSpeed < _Speed)
+                {
+                    _moveSpeed = _Speed;
+                    _toWalk = true;
+                }
             }
            
-
+            
             _characterController.Move(moveDirection.normalized * _moveSpeed * Time.deltaTime);
             _vSpeed = 0;
             

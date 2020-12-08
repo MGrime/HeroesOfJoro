@@ -12,14 +12,25 @@ public class EnemyController : MonoBehaviour
     [SerializeField] public GameObject _enemyProjectile;
     [SerializeField] public int _enemyHealth = 100;
     [SerializeField] private float _setAttackTime = 2.0f;
+    [SerializeField] private Animator _enemyAnimator;
+
     #endregion
     #region Private Data
     private Transform _target;
     private float _attackTime;
+    public float _lookTime;
     private NavMeshAgent _agent;
     private Vector3 _startingPosition;
     public bool _switchPoints;
+    public bool _lookAround = false;
     private int _playerDamage;
+
+
+    //Will change them to private later need them there for debugging
+    public float distanceToPlayer;
+    public float distanceToStart;
+    public float distanceToPoint;
+    private const float _minDistance = 3.0f;
     #endregion
     #region Functions
     // Start is called before the first frame update
@@ -29,6 +40,8 @@ public class EnemyController : MonoBehaviour
         _startingPosition = transform.position;
         _attackTime = _setAttackTime;
         //enabled = false;
+        //_target = PlayerManager._instance.PlayerTracker.transform;
+
     }
 
     public void Enable()
@@ -42,21 +55,16 @@ public class EnemyController : MonoBehaviour
     }
 
     // Update is called once per frame
-    //Will change them to private later need them there for debugging
-    public float distanceToPlayer;
-    public float distanceToStart;
-    public float distanceToPoint;
     void Update()
     {
-        if (!_target)
-        {
-            _target = PlayerManager._instance.PlayerTracker.transform;
-        }
-         distanceToPlayer = Vector3.Distance(_target.position, transform.position);
-         distanceToStart = Vector3.Distance(_startingPosition, transform.position);
-         distanceToPoint = Vector3.Distance(_patrolPoint.transform.position, transform.position);
+       
+        _target = PlayerManager._instance.PlayerTracker.transform; 
+        distanceToPlayer = Vector3.Distance(_target.position, transform.position);
+        distanceToStart = Vector3.Distance(_startingPosition, transform.position);
+        distanceToPoint = Vector3.Distance(_patrolPoint.transform.position, transform.position);
 
         _attackTime -= Time.deltaTime;
+        _lookTime -= Time.deltaTime;
         if (distanceToPlayer <= _lookRadius)
         {
             //Start following the player
@@ -77,26 +85,46 @@ public class EnemyController : MonoBehaviour
         }
         else //Patrol
         {
-            //Return to starting position
-            if ( _switchPoints) _agent.SetDestination(_startingPosition);
-            if (distanceToStart <= _agent.stoppingDistance)//Go to patrol point
-            {
-                _agent.SetDestination(_patrolPoint.transform.position);
-                _switchPoints = false;
-            }
-            if (distanceToPoint <= _agent.stoppingDistance)//Go to start point
-            {
-                _switchPoints = true;
-            }
-            
+            Patrol();
+
         }
     }
 
-    
+
 
     #endregion
     #region Enemy Behaviour Functions
+    void Patrol()
+    {
+        //Return to starting position
+        if (distanceToStart <= _minDistance)//Go to patrol point
+        {
+            if(LookAround())_agent.SetDestination(_patrolPoint.transform.position);
+        }
+        
+        if (distanceToPoint <= _minDistance)//Go to start point
+        {
+            if(LookAround())_agent.SetDestination(_startingPosition);
+        }
+    }
+    bool LookAround()
+    {
+        if (!_lookAround)
+        {
+            //_enemyAnimator.SetBool("isWalking", false);
+            _lookTime = 2.0f;
+            _lookAround = true;
+            return false;
+        }
+        else if (_lookTime <= 0.0f)
+        {
+           // _enemyAnimator.SetBool("isWalking", true);
+            _lookAround = false;
+            return true;
+        }
+        return false;
 
+    }
     void FaceTarget()
     {
         Vector3 direction = (_target.position - transform.position).normalized;

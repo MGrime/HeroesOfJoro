@@ -27,6 +27,7 @@ public class EnemyAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _target = PlayerManager._instance.PlayerTracker.transform;
         distanceToPlayer = Vector3.Distance(_target.position, _targetPos);
         transform.position = Vector3.MoveTowards(transform.position, _targetPos, _projectileSpeed * Time.deltaTime);
         if (distanceToPlayer < _distanceTo) _dealDamage = false;        

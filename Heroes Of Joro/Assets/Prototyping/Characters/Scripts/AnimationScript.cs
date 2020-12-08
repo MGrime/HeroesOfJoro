@@ -14,6 +14,7 @@ public class AnimationScript : MonoBehaviour
             _playerAnimator.SetBool("isWalking", false);
             _playerAnimator.SetBool("isRunning", false);
             _playerAnimator.SetBool("isIdle", true);
+            _playerAnimator.SetBool("isStopping", false);
             _toWalk = true;
         }
     }
@@ -29,6 +30,8 @@ public class AnimationScript : MonoBehaviour
                 _playerAnimator.SetBool("isWalking", true);
                 _playerAnimator.SetBool("isIdle", false);
                 _playerAnimator.SetBool("isRunning", false);
+                _playerAnimator.SetBool("isStopping", false);
+
             }
             if (Input.GetKey(KeyCode.LeftShift))//Transition to Run
             {
@@ -37,7 +40,12 @@ public class AnimationScript : MonoBehaviour
                 _playerAnimator.SetBool("isRunning", true);
                 _toWalk = false;
             }
-            else if (!_toWalk) _toWalk = true;
+            else if (!_toWalk)
+            {
+                _playerAnimator.SetBool("isStopping", true);
+                _playerAnimator.SetBool("isRunning", false);
+                _toWalk = true;
+            }
         }
         //Transition to idle
         else 

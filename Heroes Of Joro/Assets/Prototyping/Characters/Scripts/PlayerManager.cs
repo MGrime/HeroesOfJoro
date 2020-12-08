@@ -11,8 +11,8 @@ public class PlayerManager : MonoBehaviour
 
     #endregion
     public GameObject PlayerTracker;
-
-    private void Start()
+   
+    void Start()
     {
         _instance = this;
         // TODO: THIS IS BECAUSE OF SOMETHING I DID IN PROC GEN. OBVIOUSLY NEEDS TO TWEAK FOR OTHER PLAYER TYPES
