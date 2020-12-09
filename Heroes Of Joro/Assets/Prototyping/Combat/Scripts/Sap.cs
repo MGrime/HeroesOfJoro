@@ -73,6 +73,10 @@ public class Sap : SpellBase
                             enemy.gameObject.SendMessage("SetDamage", GetDamage());
                             enemy.gameObject.SendMessage("ReduceHealth");
                         }
+                        if (enemy.name == "Face(Clone)")
+                        {
+                            enemy.gameObject.SendMessage("ReduceProjectileHealth", GetDamage());
+                        }
                     }
                 }
             }

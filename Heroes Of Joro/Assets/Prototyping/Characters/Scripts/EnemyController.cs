@@ -18,11 +18,12 @@ public class EnemyController : MonoBehaviour
     #region Private Data
     private Transform _target;
     private float _attackTime;
-    public float _lookTime;
+    private float _lookTime;
+    private const float _bufferTime = 3.0f;
+    private const float _waitTime = 5.0f;
     private NavMeshAgent _agent;
     private Vector3 _startingPosition;
-    public bool _switchPoints;
-    public bool _lookAround = false;
+    private bool _lookAround = false;
     private int _playerDamage;
 
 
@@ -40,7 +41,7 @@ public class EnemyController : MonoBehaviour
         _startingPosition = transform.position;
         _attackTime = _setAttackTime;
         //enabled = false;
-        //_target = PlayerManager._instance.PlayerTracker.transform;
+        //_target = PlayerManager._instance.PlayerTracker.transform;//Give as weird error that its null
 
     }
 
@@ -48,7 +49,6 @@ public class EnemyController : MonoBehaviour
     {
         enabled = true;
         _patrolPoint.transform.position += new Vector3(0.0f,0.0f,5.0f);
-        _switchPoints = true;
         _target = PlayerManager._instance.PlayerTracker.transform;
         
 
@@ -58,7 +58,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
        
-        _target = PlayerManager._instance.PlayerTracker.transform; 
+        _target = PlayerManager._instance.PlayerTracker.transform; //Needs a FIX: Player position passed looks like few frames behind
         distanceToPlayer = Vector3.Distance(_target.position, transform.position);
         distanceToStart = Vector3.Distance(_startingPosition, transform.position);
         distanceToPoint = Vector3.Distance(_patrolPoint.transform.position, transform.position);
@@ -67,10 +67,11 @@ public class EnemyController : MonoBehaviour
         _lookTime -= Time.deltaTime;
         if (distanceToPlayer <= _lookRadius)
         {
+            _lookAround = false;
+            _enemyAnimator.SetBool("isWalking", true);
             //Start following the player
             _agent.SetDestination(_target.position);
-            _switchPoints = true;
-            //
+           
             if (distanceToPlayer <= 5.0f)
             {
                 if (_attackTime <= 0.0f)
@@ -100,26 +101,29 @@ public class EnemyController : MonoBehaviour
         if (distanceToStart <= _minDistance)//Go to patrol point
         {
             if(LookAround())_agent.SetDestination(_patrolPoint.transform.position);
+
         }
-        
+
         if (distanceToPoint <= _minDistance)//Go to start point
         {
             if(LookAround())_agent.SetDestination(_startingPosition);
+
         }
     }
     bool LookAround()
     {
-        if (!_lookAround)
+        if (!_lookAround && _lookTime <= 0.0f)
         {
-            //_enemyAnimator.SetBool("isWalking", false);
-            _lookTime = 2.0f;
+            _enemyAnimator.SetBool("isWalking", false);
             _lookAround = true;
+            _lookTime = _waitTime;
             return false;
         }
-        else if (_lookTime <= 0.0f)
+        if (_lookAround && _lookTime <= 0.0f)
         {
-           // _enemyAnimator.SetBool("isWalking", true);
+            _enemyAnimator.SetBool("isWalking", true);
             _lookAround = false;
+            _lookTime = _bufferTime;
             return true;
         }
         return false;

@@ -80,6 +80,10 @@ public class Fireball : SpellBase
                 other.gameObject.SendMessage("SetDamage", GetDamage());
                 other.gameObject.SendMessage("ReduceHealth");
             }
+            if (other.name == "Face(Clone)")
+            {
+                other.gameObject.SendMessage("ReduceProjectileHealth", GetDamage());
+            }
             // Set off destroy check
             StartCoroutine("DestroySpellCheck");
         }

@@ -6,6 +6,7 @@ public class EnemyAttack : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private float _projectileSpeed=10.0f;
+    [SerializeField] private float _projetileLife = 1.0f;
     [SerializeField] private float _distanceTo = 1.0f;
     [SerializeField] private float _distanceAway = 2.0f;
 
@@ -59,6 +60,11 @@ public class EnemyAttack : MonoBehaviour
     public void AttackPlayer()
     {
         _target.gameObject.SendMessage("ReceiveDamage", _enemyDamage);
+    }
+    void ReduceProjectileHealth(int amount)
+    {
+        _projetileLife -= amount;
+        if (_projetileLife <= 0) DestroyProjectile();
     }
     void DestroyProjectile()
     {
