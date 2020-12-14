@@ -49,7 +49,7 @@ public class EnemyController : MonoBehaviour
     {
         enabled = true;
         _patrolPoint.transform.position += new Vector3(0.0f,0.0f,5.0f);
-        _target = PlayerManager._instance.PlayerTracker.transform;
+        _target = PlayerManager._instance.ActivePlayer.transform;
         
 
     }
@@ -58,7 +58,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
        
-        _target = PlayerManager._instance.PlayerTracker.transform; //Needs a FIX: Player position passed looks like few frames behind
+        _target = PlayerManager._instance.ActivePlayer.transform; //Needs a FIX: Player position passed looks like few frames behind
         distanceToPlayer = Vector3.Distance(_target.position, transform.position);
         distanceToStart = Vector3.Distance(_startingPosition, transform.position);
         distanceToPoint = Vector3.Distance(_patrolPoint.transform.position, transform.position);
