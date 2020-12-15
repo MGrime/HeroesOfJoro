@@ -362,11 +362,16 @@ PrefabInstance:
       propertyPath: _activeSpell
       value: 
       objectReference: {fileID: 434361714}
+    - target: {fileID: 1594520996866533889, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
+        type: 3}
+      propertyPath: m_Name
+      value: MageCharacter2
+      objectReference: {fileID: 0}
     - target: {fileID: 1936980736311625732, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
         type: 3}
       propertyPath: _playerCamera
       value: 
-      objectReference: {fileID: 1974644040790133202}
+      objectReference: {fileID: 4733487789518503322}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b21b4ceb1b73474f887efb0b7aed52c, type: 3}
 --- !u!1 &434361712
@@ -529,11 +534,16 @@ PrefabInstance:
       propertyPath: _activeSpell
       value: 
       objectReference: {fileID: 434361714}
+    - target: {fileID: 1594520996866533889, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
+        type: 3}
+      propertyPath: m_Name
+      value: MageCharacter3
+      objectReference: {fileID: 0}
     - target: {fileID: 1936980736311625732, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
         type: 3}
       propertyPath: _playerCamera
       value: 
-      objectReference: {fileID: 1974644040790133202}
+      objectReference: {fileID: 4733487789518503322}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b21b4ceb1b73474f887efb0b7aed52c, type: 3}
 --- !u!1 &627292814
@@ -745,6 +755,11 @@ PrefabInstance:
       propertyPath: _activeSpell
       value: 
       objectReference: {fileID: 434361714}
+    - target: {fileID: 1594520996866533889, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
+        type: 3}
+      propertyPath: m_Name
+      value: MageCharacter1
+      objectReference: {fileID: 0}
     - target: {fileID: 1936980736311625732, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
         type: 3}
       propertyPath: _playerCamera
@@ -2088,8 +2103,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974644041344359151}
-  m_LocalRotation: {x: 0.3895388, y: 0.000000016870574, z: -0.000000009122058, w: 0.9210101}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0000030909014}
+  m_LocalRotation: {x: 0.3895388, y: -0.000000014823929, z: 0.000000004283049, w: 0.9210101}
+  m_LocalPosition: {x: 0, y: 0, z: -0.000004636352}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1974644042151648647}

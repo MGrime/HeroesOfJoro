@@ -76,6 +76,7 @@ public class PlayerManager : MonoBehaviour
         // Get the transform of the object that the animator is attached to
         CameraFreeLook.Follow = newPlayer.GetComponentInChildren<Animator>().transform;
         CameraFreeLook.LookAt = newPlayer.GetComponentInChildren<Animator>().transform;
+
     }
 
     void DisablePlayer(GameObject player)
