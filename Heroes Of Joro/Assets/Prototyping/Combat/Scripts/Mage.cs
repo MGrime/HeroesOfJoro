@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Mage : MonoBehaviour
+public class Mage : PlayerBase
 {
     #region Editor Fields
 
