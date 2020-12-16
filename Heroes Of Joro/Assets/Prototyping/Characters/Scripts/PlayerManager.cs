@@ -11,9 +11,9 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager _instance;
 
     #endregion
-    public GameObject[] PlayerTrackers;
+    public PlayerBase[] PlayerTrackers;
 
-    public GameObject ActivePlayer;
+    public PlayerBase ActivePlayer;
 
     public CinemachineFreeLook CameraFreeLook;
    
@@ -60,7 +60,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    void SwitchCharacter(ref GameObject newPlayer)
+    void SwitchCharacter(ref PlayerBase newPlayer)
     {
         // Move to active player
         newPlayer.transform
@@ -79,20 +79,20 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    void DisablePlayer(GameObject player)
+    void DisablePlayer(PlayerBase player)
     {
-        player.GetComponent<Mage>().enabled = false;
+        player.enabled = false;
         player.GetComponentInChildren<ThirdPersonMovementScript>().enabled = false;
-        player.GetComponent<AnimationScript>().enabled = false;
-        player.SetActive(false);
+        player.gameObject.GetComponent<AnimationScript>().enabled = false;
+        player.gameObject.SetActive(false);
     }
 
 
-    void EnablePlayer(GameObject player)
+    void EnablePlayer(PlayerBase player)
     {
-        player.GetComponent<Mage>().enabled = true;
+        player.enabled = true;
         player.GetComponentInChildren<ThirdPersonMovementScript>().enabled = true;
-        player.GetComponent<AnimationScript>().enabled = true;
-        player.SetActive(true);
+        player.gameObject.GetComponent<AnimationScript>().enabled = true;
+        player.gameObject.SetActive(true);
     }
 }
