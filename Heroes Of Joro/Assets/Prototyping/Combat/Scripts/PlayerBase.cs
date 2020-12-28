@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlayerBase : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum PlayerType
     {
-        
+        Mage,
+        Warrior
     }
 
-    // Update is called once per frame
-    void Update()
+    private PlayerType _type;
+
+    public PlayerType Type
     {
-        
+        get => _type;
+        set => _type = value;
     }
+
+
 }

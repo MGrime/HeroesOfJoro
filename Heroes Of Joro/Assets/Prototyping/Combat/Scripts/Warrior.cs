@@ -30,6 +30,15 @@ public class Warrior : PlayerBase
 
     #region Functions
 
+    private void Start()
+    {
+        Type = PlayerType.Warrior;
+
+        _health = _maxHealth;
+
+        enabled = false;
+    }
+
     private void Update()
     {
         // Update bars

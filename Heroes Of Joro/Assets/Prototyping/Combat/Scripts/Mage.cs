@@ -48,6 +48,8 @@ public class Mage : PlayerBase
     #region Functions
     private void Start()
     {
+        Type = PlayerType.Mage;
+
         // Start at the base of the spell array
         if (_spells.Length > 0)
         {

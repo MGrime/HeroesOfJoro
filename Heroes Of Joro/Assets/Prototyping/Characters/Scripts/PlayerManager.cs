@@ -16,7 +16,13 @@ public class PlayerManager : MonoBehaviour
     public PlayerBase ActivePlayer;
 
     public CinemachineFreeLook CameraFreeLook;
-   
+
+    #region Private Data
+
+    public GameObject _manaBar;  // Find it with find
+
+    #endregion
+
     void Start()
     {
         _instance = this;
@@ -31,6 +37,8 @@ public class PlayerManager : MonoBehaviour
         EnablePlayer(PlayerTrackers[0]);
 
         ActivePlayer = PlayerTrackers[0];
+
+        _manaBar = GameObject.Find("Mana Bar");
 
     }
 
@@ -62,6 +70,19 @@ public class PlayerManager : MonoBehaviour
 
     void SwitchCharacter(ref PlayerBase newPlayer)
     {
+        // Find type of player to modify UI
+        if (_manaBar)
+        {
+            if (newPlayer.Type == PlayerBase.PlayerType.Mage)
+            {
+                _manaBar.SetActive(true);
+            }
+            else
+            {
+                _manaBar.SetActive(false);
+            }
+        }
+
         // Move to active player
         newPlayer.transform
             .SetPositionAndRotation(ActivePlayer.transform.position, ActivePlayer.transform.rotation);
