@@ -11,7 +11,8 @@ public class PlayerBase : MonoBehaviour
     public enum PlayerType
     {
         Mage,
-        Warrior
+        Warrior,
+        Archer
     }
     private PlayerType _type;
     public PlayerType Type

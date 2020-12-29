@@ -19,7 +19,7 @@ public class PlayerManager : MonoBehaviour
 
     #region Private Data
 
-    public GameObject _manaBar;  // Find it with find
+    private GameObject _manaBar;  // Find it with find
 
     #endregion
 
