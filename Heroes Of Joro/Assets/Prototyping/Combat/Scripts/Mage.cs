@@ -21,7 +21,6 @@ public class Mage : PlayerBase
 
     // UI
 
-    [SerializeField] private Slider _healthBar;
     [SerializeField] private Slider _manaBar;
     [SerializeField] private Text _activeSpell;
 
@@ -43,9 +42,11 @@ public class Mage : PlayerBase
     #endregion
 
     #region Functions
-    private void Start()
+    override protected void Start()
     {
         Type = PlayerType.Mage;
+
+        base.Start();
 
         // Start at the base of the spell array
         if (_spells.Length > 0)
@@ -53,19 +54,16 @@ public class Mage : PlayerBase
             _selectedSpellIndex = 0;
         }
 
-        Health = MaxHealth;
         _mana = _maxMana;
-
-        // Will enable on game start
-        enabled = false;
 
         // Disable until we know targeting spell equiped
         _reticle.enabled = false;
     }
 
 
-    private void Update()
+    override protected void Update()
     {
+        base.Update();
 
         // Switch spell index with wheel
         if (Input.GetAxis("Mouse ScrollWheel") > 0.0f)  // Forward
@@ -108,11 +106,6 @@ public class Mage : PlayerBase
             }
         }
             
-        // Update bars
-        if (_healthBar)
-        {
-            _healthBar.value = Health / MaxHealth;
-        }
 
         if (_manaBar)
         {

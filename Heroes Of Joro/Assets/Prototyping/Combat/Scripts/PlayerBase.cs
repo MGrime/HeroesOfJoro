@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerBase : MonoBehaviour
 {
@@ -34,9 +35,34 @@ public class PlayerBase : MonoBehaviour
         set => _maxHealth = value;
     }
 
+    // UI
+    [SerializeField] private Slider _healthBar;
+    public Slider HealthBar
+    {
+        get => _healthBar;
+        set => _healthBar = value;
+    }
+
     #endregion
 
     #region Functions
+
+    protected virtual void Start()
+    {
+        _health = _maxHealth;
+
+        enabled = false;
+    }
+
+    protected virtual void Update()
+    {
+        // Update bars
+        if (_healthBar)
+        {
+            _healthBar.value = _health / _maxHealth;
+        }
+    }
+
     // Message functions
     public void ReceiveDamage(int damage)
     {

@@ -13,29 +13,21 @@ public class Warrior : PlayerBase
     // Contains the sword object
     [SerializeField] private SwordBase _sword;
 
-    // UI
-    [SerializeField] private Slider _healthBar; 
-
     #endregion
 
     #region Functions
 
-    private void Start()
+    override protected void Start()
     {
         Type = PlayerType.Warrior;
 
-        Health = MaxHealth;
+        base.Start();
 
-        enabled = false;
     }
 
-    private void Update()
+    override protected void Update()
     {
-        // Update bars
-        if (_healthBar)
-        {
-            _healthBar.value = Health / MaxHealth;
-        }
+        base.Update();
 
         // Check inputs
         // Left click
