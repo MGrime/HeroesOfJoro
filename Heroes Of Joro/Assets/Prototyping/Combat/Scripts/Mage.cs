@@ -17,8 +17,6 @@ public class Mage : PlayerBase
     // How long between spells
     [SerializeField] private float _castCooldown = 2.0f;
 
-    [SerializeField] private float _maxHealth = 100.0f;
-
     [SerializeField] private float _maxMana = 100.0f;
 
     // UI
@@ -38,7 +36,6 @@ public class Mage : PlayerBase
     private float _manaRefillTimer;
 
     // Store current health/mana
-    private float _health;
     private float _mana;
 
     //Enemy Damage
@@ -56,7 +53,7 @@ public class Mage : PlayerBase
             _selectedSpellIndex = 0;
         }
 
-        _health = _maxHealth;
+        Health = MaxHealth;
         _mana = _maxMana;
 
         // Will enable on game start
@@ -114,7 +111,7 @@ public class Mage : PlayerBase
         // Update bars
         if (_healthBar)
         {
-            _healthBar.value = _health / _maxHealth;
+            _healthBar.value = Health / MaxHealth;
         }
 
         if (_manaBar)
@@ -163,23 +160,6 @@ public class Mage : PlayerBase
 
     }
 
-    public void ReceiveDamage(int damage)
-    {
-        _enemyDamage = damage;
-
-        if (_health > 0)
-        {
-            _health -= damage;
-            Debug.Log("Damage received:" + damage);
-
-        }
-        else if (_health <= 0)
-        {
-            //Destroy(gameObject);
-            //TO DO: change this so it sends a message to GameOver function in the GameManager class
-        }
-    }
-
     public void PickupMana()
     {
         if (_mana < _maxMana - 50.0f)
@@ -189,18 +169,6 @@ public class Mage : PlayerBase
         else
         {
             _mana = _maxMana;
-        }
-    }
-
-    public void PickupHealth()
-    {
-        if (_health < _maxHealth - 50.0f)
-        {
-            _health += 50.0f;
-        }
-        else
-        {
-            _health = _maxHealth;
         }
     }
 

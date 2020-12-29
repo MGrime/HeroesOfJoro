@@ -43,7 +43,7 @@ public class EnemyAttack : MonoBehaviour
     {
         Debug.Log("Collision entered!");
 
-        if (other.transform.name == "PlayerMage")
+        if (other.CompareTag("Player"))
         {
             //TODO: NON Projectile attack
             //On Simple collision with enemy hurt the player every two seconds
