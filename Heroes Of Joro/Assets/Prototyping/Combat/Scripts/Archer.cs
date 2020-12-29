@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Archer : PlayerBase
 {
+    #region Editor Fields
+
+    // Contains the bow object
+    [SerializeField] private BowBase _base; 
+
+    #endregion
+
     // Start is called before the first frame update
     override protected void Start()
     {

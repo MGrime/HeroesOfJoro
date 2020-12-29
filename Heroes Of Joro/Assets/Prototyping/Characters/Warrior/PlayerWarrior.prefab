@@ -1949,10 +1949,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d3eed96264c4a43a98ae939e7cc34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _physicalPlayer: {fileID: 8511612672534867196}
-  _sword: {fileID: 6999041995677791880}
   _maxHealth: 200
   _healthBar: {fileID: 0}
+  _physicalPlayer: {fileID: 8511612672534867196}
+  _sword: {fileID: 6999041995677791880}
 --- !u!143 &8511612672534867197
 CharacterController:
   m_ObjectHideFlags: 0
