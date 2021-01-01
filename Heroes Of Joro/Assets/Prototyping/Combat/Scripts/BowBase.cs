@@ -4,15 +4,43 @@ using UnityEngine;
 
 public class BowBase : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    #region Editor Fields
+
+    // Arrow to fire.
+    [SerializeField] private Arrow _arrow;
+
+    // damages
+    [SerializeField] private float _fastDamage;
+    [SerializeField] private float _chargedBaseDamage;
+
+    // Max hold for this bow
+    [SerializeField] private float _holdTime;
+
+    #endregion
+
+    #region Code Fields
+
+    public float HoldTime
     {
-        
+        get => _holdTime;
+        set => _holdTime = value;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    #endregion
+
+
+    #region Functions
+
+    public void FastFire()
     {
-        
+        Debug.Log("Fast");
     }
+
+    public void ChargedFire(float heldTime)
+    {
+        Debug.Log("Charged");
+    }
+
+    #endregion
 }
