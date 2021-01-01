@@ -7,7 +7,7 @@ public class BowBase : MonoBehaviour
     #region Editor Fields
 
     // Arrow to fire.
-    [SerializeField] private Arrow _arrow;
+    [SerializeField] private GameObject _arrow;
 
     // damages
     [SerializeField] private float _fastDamage;
@@ -31,15 +31,27 @@ public class BowBase : MonoBehaviour
 
 
     #region Functions
-
     public void FastFire()
     {
         Debug.Log("Fast");
+
+        // Create arrow
+        Arrow newArrow = Instantiate(_arrow, gameObject.transform.position, gameObject.transform.rotation).GetComponent<Arrow>();
+
+
+        newArrow.Fire(_fastDamage);
     }
 
     public void ChargedFire(float heldTime)
     {
         Debug.Log("Charged");
+
+        float percentage = _holdTime / heldTime;
+
+        // Create arrow
+        Arrow newArrow = Instantiate(_arrow, gameObject.transform.position, gameObject.transform.rotation).GetComponent<Arrow>();
+
+        newArrow.Fire(_chargedBaseDamage * percentage);
     }
 
     #endregion

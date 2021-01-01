@@ -4,15 +4,39 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    #region Editor Fields
+
+    [SerializeField] private Rigidbody _rigidBody;
+
+    [SerializeField] private float _speed;
+    #endregion
+
+    private float _damage;
+
+    public void Fire(float damage)
     {
-        
+        _damage = damage;
+
+        _rigidBody.velocity = transform.forward * _speed;
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.tag != "Player")
+        {
+            if (other.name == "EnemyControls")
+            {
+                other.gameObject.SendMessage("SetDamage", _damage);
+                other.gameObject.SendMessage("ReduceHealth");
+            }
+            if (other.name == "Face(Clone)")
+            {
+                other.gameObject.SendMessage("ReduceProjectileHealth", _damage);
+            }
+
+            Destroy(this.gameObject);
+        }
+
     }
 }

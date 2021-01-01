@@ -899,7 +899,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 150
   _healthBar: {fileID: 0}
-  _base: {fileID: 5961110967906672721}
+  _bow: {fileID: 0}
 --- !u!1 &2532793612934310790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1751,6 +1751,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7eca32545df8a34d9439ad121b4e52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _arrow: {fileID: 8561646255657111476, guid: 208c6de2b06e9ef46819ed2d7f69d3d6, type: 3}
+  _fastDamage: 0
+  _chargedBaseDamage: 0
+  _holdTime: 0
 --- !u!1 &5794637645538076718
 GameObject:
   m_ObjectHideFlags: 0
