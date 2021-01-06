@@ -62,8 +62,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360722363320360500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.8511, y: 2.6529, z: -4.45}
-  m_LocalScale: {x: 1.7630999, y: 1.7630999, z: 1.7630999}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 2119841696426619067}
   m_Father: {fileID: 0}
@@ -81,15 +81,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4314fe121a7ed1a40b91e82719857755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 100
+  _healthBar: {fileID: 0}
   _physicalPlayer: {fileID: 1936980736311625732}
   _spells:
   - {fileID: 4569553060908324738, guid: 0206dcf957e351b45a1489a29b4966cd, type: 3}
   - {fileID: 1787956836036324107, guid: 5191bfcd4a3960f4fbecf09661c02b18, type: 3}
   _reticle: {fileID: 5625150739552635643}
   _castCooldown: 2
-  _maxHealth: 100
   _maxMana: 100
-  _healthBar: {fileID: 0}
   _manaBar: {fileID: 0}
   _activeSpell: {fileID: 0}
 --- !u!143 &1936980736311625733
@@ -175,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerAnimator: {fileID: 1936980737245572803}
   _toWalk: 0
+  _toRun: 0
 --- !u!114 &6580097324133574210
 MonoBehaviour:
   m_ObjectHideFlags: 0

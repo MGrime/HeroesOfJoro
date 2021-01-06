@@ -6,7 +6,12 @@ ModelImporter:
   - first:
       74: -203655887218126122
     second: RunningAnimation
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ch39_Body
+    second: {fileID: 2100000, guid: fd2a005d4e8907c4cb5b6fcbf6466c14, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -116,11 +121,11 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 2
+  animationType: 1
   humanoidOversampling: 1
   avatarSetup: 0
   additionalBone: 0

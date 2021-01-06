@@ -85,8 +85,8 @@ public class Dungeon : MonoBehaviour
                 CreatePickups();
 
                 // Enable movement
-                _player.GetComponentInChildren<ThirdPersonMovementScript>().enabled = true;
-                _player.GetComponent<Mage>().enabled = true;
+               // _player.GetComponentInChildren<ThirdPersonMovementScript>().enabled = true;
+                //_player.GetComponent<Mage>().enabled = true;
 
                 // Plug all remaining doors
                 PlugGaps();
@@ -133,8 +133,8 @@ public class Dungeon : MonoBehaviour
         //Single enemy spawn keep for testing attacks
         /*_enemyClones.Add(Instantiate(_enemyPrefab, _builtPieces[1].Pivot.transform.position, Quaternion.identity));
         _enemyClones[0].GetComponentInChildren<EnemyController>().Enable();
-        _enemyClones[0].GetComponentInChildren<EnemyController>()._patrolPoint.transform.position = _builtPieces[1 + 1].Pivot.transform.position;
-        */
+        _enemyClones[0].GetComponentInChildren<EnemyController>()._patrolPoint.transform.position = _builtPieces[1 + 1].Pivot.transform.position;*/
+        
         foreach (DungeonPiece piece in _builtPieces)
         {
             _enemyClones.Add(Instantiate(_enemyPrefab, _builtPieces[index].Pivot.transform.position, Quaternion.identity));

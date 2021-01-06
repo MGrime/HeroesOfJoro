@@ -6,6 +6,8 @@ public class AnimationScript : MonoBehaviour
 {
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private bool _toWalk=true;
+    [SerializeField] private bool _toRun = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +18,7 @@ public class AnimationScript : MonoBehaviour
             _playerAnimator.SetBool("isIdle", true);
             _playerAnimator.SetBool("isStopping", false);
             _toWalk = true;
+            _toRun = false;
         }
     }
 
@@ -33,6 +36,7 @@ public class AnimationScript : MonoBehaviour
                 _playerAnimator.SetBool("isStopping", false);
 
             }
+
             if (Input.GetKey(KeyCode.LeftShift))//Transition to Run
             {
                 _playerAnimator.SetBool("isWalking", false);
@@ -40,19 +44,29 @@ public class AnimationScript : MonoBehaviour
                 _playerAnimator.SetBool("isRunning", true);
                 _toWalk = false;
             }
-            else if (!_toWalk)
+            if (!_toWalk && !Input.GetKey(KeyCode.LeftShift))
             {
                 _playerAnimator.SetBool("isStopping", true);
                 _playerAnimator.SetBool("isRunning", false);
                 _toWalk = true;
             }
         }
-        //Transition to idle
-        else 
+        else if (!_toWalk && !Input.GetKey(KeyCode.LeftShift))
         {
+            _playerAnimator.SetBool("isStopping", true);
+            _playerAnimator.SetBool("isRunning", false);
+            _toWalk = true;
+        }
+        //Transition to idle
+        else
+        {
+           
+            _playerAnimator.SetBool("isStopping", false);
             _playerAnimator.SetBool("isWalking", false);
             _playerAnimator.SetBool("isRunning", false);
             _playerAnimator.SetBool("isIdle", true);
         }
+       
+        
     }
 }
