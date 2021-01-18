@@ -32,7 +32,7 @@ public class SwordBase : MonoBehaviour
         _swinging = false;
         _directionNegative = true;
         _flipped = false;
-        _previousAngle = transform.localRotation.eulerAngles.y;
+        _previousAngle = transform.parent.localRotation.eulerAngles.y;
     }    
     // Update is called once per frame
     void Update()
@@ -45,12 +45,12 @@ public class SwordBase : MonoBehaviour
                 rotateAmount *= -1.0f;  // Invert
             }
 
-            _previousAngle = transform.localRotation.eulerAngles.y;
+            _previousAngle = transform.parent.localRotation.eulerAngles.y;
             // Rotate
-            transform.Rotate(0.0f, rotateAmount, 0.0f);
+            transform.parent.Rotate(0.0f, rotateAmount, 0.0f);
 
             // This is a cheap bodge catch all for when a big change happens
-            if (Mathf.Abs(transform.localRotation.eulerAngles.y - _previousAngle) > 180.0f)
+            if (Mathf.Abs(transform.parent.localRotation.eulerAngles.y - _previousAngle) > 180.0f)
             {
                 _flipped = true;
             }
@@ -60,14 +60,14 @@ public class SwordBase : MonoBehaviour
             bool finished = false;
             if (_directionNegative)
             {
-                if (transform.localRotation.eulerAngles.y <= 315.0f && _flipped)
+                if (transform.parent.localRotation.eulerAngles.y <= 315.0f && _flipped)
                 {
                     finished = true;
                 }
             }
             else
             {
-                if (transform.localRotation.eulerAngles.y >= 45.0f && _flipped)
+                if (transform.parent.localRotation.eulerAngles.y >= 45.0f && _flipped)
                 {
                     finished = true;
                 }
