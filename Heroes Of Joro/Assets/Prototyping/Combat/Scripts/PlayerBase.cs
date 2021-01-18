@@ -51,8 +51,6 @@ public class PlayerBase : MonoBehaviour
     protected virtual void Start()
     {
         _health = _maxHealth;
-
-        enabled = false;
     }
 
     protected virtual void Update()
