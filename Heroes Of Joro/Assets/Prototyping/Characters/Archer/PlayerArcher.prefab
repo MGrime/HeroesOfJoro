@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7eca32545df8a34d9439ad121b4e52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _arrow: {fileID: 0}
+  _arrow: {fileID: 8561646255657111476, guid: 208c6de2b06e9ef46819ed2d7f69d3d6, type: 3}
   _fastDamage: 5
   _chargedBaseDamage: 20
   _holdTime: 2
