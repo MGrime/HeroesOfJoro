@@ -91,6 +91,11 @@ public class UIController : MonoBehaviour
         _titleUI.SetActive(true);
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
     public void SetMusicVolume(Single value)
     {
         _musicVolume = value;
