@@ -26,6 +26,8 @@ public class Dungeon : MonoBehaviour
 
     [SerializeField] private PickupBase[] _pickupPrefabs;
 
+    [SerializeField] private DungeonPortal _portalPrefab;
+
     #endregion
 
     #region Private Data
@@ -90,6 +92,9 @@ public class Dungeon : MonoBehaviour
 
                 // Plug all remaining doors
                 PlugGaps();
+
+                // Place the portal in the last room TODO: Make it last, using 2nd for now
+                Instantiate(_portalPrefab.gameObject, _builtPieces[_builtPieces.Count - 1].Pivot.transform.position + new Vector3(0,2.0f,0),_portalPrefab.gameObject.transform.rotation);
 
                 _gameManager.LoadingFinished();
 
