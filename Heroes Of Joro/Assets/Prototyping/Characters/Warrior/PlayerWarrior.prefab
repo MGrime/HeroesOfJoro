@@ -90,7 +90,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: -0.55, z: 2.3}
+  m_Center: {x: 0, y: 0.65, z: 0}
 --- !u!136 &8139660259060598205
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -104,7 +104,7 @@ CapsuleCollider:
   m_Radius: 0.2409857
   m_Height: 1.6772605
   m_Direction: 1
-  m_Center: {x: 0, y: -0.3796605, z: 2.300477}
+  m_Center: {x: 0, y: 0.83, z: 0}
 --- !u!54 &6251424689369559950
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -184,17 +184,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9f7cc43701ccd0344b4a7b9cafb1181b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00036428
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f7cc43701ccd0344b4a7b9cafb1181b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.2282
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f7cc43701ccd0344b4a7b9cafb1181b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.288
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f7cc43701ccd0344b4a7b9cafb1181b,
         type: 3}

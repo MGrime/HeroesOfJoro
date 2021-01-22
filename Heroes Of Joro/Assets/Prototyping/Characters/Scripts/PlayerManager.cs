@@ -40,6 +40,9 @@ public class PlayerManager : MonoBehaviour
 
         _manaBar = GameObject.Find("Mana Bar");
 
+        CameraFreeLook.Follow = ActivePlayer.GetComponentInChildren<Animator>().transform;
+        CameraFreeLook.LookAt = ActivePlayer.GetComponentInChildren<Animator>().transform;
+   
     }
 
     void Update()

@@ -168,7 +168,7 @@ public class Mage : PlayerBase
     private void FireProjectileSpell()
     {
         // Create a new spell object
-        GameObject newSpellObject = Instantiate(_spells[_selectedSpellIndex].gameObject,_physicalPlayer.transform.position,_physicalPlayer.transform.rotation);
+        GameObject newSpellObject = Instantiate(_spells[_selectedSpellIndex].gameObject,_physicalPlayer.transform.position + new Vector3(0,2,0),_physicalPlayer.transform.rotation);
 
         // This spell script controls the behaviour. Thats the beauty of an extra level of abstraction
     }

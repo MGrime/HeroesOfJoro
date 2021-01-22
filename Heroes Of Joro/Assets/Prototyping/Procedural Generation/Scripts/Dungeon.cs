@@ -79,7 +79,7 @@ public class Dungeon : MonoBehaviour
                     piece.SetValidatorsState(false);
                 }
 
-                _player.transform.position = _builtPieces[0].Pivot.transform.position + new Vector3(0.0f, 2.46f, 0.0f);
+                _player.transform.position = _builtPieces[0].Pivot.transform.position;
 
                 _complete = true;
 
@@ -139,27 +139,19 @@ public class Dungeon : MonoBehaviour
         //2. Place patrol points in each connected room
         //3. The amount of rooms will be random at first but once difficulty level applies it will change according to that
 
-        int index = 0;
         //Single enemy spawn keep for testing attacks
         /*_enemyClones.Add(Instantiate(_enemyPrefab, _builtPieces[1].Pivot.transform.position, Quaternion.identity));
         _enemyClones[0].GetComponentInChildren<EnemyController>().Enable();
         _enemyClones[0].GetComponentInChildren<EnemyController>()._patrolPoint.transform.position = _builtPieces[1 + 1].Pivot.transform.position;*/
         
-        foreach (DungeonPiece piece in _builtPieces)
+        for (int i = 0; i < _builtPieces.Count - 1; i += 2)
         {
-            _enemyClones.Add(Instantiate(_enemyPrefab, _builtPieces[index].Pivot.transform.position, Quaternion.identity));
-            _enemyClones[index].GetComponentInChildren<EnemyController>().Enable();
-            _enemyClones[index].GetComponentInChildren<EnemyController>()._patrolPoint.transform.position = _builtPieces[index + 1].Pivot.transform.position;
-            if (index == 0)//Temporary to get rid of enemy that spawn in main room
+            _enemyClones.Add(Instantiate(_enemyPrefab, _builtPieces[i].Pivot.transform.position, Quaternion.identity));
+            _enemyClones[_enemyClones.Count - 1].GetComponentInChildren<EnemyController>().Enable();
+            _enemyClones[_enemyClones.Count - 1].GetComponentInChildren<EnemyController>()._patrolPoint.transform.position = _builtPieces[i + 1].Pivot.transform.position;
+            if (i == 0)//Temporary to get rid of enemy that spawn in main room
             {
-                _enemyClones[index].transform.position = _builtPieces[index+1].Pivot.transform.position;
-            }
-
-            ++index;
-
-            if (index >= _builtPieces.Count - 1)
-            {
-                --index;
+                _enemyClones[_enemyClones.Count - 1].transform.position = _builtPieces[i + 1].Pivot.transform.position;
             }
         }
     }
