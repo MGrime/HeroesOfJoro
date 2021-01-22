@@ -20,7 +20,7 @@ public class EnemyAttack : MonoBehaviour
     void Start()
     {
         _target = PlayerManager._instance.ActivePlayer.transform;
-        _targetPos = _target.position;
+        _targetPos = _target.position + new Vector3(0,2,0);
 
         GetComponent<Rigidbody>().AddTorque(new Vector3(0.0f, 40.0f));
     }

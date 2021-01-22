@@ -74,7 +74,7 @@ public class EnemyController : MonoBehaviour
             {
                 if (_attackTime <= 0.0f)
                 {  
-                    Instantiate(_enemyProjectile, transform.position, Quaternion.identity);
+                    Instantiate(_enemyProjectile, transform.position + new Vector3(0,2.0f,0), Quaternion.identity);
                     _attackTime = _setAttackTime;
                 }
 
