@@ -57,7 +57,6 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
         _target = PlayerManager._instance.ActivePlayer.transform; //Needs a FIX: Player position passed looks like few frames behind
         distanceToPlayer = Vector3.Distance(_target.position, transform.position);
         distanceToStart = Vector3.Distance(_startingPosition, transform.position);
@@ -71,7 +70,6 @@ public class EnemyController : MonoBehaviour
             _enemyAnimator.SetBool("isWalking", true);
             //Start following the player
             _agent.SetDestination(_target.position);
-           
             if (distanceToPlayer <= 5.0f)
             {
                 if (_attackTime <= 0.0f)
