@@ -28,6 +28,8 @@ public class Dungeon : MonoBehaviour
 
     [SerializeField] private DungeonPortal _portalPrefab;
 
+    public NavMeshSurface surface;
+
     #endregion
 
     #region Private Data
@@ -80,6 +82,9 @@ public class Dungeon : MonoBehaviour
                 _player.transform.position = _builtPieces[0].Pivot.transform.position + new Vector3(0.0f, 2.46f, 0.0f);
 
                 _complete = true;
+
+                //Create the nav mesh
+                surface.BuildNavMesh();
                 //Create enemies
                 CreateEnemyNode();
 
@@ -270,8 +275,8 @@ public class Dungeon : MonoBehaviour
 
             _builtPieces.Add(dungeonPiece);
 
-            _surfaces.Add(dungeonPiece.gameObject.GetComponent<NavMeshSurface>());
-            _surfaces[_surfaces.Count - 1].BuildNavMesh();
+            /*_surfaces.Add(dungeonPiece.gameObject.GetComponent<NavMeshSurface>());
+            _surfaces[_surfaces.Count - 1].BuildNavMesh();*/
         }
         else
         {
