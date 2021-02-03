@@ -23,10 +23,11 @@ public class EnemyController : MonoBehaviour
     private const float _waitTime = 5.0f;
     private NavMeshAgent _agent;
     private Vector3 _startingPosition;
+    private Vector3 _lastPPoint;
     private bool _lookAround = false;
     private int _playerDamage;
-
-
+    private bool _playerChased = false;
+    private bool _patrolSwitch = false;
     //Will change them to private later need them there for debugging
     public float distanceToPlayer;
     public float distanceToStart;
@@ -67,6 +68,7 @@ public class EnemyController : MonoBehaviour
         if (distanceToPlayer <= _lookRadius)
         {
             _lookAround = false;
+            _playerChased = true;
             _enemyAnimator.SetBool("isWalking", true);
             //Start following the player
             _agent.SetDestination(_target.position);
@@ -95,17 +97,27 @@ public class EnemyController : MonoBehaviour
     #region Enemy Behaviour Functions
     void Patrol()
     {
-        //Return to starting position
-        if (distanceToStart <= _minDistance)//Go to patrol point
+        if (_playerChased)
         {
-            if(LookAround())_agent.SetDestination(_patrolPoint.transform.position);
-
+            if (_lastPPoint == null) _lastPPoint = _patrolPoint.transform.position;
+            _agent.SetDestination(_lastPPoint);
+            _playerChased = false;
         }
-
-        if (distanceToPoint <= _minDistance)//Go to start point
+        else
         {
-            if(LookAround())_agent.SetDestination(_startingPosition);
+            //Return to starting position
+            if (distanceToStart <= _minDistance)//Go to patrol point
+            {
+                _lastPPoint = _patrolPoint.transform.position;
+                if (LookAround()) _agent.SetDestination(_patrolPoint.transform.position);
+            }
 
+            if (distanceToPoint <= _minDistance)//Go to start point
+            {
+                _lastPPoint = _startingPosition;
+                if (LookAround()) _agent.SetDestination(_startingPosition);
+
+            }
         }
     }
     bool LookAround()
