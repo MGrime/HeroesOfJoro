@@ -17,6 +17,8 @@ public class PlayerManager : MonoBehaviour
 
     public CinemachineFreeLook CameraFreeLook;
 
+    public Camera MinimapCamera;
+
     #region Private Data
 
     private GameObject _manaBar;  // Find it with find
@@ -69,6 +71,8 @@ public class PlayerManager : MonoBehaviour
 
             }
         }
+
+
     }
 
     void SwitchCharacter(ref PlayerBase newPlayer)
@@ -100,6 +104,8 @@ public class PlayerManager : MonoBehaviour
         // Get the transform of the object that the animator is attached to
         CameraFreeLook.Follow = newPlayer.GetComponentInChildren<Animator>().transform;
         CameraFreeLook.LookAt = newPlayer.GetComponentInChildren<Animator>().transform;
+
+        MinimapCamera.transform.SetParent(newPlayer.transform);
 
     }
 
