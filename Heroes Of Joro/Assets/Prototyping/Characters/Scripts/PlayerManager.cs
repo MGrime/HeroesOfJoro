@@ -71,11 +71,8 @@ public class PlayerManager : MonoBehaviour
             if (ActivePlayer != PlayerTrackers[2])
             {
                 SwitchCharacter(ref PlayerTrackers[2]);
-
             }
         }
-
-
     }
 
     void SwitchCharacter(ref PlayerBase newPlayer)
