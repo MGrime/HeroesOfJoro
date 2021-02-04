@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour
     #region Private Data
 
     private GameObject _manaBar;  // Find it with find
+    private GameObject _activeSpell;
 
     #endregion
 
@@ -39,8 +40,10 @@ public class PlayerManager : MonoBehaviour
         EnablePlayer(PlayerTrackers[0]);
 
         ActivePlayer = PlayerTrackers[0];
+        MinimapCamera.transform.SetParent(ActivePlayer.transform);
 
         _manaBar = GameObject.Find("Mana Bar");
+        _activeSpell = GameObject.Find("Active Spell");
 
         CameraFreeLook.Follow = ActivePlayer.GetComponentInChildren<Animator>().transform;
         CameraFreeLook.LookAt = ActivePlayer.GetComponentInChildren<Animator>().transform;
@@ -83,10 +86,12 @@ public class PlayerManager : MonoBehaviour
             if (newPlayer.Type == PlayerBase.PlayerType.Mage)
             {
                 _manaBar.SetActive(true);
+                _activeSpell.SetActive(true);
             }
             else
             {
                 _manaBar.SetActive(false);
+                _activeSpell.SetActive(false);
             }
         }
 
