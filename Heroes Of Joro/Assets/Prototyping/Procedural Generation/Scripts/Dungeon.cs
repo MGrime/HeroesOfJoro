@@ -34,6 +34,13 @@ public class Dungeon : MonoBehaviour
 
     #region Private Data
 
+    struct DungeonFloor
+    {
+        public GameObject Root;
+        public GameObject Plugs;
+        public GameObject Enemies;
+    }
+
     private List<DungeonPiece> _builtPieces;
     private Queue<NodeConnector> _activeConnectors;
     private Random _random;
@@ -41,6 +48,8 @@ public class Dungeon : MonoBehaviour
     private bool _complete;
     private List<NavMeshSurface> _surfaces;
     private List<GameObject> _enemyClones;
+
+    private List<DungeonFloor> _floorObjs;
 
 
     #endregion
@@ -52,6 +61,8 @@ public class Dungeon : MonoBehaviour
         _activeConnectors = new Queue<NodeConnector>();
         _surfaces = new List<NavMeshSurface>();
         _enemyClones = new List<GameObject>();
+
+        _floorObjs = new List<DungeonFloor>();
 
         StartGeneration();
 
@@ -91,10 +102,6 @@ public class Dungeon : MonoBehaviour
                 // TODO: UPDATE TO BE BETTER
                 CreatePickups();
 
-                // Enable movement
-               // _player.GetComponentInChildren<ThirdPersonMovementScript>().enabled = true;
-                //_player.GetComponent<Mage>().enabled = true;
-
                 // Plug all remaining doors
                 PlugGaps();
 
@@ -116,7 +123,7 @@ public class Dungeon : MonoBehaviour
         foreach (NodeConnector connector in _activeConnectors)
         {
             // Plug the gap
-            GameObject plug = Instantiate(_doorPlug);
+            GameObject plug = Instantiate(_doorPlug, _floorObjs[_floorObjs.Count - 1].Plugs.transform);
 
             plug.transform.rotation = connector.transform.rotation;
             plug.transform.position = connector.transform.position;
@@ -139,11 +146,6 @@ public class Dungeon : MonoBehaviour
         //2. Place patrol points in each connected room
         //3. The amount of rooms will be random at first but once difficulty level applies it will change according to that
 
-        //Single enemy spawn keep for testing attacks
-        /*_enemyClones.Add(Instantiate(_enemyPrefab, _builtPieces[1].Pivot.transform.position, Quaternion.identity));
-        _enemyClones[0].GetComponentInChildren<EnemyController>().Enable();
-        _enemyClones[0].GetComponentInChildren<EnemyController>()._patrolPoint.transform.position = _builtPieces[1 + 1].Pivot.transform.position;*/
-        
         for (int i = 0; i < _builtPieces.Count - 1; i += 2)
         {
             _enemyClones.Add(Instantiate(_enemyPrefab, _builtPieces[i].Pivot.transform.position, Quaternion.identity));
@@ -153,6 +155,7 @@ public class Dungeon : MonoBehaviour
             {
                 _enemyClones[_enemyClones.Count - 1].transform.position = _builtPieces[i + 1].Pivot.transform.position;
             }
+            _enemyClones[_enemyClones.Count - 1].transform.parent = _floorObjs[_floorObjs.Count - 1].Enemies.transform;
         }
     }
 
@@ -162,8 +165,23 @@ public class Dungeon : MonoBehaviour
     {
         _random = new Random(DateTime.Now.Millisecond);
 
+        // Add a new floor object
+        DungeonFloor floor = new DungeonFloor();
+        _floorObjs.Add(floor);
+        // Create the subobjects
+        floor.Root = new GameObject("Floor");
+        floor.Plugs = new GameObject("Plugs");
+        floor.Enemies = new GameObject("Enemies");
+
+        floor.Root.transform.parent = transform;
+        floor.Plugs.transform.parent = floor.Root.transform;
+        floor.Enemies.transform.parent = floor.Root.transform;
+
+        _floorObjs.Add(floor);
+
+
         // Place first room and pull DungeonPiece component
-        _builtPieces.Add(Instantiate(_startingPiece).GetComponent<DungeonPiece>());
+        _builtPieces.Add(Instantiate(_startingPiece, floor.Root.transform).GetComponent<DungeonPiece>());
 
         // Add its connectors to queue
         foreach (NodeConnector node in _builtPieces[0].Nodes)
@@ -189,7 +207,7 @@ public class Dungeon : MonoBehaviour
                 break;
             }
 
-            dungeonPiece = Instantiate(picked,transform).GetComponent<DungeonPiece>();
+            dungeonPiece = Instantiate(picked, _floorObjs[_floorObjs.Count - 1].Root.transform).GetComponent<DungeonPiece>();
         }
 
         // Now we need to process the new piece
@@ -276,7 +294,7 @@ public class Dungeon : MonoBehaviour
             DestroyImmediate(dungeonPiece.gameObject);
 
             // Plug the gap
-            GameObject plug = Instantiate(_doorPlug);
+            GameObject plug = Instantiate(_doorPlug, _floorObjs[_floorObjs.Count - 1].Plugs.transform);
 
             plug.transform.rotation = connector.transform.rotation;
             plug.transform.position = connector.transform.position;
