@@ -89,6 +89,15 @@ public class Dungeon : MonoBehaviour
         if (!anyLeft)
         {
             _gameManager.LoadingFinished();
+
+            foreach (DungeonFloor floor in _floorObjs)
+            {
+                floor.Root.SetActive(false);
+            }
+
+            _floorObjs[0].Root.SetActive(true);
+            _player.transform.position = _floorObjs[0].BuiltPieces[0].Pivot.transform.position;
+
             enabled = false;
         }
     }
@@ -101,7 +110,7 @@ public class Dungeon : MonoBehaviour
             piece.SetValidatorsState(false);
         }
 
-        _player.transform.position = floor.BuiltPieces[0].Pivot.transform.position;
+   
 
         floor.Complete = true;
 
