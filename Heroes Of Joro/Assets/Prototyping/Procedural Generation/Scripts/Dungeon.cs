@@ -34,19 +34,20 @@ public class Dungeon : MonoBehaviour
 
     #region Private Data
 
-    struct DungeonFloor
+    class DungeonFloor
     {
         public GameObject Root;
         public GameObject Plugs;
         public GameObject Enemies;
+
+        public List<DungeonPiece> BuiltPieces;
+        public Queue<NodeConnector> ActiveConnectors;
+
+        public bool Complete;
+        public uint Count;
     }
 
-    private List<DungeonPiece> _builtPieces;
-    private Queue<NodeConnector> _activeConnectors;
     private Random _random;
-    private uint _count;
-    private bool _complete;
-    private List<NavMeshSurface> _surfaces;
     private List<GameObject> _enemyClones;
 
     private List<DungeonFloor> _floorObjs;
@@ -57,56 +58,26 @@ public class Dungeon : MonoBehaviour
     #region Functions
     private void Start()
     {
-        _builtPieces = new List<DungeonPiece>();
-        _activeConnectors = new Queue<NodeConnector>();
-        _surfaces = new List<NavMeshSurface>();
         _enemyClones = new List<GameObject>();
 
         _floorObjs = new List<DungeonFloor>();
 
         StartGeneration();
 
-        _complete = false;
-
     }
 
     private void Update() 
     {
-        if (!_complete)
+        if (!_floorObjs[0].Complete)
         {
-            if (_count < _dungeonSize)
+            if (_floorObjs[0].Count < _dungeonSize)
             {
-                //if (Input.GetKeyDown(KeyCode.Space))
-                //{
-                    StartCoroutine("ProcessSection");
-                    ++_count;
-                //}
+                StartCoroutine("ProcessSection", _floorObjs[0]);
+                _floorObjs[0].Count += 1;
             }
             else
             {
-                // When its done
-                foreach (DungeonPiece piece in _builtPieces)
-                {
-                    piece.SetValidatorsState(false);
-                }
-
-                _player.transform.position = _builtPieces[0].Pivot.transform.position;
-
-                _complete = true;
-
-                //Create the nav mesh
-                surface.BuildNavMesh();
-                //Create enemies
-                CreateEnemyNode();
-
-                // TODO: UPDATE TO BE BETTER
-                CreatePickups();
-
-                // Plug all remaining doors
-                PlugGaps();
-
-                // Place the portal in the last room TODO: Make it last, using 2nd for now
-                Instantiate(_portalPrefab.gameObject, _builtPieces[2].Pivot.transform.position + new Vector3(0,2.0f,0),_portalPrefab.gameObject.transform.rotation);
+                FinaliseFloor(_floorObjs[0]);
 
                 _gameManager.LoadingFinished();
 
@@ -118,9 +89,36 @@ public class Dungeon : MonoBehaviour
         }
     }
 
-    private void PlugGaps()
+    private void FinaliseFloor(DungeonFloor floor)
     {
-        foreach (NodeConnector connector in _activeConnectors)
+        // When its done
+        foreach (DungeonPiece piece in floor.BuiltPieces)
+        {
+            piece.SetValidatorsState(false);
+        }
+
+        _player.transform.position = floor.BuiltPieces[0].Pivot.transform.position;
+
+        floor.SetComplete();
+
+        //Create the nav mesh
+        surface.BuildNavMesh();
+        //Create enemies
+        CreateEnemyNode(floor);
+
+        // TODO: UPDATE TO BE BETTER
+        CreatePickups(floor);
+
+        // Plug all remaining doors
+        PlugGaps(floor);
+
+        // Place the portal in the last room TODO: Make it last, using 2nd for now
+        PlacePortal(floor);
+    }
+
+    private void PlugGaps(DungeonFloor floor)
+    {
+        foreach (NodeConnector connector in floor.ActiveConnectors)
         {
             // Plug the gap
             GameObject plug = Instantiate(_doorPlug, _floorObjs[_floorObjs.Count - 1].Plugs.transform);
@@ -131,29 +129,34 @@ public class Dungeon : MonoBehaviour
         }
     }
 
-    private void CreatePickups()
+    private void CreatePickups(DungeonFloor floor)
     {
         // For now spawn a pickup in the middle room
-        Instantiate(_pickupPrefabs[0].gameObject, _builtPieces[0].Pivot.transform.position + new Vector3(3.0f,2.0f,3.0f), _pickupPrefabs[0].gameObject.transform.rotation);
-        Instantiate(_pickupPrefabs[1].gameObject, _builtPieces[0].Pivot.transform.position - new Vector3(3.0f, 2.0f, 3.0f), _pickupPrefabs[1].gameObject.transform.rotation);
+        Instantiate(_pickupPrefabs[0].gameObject, floor.BuiltPieces[0].Pivot.transform.position + new Vector3(3.0f,2.0f,3.0f), _pickupPrefabs[0].gameObject.transform.rotation);
+        Instantiate(_pickupPrefabs[1].gameObject, floor.BuiltPieces[0].Pivot.transform.position - new Vector3(3.0f, 2.0f, 3.0f), _pickupPrefabs[1].gameObject.transform.rotation);
     }
 
+    private void PlacePortal(DungeonFloor floor)
+    {
+        // Place the portal in the last room TODO: Make it last, using 2nd for now
+        Instantiate(_portalPrefab.gameObject, floor.BuiltPieces[2].Pivot.transform.position + new Vector3(0, 2.0f, 0), _portalPrefab.gameObject.transform.rotation);
+    }
 
-    private void CreateEnemyNode()
+    private void CreateEnemyNode(DungeonFloor floor)
     {
         //Once we can tell which rooms are connected to the enemy spawn room Ill implement this algorithm:
         //1. Spawn enemies based on the number of rooms connected and slightly adjusted i.e. randomise it so some casses have more enemies some less 
         //2. Place patrol points in each connected room
         //3. The amount of rooms will be random at first but once difficulty level applies it will change according to that
 
-        for (int i = 0; i < _builtPieces.Count - 1; i += 2)
+        for (int i = 0; i < floor.BuiltPieces.Count - 1; i += 2)
         {
-            _enemyClones.Add(Instantiate(_enemyPrefab, _builtPieces[i].Pivot.transform.position, Quaternion.identity));
+            _enemyClones.Add(Instantiate(_enemyPrefab, floor.BuiltPieces[i].Pivot.transform.position, Quaternion.identity));
             _enemyClones[_enemyClones.Count - 1].GetComponentInChildren<EnemyController>().Enable();
-            _enemyClones[_enemyClones.Count - 1].GetComponentInChildren<EnemyController>()._patrolPoint.transform.position = _builtPieces[i + 1].Pivot.transform.position;
+            _enemyClones[_enemyClones.Count - 1].GetComponentInChildren<EnemyController>()._patrolPoint.transform.position = floor.BuiltPieces[i + 1].Pivot.transform.position;
             if (i == 0)//Temporary to get rid of enemy that spawn in main room
             {
-                _enemyClones[_enemyClones.Count - 1].transform.position = _builtPieces[i + 1].Pivot.transform.position;
+                _enemyClones[_enemyClones.Count - 1].transform.position = floor.BuiltPieces[i + 1].Pivot.transform.position;
             }
             _enemyClones[_enemyClones.Count - 1].transform.parent = _floorObjs[_floorObjs.Count - 1].Enemies.transform;
         }
@@ -167,33 +170,36 @@ public class Dungeon : MonoBehaviour
 
         // Add a new floor object
         DungeonFloor floor = new DungeonFloor();
-        _floorObjs.Add(floor);
         // Create the subobjects
         floor.Root = new GameObject("Floor");
         floor.Plugs = new GameObject("Plugs");
         floor.Enemies = new GameObject("Enemies");
+        floor.BuiltPieces = new List<DungeonPiece>();
+        floor.ActiveConnectors = new Queue<NodeConnector>();
+        floor.Complete = false;
+        floor.Count = 0u;
 
         floor.Root.transform.parent = transform;
         floor.Plugs.transform.parent = floor.Root.transform;
         floor.Enemies.transform.parent = floor.Root.transform;
 
-        _floorObjs.Add(floor);
-
 
         // Place first room and pull DungeonPiece component
-        _builtPieces.Add(Instantiate(_startingPiece, floor.Root.transform).GetComponent<DungeonPiece>());
+        floor.BuiltPieces.Add(Instantiate(_startingPiece, floor.Root.transform).GetComponent<DungeonPiece>());
 
         // Add its connectors to queue
-        foreach (NodeConnector node in _builtPieces[0].Nodes)
+        foreach (NodeConnector node in floor.BuiltPieces[0].Nodes)
         {
-            _activeConnectors.Enqueue(node);
+            floor.ActiveConnectors.Enqueue(node);
         }
+
+        _floorObjs.Add(floor);
     }
 
-    private IEnumerator ProcessSection()
+    private IEnumerator ProcessSection(DungeonFloor floor)
     {
         // Take a connector
-        NodeConnector connector = _activeConnectors.Dequeue();
+        NodeConnector connector = floor.ActiveConnectors.Dequeue();
 
         //Debug.Log("Root: " + connector.name);
 
@@ -207,7 +213,7 @@ public class Dungeon : MonoBehaviour
                 break;
             }
 
-            dungeonPiece = Instantiate(picked, _floorObjs[_floorObjs.Count - 1].Root.transform).GetComponent<DungeonPiece>();
+            dungeonPiece = Instantiate(picked, floor.Root.transform).GetComponent<DungeonPiece>();
         }
 
         // Now we need to process the new piece
@@ -277,13 +283,13 @@ public class Dungeon : MonoBehaviour
                 {
                     continue;
                 }
-                _activeConnectors.Enqueue(node);
+                floor.ActiveConnectors.Enqueue(node);
             }
 
             // Change back trigger state
             dungeonPiece.SetTriggerState(false);
 
-            _builtPieces.Add(dungeonPiece);
+            floor.BuiltPieces.Add(dungeonPiece);
 
             /*_surfaces.Add(dungeonPiece.gameObject.GetComponent<NavMeshSurface>());
             _surfaces[_surfaces.Count - 1].BuildNavMesh();*/
@@ -294,7 +300,7 @@ public class Dungeon : MonoBehaviour
             DestroyImmediate(dungeonPiece.gameObject);
 
             // Plug the gap
-            GameObject plug = Instantiate(_doorPlug, _floorObjs[_floorObjs.Count - 1].Plugs.transform);
+            GameObject plug = Instantiate(_doorPlug, floor.Plugs.transform);
 
             plug.transform.rotation = connector.transform.rotation;
             plug.transform.position = connector.transform.position;
