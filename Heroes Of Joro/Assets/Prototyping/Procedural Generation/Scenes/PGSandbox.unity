@@ -1439,6 +1439,7 @@ MonoBehaviour:
   _doorPlug: {fileID: 3199487631391129335, guid: 2f925732d419aa047a1c8ec8b82ee38f,
     type: 3}
   _dungeonSize: 32
+  _floorCount: 3
   _player: {fileID: 886127842}
   _enemyPrefab: {fileID: 8716310827570620369, guid: f4325968290290b4cb6ae1498dee02c3,
     type: 3}
@@ -2504,7 +2505,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974644041344359151}
-  m_LocalRotation: {x: 0.3895388, y: 0.0000000010233251, z: -0.000000002419505, w: 0.9210101}
+  m_LocalRotation: {x: 0.38953882, y: -0.000000026424917, z: 0.000000009189658, w: 0.9210101}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2828,7 +2829,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974644042282423099}
-  m_LocalRotation: {x: 0.37582207, y: 2.6044208e-10, z: -6.4220657e-10, w: 0.9266919}
+  m_LocalRotation: {x: 0.37582207, y: 0.000000039317587, z: -0.000000016481923, w: 0.9266919}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3132,7 +3133,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4733487789518503323}
-  m_LocalRotation: {x: 0.3675666, y: 0.000000011477523, z: -0.000000004536308, w: 0.9299972}
+  m_LocalRotation: {x: 0.3675666, y: 0.000000042834685, z: -0.000000016929727, w: 0.9299972}
   m_LocalPosition: {x: 0, y: 15.788869, z: -15.326356}
   m_LocalScale: {x: 45.416363, y: 45.416363, z: 45.416363}
   m_Children: []
