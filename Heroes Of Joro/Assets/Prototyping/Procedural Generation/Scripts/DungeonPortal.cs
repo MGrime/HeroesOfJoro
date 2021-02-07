@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class DungeonPortal : MonoBehaviour
 {
+    public Dungeon _dungeon;
+    public int _targetFloor;
+
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag != "Player")
@@ -12,8 +16,7 @@ public class DungeonPortal : MonoBehaviour
             return;
         }
 
-        // TODO: Replace with loading next level
-        SceneManager.LoadScene("TBCScene");
+        _dungeon.SwitchFloor(_targetFloor);
     }
 
 }

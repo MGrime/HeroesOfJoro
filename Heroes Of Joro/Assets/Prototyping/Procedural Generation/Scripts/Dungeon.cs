@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using Random = System.Random;
 
 // This class processes the most stuff
@@ -19,7 +20,7 @@ public class Dungeon : MonoBehaviour
     [SerializeField] private uint _dungeonSize;
     [SerializeField] private uint _floorCount;
 
-    [SerializeField] private GameObject _player;
+    [SerializeField] private PlayerManager _player;
 
     [SerializeField] private GameObject _enemyPrefab;
 
@@ -72,6 +73,7 @@ public class Dungeon : MonoBehaviour
     private void Update() 
     {
         bool anyLeft = false;
+        int floorIndex = 0;
         foreach (DungeonFloor floor in _floorObjs)
         {
             if (floor.Count < _dungeonSize)
@@ -83,8 +85,9 @@ public class Dungeon : MonoBehaviour
             else
             {
                 anyLeft = false;
-                FinaliseFloor(floor);
+                FinaliseFloor(floor,floorIndex);
             }
+            ++floorIndex;
         }
         if (!anyLeft)
         {
@@ -96,21 +99,19 @@ public class Dungeon : MonoBehaviour
             }
 
             _floorObjs[0].Root.SetActive(true);
-            _player.transform.position = _floorObjs[0].BuiltPieces[0].Pivot.transform.position;
+            _player.ActivePlayer.transform.position = _floorObjs[0].BuiltPieces[0].Pivot.transform.position;
 
             enabled = false;
         }
     }
 
-    private void FinaliseFloor(DungeonFloor floor)
+    private void FinaliseFloor(DungeonFloor floor, int floorIndex)
     {
         // When its done
         foreach (DungeonPiece piece in floor.BuiltPieces)
         {
             piece.SetValidatorsState(false);
         }
-
-   
 
         floor.Complete = true;
 
@@ -126,7 +127,7 @@ public class Dungeon : MonoBehaviour
         PlugGaps(floor);
 
         // Place the portal in the last room TODO: Make it last, using 2nd for now
-        PlacePortal(floor);
+        PlacePortal(floor, floorIndex);
     }
 
     private void PlugGaps(DungeonFloor floor)
@@ -149,10 +150,25 @@ public class Dungeon : MonoBehaviour
         Instantiate(_pickupPrefabs[1].gameObject, floor.BuiltPieces[0].Pivot.transform.position - new Vector3(3.0f, 2.0f, 3.0f), _pickupPrefabs[1].gameObject.transform.rotation, floor.Pickups.transform);
     }
 
-    private void PlacePortal(DungeonFloor floor)
+    private void PlacePortal(DungeonFloor floor, int floorIndex)
     {
-        // Place the portal in the last room TODO: Make it last, using 2nd for now
-        Instantiate(_portalPrefab.gameObject, floor.BuiltPieces[2].Pivot.transform.position + new Vector3(0, 2.0f, 0), _portalPrefab.gameObject.transform.rotation, floor.Pickups.transform);
+        // Place the portal in the last room
+        DungeonPortal portal = Instantiate(_portalPrefab.gameObject, floor.BuiltPieces[2].Pivot.transform.position + new Vector3(0, 2.0f, 0), _portalPrefab.gameObject.transform.rotation, floor.Pickups.transform).GetComponent<DungeonPortal>();
+
+        // Check if this is a portal to the next floor or a portal to the last floor
+        if (floorIndex + 1 < _floorObjs.Count)
+        {
+            // Portal to next floor
+            portal._dungeon = this;
+            portal._targetFloor = floorIndex + 1;
+        }
+        else
+        {
+            // Portal to last floor
+            portal._dungeon = this;
+            portal._targetFloor = -1;
+        }
+
     }
 
     private void CreateEnemyNode(DungeonFloor floor)
@@ -334,6 +350,31 @@ public class Dungeon : MonoBehaviour
         }
 
         yield return null;
+    }
+
+    #endregion
+
+    #region Code Functions
+
+    public void SwitchFloor(int targetFloor)
+    {
+        // If -1 then end
+        if (targetFloor == -1)
+        {
+            SceneManager.LoadScene("TBCScene");
+        }
+        else
+        {
+
+            // Disable curr floor
+            _floorObjs[targetFloor - 1].Root.SetActive(false);
+
+            // Enable next floor
+            _floorObjs[targetFloor].Root.SetActive(true);
+
+            // Teleport player to next floor
+            _player.ActivePlayer.transform.position = _floorObjs[targetFloor].BuiltPieces[0].Pivot.transform.position;
+        }
     }
 
     #endregion
