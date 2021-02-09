@@ -365,6 +365,11 @@ public class Dungeon : MonoBehaviour
         }
         else
         {
+            // Teleport player to next floor
+            // We need to disable the player to stop the character controller messing up the movement
+            _player.ActivePlayer.gameObject.SetActive(false);
+            _player.ActivePlayer.transform.position = _floorObjs[targetFloor].BuiltPieces[0].Pivot.transform.position;
+            _player.ActivePlayer.gameObject.SetActive(true);
 
             // Disable curr floor
             _floorObjs[targetFloor - 1].Root.SetActive(false);
@@ -372,8 +377,6 @@ public class Dungeon : MonoBehaviour
             // Enable next floor
             _floorObjs[targetFloor].Root.SetActive(true);
 
-            // Teleport player to next floor
-            _player.ActivePlayer.transform.position = _floorObjs[targetFloor].BuiltPieces[0].Pivot.transform.position;
         }
     }
 
