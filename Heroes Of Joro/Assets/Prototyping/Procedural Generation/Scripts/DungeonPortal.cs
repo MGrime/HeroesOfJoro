@@ -8,6 +8,8 @@ public class DungeonPortal : MonoBehaviour
     public Dungeon _dungeon;
     public int _targetFloor;
 
+    public AudioSource _teleportSound;
+
 
     public void OnTriggerEnter(Collider other)
     {
@@ -16,6 +18,8 @@ public class DungeonPortal : MonoBehaviour
             return;
         }
 
+        _teleportSound.ignoreListenerVolume = true;
+        _teleportSound.Play();
         _dungeon.SwitchFloor(_targetFloor);
     }
 

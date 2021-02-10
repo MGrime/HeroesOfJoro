@@ -361,6 +361,8 @@ public class Dungeon : MonoBehaviour
         // If -1 then end
         if (targetFloor == -1)
         {
+            // Unlock cursor
+            Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene("TBCScene");
         }
         else
