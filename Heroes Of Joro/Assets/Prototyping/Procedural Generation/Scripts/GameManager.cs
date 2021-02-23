@@ -24,16 +24,30 @@ public class GameManager : MonoBehaviour
             _dungeonMusic.volume = PlayerPrefs.GetFloat("MusicVolume");
         }
 
-        _loadingMusic.Play();
+        if (_loadingMusic)
+        {
+            _loadingMusic.Play();
+        }
 
     }
 
     public void LoadingFinished()
     {
-        _loadingImage.SetActive(false);
-        _loadingMusic.Stop();
+        if (_loadingImage)
+        {
+            _loadingImage.SetActive(false);
+        }
 
-        _dungeonMusic.Play();
+        if (_loadingMusic)
+        {
+            _loadingMusic.Stop();
+        }
+
+        if (_dungeonMusic)
+        {
+            _dungeonMusic.Play();
+        }
+
     }
 
     #endregion
