@@ -3150,6 +3150,11 @@ PrefabInstance:
       propertyPath: _effectsSlider
       value: 
       objectReference: {fileID: 641062641}
+    - target: {fileID: 7574797311337188506, guid: 52763c25a5311604d925323baa37767e,
+        type: 3}
+      propertyPath: _mainGameScene
+      value: PreGameHub
+      objectReference: {fileID: 0}
     - target: {fileID: 7574797311337188507, guid: 52763c25a5311604d925323baa37767e,
         type: 3}
       propertyPath: m_Name
