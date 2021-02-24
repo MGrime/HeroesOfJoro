@@ -23,6 +23,7 @@ public class PlayerManager : MonoBehaviour
 
     private GameObject _manaBar;  // Find it with find
     private GameObject _activeSpell;
+    [SerializeField] LayerMask _aimLayerMask;
 
     #endregion
 
@@ -73,6 +74,7 @@ public class PlayerManager : MonoBehaviour
                 SwitchCharacter(ref PlayerTrackers[2]);
             }
         }
+        AimTowardMouse();
     }
 
     void SwitchCharacter(ref PlayerBase newPlayer)
@@ -115,7 +117,7 @@ public class PlayerManager : MonoBehaviour
     {
         player.enabled = false;
         player.GetComponentInChildren<ThirdPersonMovementScript>().enabled = false;
-        player.gameObject.GetComponent<AnimationScript>().enabled = false;
+        //player.gameObject.GetComponent<AnimationScript>().enabled = false;
         player.gameObject.SetActive(false);
     }
 
@@ -124,7 +126,19 @@ public class PlayerManager : MonoBehaviour
     {
         player.enabled = true;
         player.GetComponentInChildren<ThirdPersonMovementScript>().enabled = true;
-        player.gameObject.GetComponent<AnimationScript>().enabled = true;
+        //player.gameObject.GetComponent<AnimationScript>().enabled = true;
         player.gameObject.SetActive(true);
+    }
+
+    void AimTowardMouse()
+    {
+        Ray ray = GetComponentInChildren<Camera>().ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, _aimLayerMask))
+        {
+            var _direction = hitInfo.point - ActivePlayer.transform.position;
+            _direction.y = 0.0f;
+            _direction.Normalize();
+            ActivePlayer.transform.forward = _direction;
+        }
     }
 }

@@ -188,11 +188,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1594520996866533889, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
-        type: 3}
-      propertyPath: m_Name
-      value: MageCharacter2
-      objectReference: {fileID: 0}
     - target: {fileID: 1936980736311625732, guid: 6b21b4ceb1b73474f887efb0b7aed52c,
         type: 3}
       propertyPath: _playerCamera
@@ -335,6 +330,10 @@ MonoBehaviour:
   - {fileID: 1800027266}
   ActivePlayer: {fileID: 1487644036}
   CameraFreeLook: {fileID: 6545949466546418254}
+  MinimapCamera: {fileID: 0}
+  _aimLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &585322990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,16 +462,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2341759434493626611, guid: 39a0fd49b390fe44a9e3bc024a2c2949,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6999041995677791880, guid: 39a0fd49b390fe44a9e3bc024a2c2949,
-        type: 3}
-      propertyPath: _swingSpeed
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 7637911464857680578, guid: 39a0fd49b390fe44a9e3bc024a2c2949,
         type: 3}
       propertyPath: m_LocalPosition.x

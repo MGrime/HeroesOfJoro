@@ -188,7 +188,6 @@ GameObject:
   - component: {fileID: 4100137160814037962}
   - component: {fileID: 2221111641681067513}
   - component: {fileID: 4470999408544031371}
-  - component: {fileID: 2444378062190638264}
   - component: {fileID: 9204394838980840653}
   - component: {fileID: 794518874886942356}
   m_Layer: 0
@@ -282,21 +281,7 @@ MonoBehaviour:
   _vSpeed: 0
   _toWalk: 1
   _isStopping: 0
---- !u!114 &2444378062190638264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2444378062190638267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eea655392decc74e8c7ea0370fd8ac0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   _playerAnimator: {fileID: 3375093094498638101}
-  _toWalk: 0
-  _toRun: 0
 --- !u!114 &9204394838980840653
 MonoBehaviour:
   m_ObjectHideFlags: 0

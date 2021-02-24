@@ -45,7 +45,6 @@ GameObject:
   - component: {fileID: 2020773693511016773}
   - component: {fileID: 4197177507830355830}
   - component: {fileID: 1936980736311625732}
-  - component: {fileID: 360722363320360503}
   - component: {fileID: 6580097324133574210}
   m_Layer: 0
   m_Name: PlayerMage
@@ -161,21 +160,7 @@ MonoBehaviour:
   _vSpeed: 0
   _toWalk: 1
   _isStopping: 0
---- !u!114 &360722363320360503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 360722363320360500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eea655392decc74e8c7ea0370fd8ac0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   _playerAnimator: {fileID: 1936980737245572803}
-  _toWalk: 0
-  _toRun: 0
 --- !u!114 &6580097324133574210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,7 +438,7 @@ GameObject:
   - component: {fileID: 2119841696426619067}
   - component: {fileID: 1936980737245572803}
   m_Layer: 0
-  m_Name: MageCharacter
+  m_Name: MageCharacter2
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

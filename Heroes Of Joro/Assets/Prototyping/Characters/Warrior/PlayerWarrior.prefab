@@ -112,7 +112,6 @@ GameObject:
   - component: {fileID: 8139660259060598205}
   - component: {fileID: 6251424689369559950}
   - component: {fileID: 8511612672534867196}
-  - component: {fileID: 7637911464857680591}
   - component: {fileID: 4012681643289248442}
   m_Layer: 0
   m_Name: PlayerWarrior
@@ -221,21 +220,7 @@ MonoBehaviour:
   _vSpeed: 0
   _toWalk: 1
   _isStopping: 0
---- !u!114 &7637911464857680591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7637911464857680588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eea655392decc74e8c7ea0370fd8ac0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   _playerAnimator: {fileID: 2837869967861141402}
-  _toWalk: 0
-  _toRun: 0
 --- !u!114 &4012681643289248442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +341,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3393649343419994257}
     m_Modifications:
+    - target: {fileID: 831733610036832731, guid: 79fc7d68c94ede0479b862fe314e027e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2464059355147060346, guid: 79fc7d68c94ede0479b862fe314e027e,
         type: 3}
       propertyPath: m_LocalPosition.x

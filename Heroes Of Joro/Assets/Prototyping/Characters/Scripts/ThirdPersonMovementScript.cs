@@ -16,8 +16,9 @@ public class ThirdPersonMovementScript : MonoBehaviour
     [SerializeField] private float _vSpeed = 0.0f;
     [SerializeField] private bool _toWalk = true;
     [SerializeField] private bool _isStopping = false;
+    [SerializeField] private Animator _playerAnimator;
+   
 
-    //[SerializeField] private Animator _playerAnimator;
 
 
     #endregion
@@ -25,6 +26,7 @@ public class ThirdPersonMovementScript : MonoBehaviour
     #region Private Data
 
     private float _turnSmoothVelocity;
+    Vector3 moveDirection;
 
     #endregion
 
@@ -33,7 +35,7 @@ public class ThirdPersonMovementScript : MonoBehaviour
     private void Start()
     {
         // Lock cursor to fix movement
-        Cursor.lockState = CursorLockMode.Locked;
+        
         _toWalk = true;
         // Start with no control. Dungeon will enable when complete
         enabled = false;
@@ -53,11 +55,10 @@ public class ThirdPersonMovementScript : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        // Calculate the movement direction
-        Vector3 direction = new Vector3(horizontal, 0.0f, vertical).normalized;
-
+          // Calculate the movement direction
+          Vector3 direction = new Vector3(horizontal, 0.0f, vertical).normalized;
         // If the direction is not null we are moving
-        if (direction.magnitude >= 0.1f )
+        if (direction.magnitude >= 0.1f)
         {
             // Calculate the angle we will finish at
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _playerCamera.eulerAngles.y;
@@ -67,10 +68,10 @@ public class ThirdPersonMovementScript : MonoBehaviour
 
             // Set the new smoother angle
             transform.rotation = Quaternion.Euler(0.0f, angle, 0.0f);
-         
+
             // Move the model in the direction
-            Vector3 moveDirection = Quaternion.Euler(0.0f, targetAngle, 0.0f) * Vector3.forward;
-            _vSpeed-= _gravity * Time.deltaTime;
+            moveDirection = Quaternion.Euler(0.0f, targetAngle, 0.0f) * Vector3.forward;
+            _vSpeed -= _gravity * Time.deltaTime;
             moveDirection.y = _vSpeed;
             if (Input.GetKey(KeyCode.LeftShift))
             {
@@ -81,7 +82,7 @@ public class ThirdPersonMovementScript : MonoBehaviour
             {
                 while (_moveSpeed > _Speed)
                 {
-                    _moveSpeed *= 0.05f*Time.deltaTime;//Gradually decrease speed 
+                    _moveSpeed *= 0.05f * Time.deltaTime;//Gradually decrease speed 
 
                 }
                 if (_moveSpeed < _Speed)
@@ -90,16 +91,32 @@ public class ThirdPersonMovementScript : MonoBehaviour
                     _toWalk = true;
                 }
             }
-           
-            
+
+
             _characterController.Move(moveDirection.normalized * _moveSpeed * Time.deltaTime);
             _vSpeed = 0;
-            
+
 
         }
-       
+        else
+        {
+            moveDirection.x = 0.0f;
+            moveDirection.z = 0.0f;
 
+        }
+
+
+
+
+        // Animating
+        float velocityZ = Vector3.Dot(moveDirection.normalized, transform.forward);
+        float velocityX = Vector3.Dot(moveDirection.normalized, transform.right);
+
+        _playerAnimator.SetFloat("VelocityZ", velocityZ, 0.1f, Time.deltaTime);
+        _playerAnimator.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
     }
 
+
+   
     #endregion
 }

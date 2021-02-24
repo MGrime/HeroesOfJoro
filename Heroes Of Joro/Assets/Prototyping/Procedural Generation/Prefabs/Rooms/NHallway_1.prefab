@@ -949,7 +949,7 @@ GameObject:
   - component: {fileID: 4689601382829256491}
   - component: {fileID: 1018444919787692716}
   - component: {fileID: 6066458067702124642}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Minimap Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1599,7 +1599,7 @@ GameObject:
   - component: {fileID: 3368271842441793300}
   - component: {fileID: 1077014725774897667}
   - component: {fileID: 7740247579240038349}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
