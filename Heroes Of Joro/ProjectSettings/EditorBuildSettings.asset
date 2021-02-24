@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Prototyping/UI/Scenes/TBCScene.unity
     guid: 259a5c2843b85b349b0522765aadd190
+  - enabled: 1
+    path: Assets/Prototyping/Hub/PreGameHub.unity
+    guid: ea86f981c1caf4f4da19cfc1494e0e98
   m_configObjects: {}
