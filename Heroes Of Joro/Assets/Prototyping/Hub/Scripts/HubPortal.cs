@@ -8,6 +8,8 @@ public class HubPortal : MonoBehaviour
     public string _mainGameScene;
     public AudioSource _teleportSound;
 
+    public bool _isExit;
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag != "Player")
@@ -20,6 +22,15 @@ public class HubPortal : MonoBehaviour
             _teleportSound.ignoreListenerVolume = true;
             _teleportSound.Play();
         }
-        SceneManager.LoadScene(_mainGameScene);
+        if (_isExit)
+        {
+            Application.Quit();
+            Debug.Log("Sent player application quit command!");
+        }
+        else
+        {
+            SceneManager.LoadScene(_mainGameScene);
+        }
+        
     }
 }
