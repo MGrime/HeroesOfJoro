@@ -7,6 +7,7 @@ public class HubPortal : MonoBehaviour
 {
     public string _mainGameScene;
     public AudioSource _teleportSound;
+    public int _targetDungeon;
 
     public bool _isExit;
 
@@ -29,6 +30,9 @@ public class HubPortal : MonoBehaviour
         }
         else
         {
+            PlayerPrefs.SetInt("TargetDungeon",_targetDungeon);
+            PlayerPrefs.Save();
+
             SceneManager.LoadScene(_mainGameScene);
         }
         

@@ -733,6 +733,7 @@ MonoBehaviour:
   _loadingMusic: {fileID: 0}
   _dungeonMusic: {fileID: 0}
   _cursorTexture: {fileID: 0}
+  _dungeons: []
   _cursorMode: 0
   _hotSpot: {x: 0, y: 0}
 --- !u!114 &323161941
@@ -1857,6 +1858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainGameScene: 
   _teleportSound: {fileID: 0}
+  _targetDungeon: 0
   _isExit: 1
 --- !u!1 &1300915612
 GameObject:
@@ -2693,6 +2695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainGameScene: PGSandbox
   _teleportSound: {fileID: 0}
+  _targetDungeon: 1
   _isExit: 0
 --- !u!1001 &1653660555
 PrefabInstance:

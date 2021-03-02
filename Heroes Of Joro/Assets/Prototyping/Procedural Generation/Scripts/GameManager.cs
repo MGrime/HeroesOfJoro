@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private AudioSource _dungeonMusic;
     [SerializeField] private Texture2D _cursorTexture;
+
+    [SerializeField] private GameObject[] _dungeons;
+
     public CursorMode _cursorMode;
     public Vector2 _hotSpot = Vector2.zero;
     #endregion
@@ -40,7 +43,14 @@ public class GameManager : MonoBehaviour
         _cursorMode = CursorMode.ForceSoftware;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-       
+
+        // Enable the correct dungeon
+        if (_dungeons.Length != 0)
+        {
+            _dungeons[PlayerPrefs.GetInt("TargetDungeon")].SetActive(true);
+        }
+
+
     }
 
     public void LoadingFinished()
