@@ -2339,7 +2339,7 @@ GameObject:
   - component: {fileID: 4688425466848361901}
   - component: {fileID: 1737087238869212107}
   m_Layer: 0
-  m_Name: NRoom_1
+  m_Name: NRoom_1 D1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2438,7 +2438,7 @@ GameObject:
   - component: {fileID: 4437730852104811413}
   - component: {fileID: 6499676326699359829}
   - component: {fileID: 4398987102108952665}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Minimap Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
