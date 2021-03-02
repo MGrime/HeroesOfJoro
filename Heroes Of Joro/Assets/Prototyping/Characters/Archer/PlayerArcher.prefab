@@ -274,13 +274,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterController: {fileID: 4470999408544031370}
   _playerCamera: {fileID: 0}
-  _runSpeed: 30
   _moveSpeed: 10
   _turnSmoothTime: 0.1
-  _gravity: 100
+  _gravity: 10
   _vSpeed: 0
-  _toWalk: 1
-  _isStopping: 0
+  _isTouching: 0
   _playerAnimator: {fileID: 3375093094498638101}
 --- !u!114 &9204394838980840653
 MonoBehaviour:

@@ -8,14 +8,14 @@ public class ThirdPersonMovementScript : MonoBehaviour
 
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private Transform _playerCamera;
-    [SerializeField] private const float _Speed = 10.0f;
-    [SerializeField] private float _runSpeed = 30.0f;
+    [SerializeField] private const float _Speed = 5.0f;
+    [SerializeField] private const float _runSpeed = 15.0f;
     [SerializeField] private float _moveSpeed = 10.0f;
     [SerializeField] private float _turnSmoothTime = 0.1f;
-    [SerializeField] private float _gravity = 10.0f;
+    [SerializeField] private float _gravity = 5.0f;
     [SerializeField] private float _vSpeed = 0.0f;
-    [SerializeField] private bool _toWalk = true;
-    [SerializeField] private bool _isStopping = false;
+    [SerializeField] private bool _isTouching = false;
+
     [SerializeField] private Animator _playerAnimator;
    
 
@@ -34,10 +34,7 @@ public class ThirdPersonMovementScript : MonoBehaviour
 
     private void Start()
     {
-        // Lock cursor to fix movement
-        
-        _toWalk = true;
-        // Start with no control. Dungeon will enable when complete
+              // Start with no control. Dungeon will enable when complete
         enabled = false;
     }
 
@@ -71,30 +68,31 @@ public class ThirdPersonMovementScript : MonoBehaviour
 
             // Move the model in the direction
             moveDirection = Quaternion.Euler(0.0f, targetAngle, 0.0f) * Vector3.forward;
+            if (_characterController.isGrounded)
+            {
+                _vSpeed = 0;
+                _isTouching = true;
+            }
+            else _isTouching = false;
             _vSpeed -= _gravity * Time.deltaTime;
             moveDirection.y = _vSpeed;
+
+            //Transition to run animation
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 _moveSpeed = _runSpeed;
-                _toWalk = false;
+                _playerAnimator.SetBool("isRunning",true);
             }
-            else if (!_toWalk)
+            else 
             {
-                while (_moveSpeed > _Speed)
-                {
-                    _moveSpeed *= 0.05f * Time.deltaTime;//Gradually decrease speed 
+                _moveSpeed = _Speed;
+                _playerAnimator.SetBool("isRunning", false);
 
-                }
-                if (_moveSpeed < _Speed)
-                {
-                    _moveSpeed = _Speed;
-                    _toWalk = true;
-                }
             }
 
 
             _characterController.Move(moveDirection.normalized * _moveSpeed * Time.deltaTime);
-            _vSpeed = 0;
+           
 
 
         }
@@ -102,7 +100,6 @@ public class ThirdPersonMovementScript : MonoBehaviour
         {
             moveDirection.x = 0.0f;
             moveDirection.z = 0.0f;
-
         }
 
 
@@ -112,8 +109,8 @@ public class ThirdPersonMovementScript : MonoBehaviour
         float velocityZ = Vector3.Dot(moveDirection.normalized, transform.forward);
         float velocityX = Vector3.Dot(moveDirection.normalized, transform.right);
 
-        _playerAnimator.SetFloat("VelocityZ", velocityZ, 0.1f, Time.deltaTime);
-        _playerAnimator.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
+        _playerAnimator.SetFloat("VelocityZ", velocityZ, 0.2f, Time.deltaTime);
+        _playerAnimator.SetFloat("VelocityX", velocityX, 0.2f, Time.deltaTime);
     }
 
 
