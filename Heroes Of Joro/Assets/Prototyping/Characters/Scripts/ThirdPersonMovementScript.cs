@@ -94,7 +94,11 @@ public class ThirdPersonMovementScript : MonoBehaviour
 
 
             _characterController.Move(moveDirection.normalized * _moveSpeed * Time.deltaTime);
+<<<<<<< Updated upstream
             _vSpeed = 0;
+=======
+
+>>>>>>> Stashed changes
 
 
         }
@@ -112,16 +116,25 @@ public class ThirdPersonMovementScript : MonoBehaviour
         float velocityZ = Vector3.Dot(moveDirection.normalized, transform.forward);
         float velocityX = Vector3.Dot(moveDirection.normalized, transform.right);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
         _playerAnimator.SetFloat("VelocityZ", velocityZ, 0.1f, Time.deltaTime);
         _playerAnimator.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
 =======
+=======
+>>>>>>> Stashed changes
         //Movement animation
         _playerAnimator.SetFloat("VelocityZ", velocityZ, 0.2f, Time.deltaTime);
         _playerAnimator.SetFloat("VelocityX", velocityX, 0.2f, Time.deltaTime);
 
         //Attacking animation
+<<<<<<< Updated upstream
         if (Input.GetMouseButtonDown(0)) _playerAnimator.SetBool("isAttacking", true);
+        else if (Input.GetMouseButtonUp(0)) _playerAnimator.SetBool("isAttacking", false);
+
+>>>>>>> Stashed changes
+=======
+        if (Input.GetMouseButton(0)) _playerAnimator.SetBool("isAttacking", true);
         else if (Input.GetMouseButtonUp(0)) _playerAnimator.SetBool("isAttacking", false);
 
 >>>>>>> Stashed changes
