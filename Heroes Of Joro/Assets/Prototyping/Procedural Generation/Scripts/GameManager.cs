@@ -72,5 +72,17 @@ public class GameManager : MonoBehaviour
 
     }
 
+    private int _sessionCoins;
+    public int Coins
+    {
+        get => _sessionCoins;
+        set => _sessionCoins = value;
+    }
+
+    public void AddCoin()
+    {
+        _sessionCoins++;
+    }
+
     #endregion
 }

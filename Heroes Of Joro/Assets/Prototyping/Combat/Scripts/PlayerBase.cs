@@ -44,6 +44,8 @@ public class PlayerBase : MonoBehaviour
         set => _healthBar = value;
     }
 
+    private GameManager _manager;
+
     #endregion
 
     #region Functions
@@ -51,6 +53,9 @@ public class PlayerBase : MonoBehaviour
     protected virtual void Start()
     {
         _health = _maxHealth;
+
+        _manager = null;
+        _manager = GameObject.FindObjectOfType<GameManager>();
     }
 
     protected virtual void Update()
@@ -88,6 +93,16 @@ public class PlayerBase : MonoBehaviour
             _health = _maxHealth;
         }
     }
+
+    public void PickupCoin()
+    {
+        if (_manager)
+        {
+            _manager.AddCoin();
+            Debug.Log("Picked up coin! Coin count: " + _manager.Coins);
+        }
+    }
+
     #endregion
 
 

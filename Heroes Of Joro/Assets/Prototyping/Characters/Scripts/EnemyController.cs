@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] public int _enemyHealth = 100;
     [SerializeField] private float _setAttackTime = 2.0f;
     [SerializeField] private Animator _enemyAnimator;
+    [SerializeField] private PickupBase _dropPickup;
 
     #endregion
     #region Private Data
@@ -165,7 +166,18 @@ public class EnemyController : MonoBehaviour
         if (_enemyHealth > 0)
         {
             _enemyHealth -= _playerDamage;
-            if (_enemyHealth <= 0)  Destroy(gameObject);
+            if (_enemyHealth <= 0)
+            {
+                // Spawn a range of coin pickups
+                int dropAmount = Random.Range(1, 6);
+
+                for (int i = 0; i < dropAmount; ++i)
+                {
+                    Instantiate(_dropPickup.gameObject, transform.position + new Vector3(0.0f,2.0f), Quaternion.identity);
+                }
+
+                Destroy(gameObject);
+            }
         }
     }
 
