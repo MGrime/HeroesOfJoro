@@ -147,7 +147,7 @@ public class Dungeon : MonoBehaviour
     {
         // For now spawn a pickup in the middle room
         Instantiate(_pickupPrefabs[0].gameObject, floor.BuiltPieces[0].Pivot.transform.position + new Vector3(3.0f,2.0f,3.0f), _pickupPrefabs[0].gameObject.transform.rotation, floor.Pickups.transform);
-        Instantiate(_pickupPrefabs[1].gameObject, floor.BuiltPieces[0].Pivot.transform.position - new Vector3(3.0f, 2.0f, 3.0f), _pickupPrefabs[1].gameObject.transform.rotation, floor.Pickups.transform);
+        Instantiate(_pickupPrefabs[1].gameObject, floor.BuiltPieces[0].Pivot.transform.position + new Vector3(-3.0f, 2.0f, -3.0f), _pickupPrefabs[1].gameObject.transform.rotation, floor.Pickups.transform);
     }
 
     private void PlacePortal(DungeonFloor floor, int floorIndex)
