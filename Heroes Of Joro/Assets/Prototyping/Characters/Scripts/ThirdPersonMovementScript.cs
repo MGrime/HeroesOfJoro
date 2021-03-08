@@ -111,12 +111,23 @@ public class ThirdPersonMovementScript : MonoBehaviour
         // Animating
         float velocityZ = Vector3.Dot(moveDirection.normalized, transform.forward);
         float velocityX = Vector3.Dot(moveDirection.normalized, transform.right);
+<<<<<<< Updated upstream
 
         _playerAnimator.SetFloat("VelocityZ", velocityZ, 0.1f, Time.deltaTime);
         _playerAnimator.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
+=======
+        //Movement animation
+        _playerAnimator.SetFloat("VelocityZ", velocityZ, 0.2f, Time.deltaTime);
+        _playerAnimator.SetFloat("VelocityX", velocityX, 0.2f, Time.deltaTime);
+
+        //Attacking animation
+        if (Input.GetMouseButtonDown(0)) _playerAnimator.SetBool("isAttacking", true);
+        else if (Input.GetMouseButtonUp(0)) _playerAnimator.SetBool("isAttacking", false);
+
+>>>>>>> Stashed changes
     }
 
 
-   
+
     #endregion
 }
