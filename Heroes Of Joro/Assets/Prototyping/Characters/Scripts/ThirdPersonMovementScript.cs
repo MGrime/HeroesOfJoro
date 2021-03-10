@@ -24,9 +24,14 @@ public class ThirdPersonMovementScript : MonoBehaviour
     #endregion
 
     #region Private Data
-
+    public static ThirdPersonMovementScript _instance;
     private float _turnSmoothVelocity;
     Vector3 moveDirection;
+    public static int numOfClicks = 0;
+    //Time the button was last clicked
+    float lastClick = 0.0f;
+    //Delay between each click
+    float combatDelay = 5.0f;
 
     #endregion
 
@@ -36,6 +41,7 @@ public class ThirdPersonMovementScript : MonoBehaviour
     {
               // Start with no control. Dungeon will enable when complete
         enabled = false;
+        _instance = this;
     }
 
     // Update is called once per frame
@@ -105,15 +111,62 @@ public class ThirdPersonMovementScript : MonoBehaviour
 
 
 
-        // Animating
+        /** 
+         **  Animating
+         **/
         float velocityZ = Vector3.Dot(moveDirection.normalized, transform.forward);
         float velocityX = Vector3.Dot(moveDirection.normalized, transform.right);
-
+        //Movement
         _playerAnimator.SetFloat("VelocityZ", velocityZ, 0.2f, Time.deltaTime);
         _playerAnimator.SetFloat("VelocityX", velocityX, 0.2f, Time.deltaTime);
+        //Attacking
+        lastClick -= Time.deltaTime;
+        if (Input.GetMouseButtonDown(0))
+        {
+            _playerAnimator.SetBool("isAttacking", true);
+            OnClick();
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            _playerAnimator.SetBool("isAttacking", false);
+        }
+        else if (lastClick <= 0.0f) ResetNumOfClicks();
+        /**Special animation for the Mage Sap attack:
+         * Conditions to make it work:
+         * Get a message to know which attack the mage is using
+         * Maybe allow Sap to be used only while the player is not moving 
+         * To compensate we could increase Sap's damage
+        **/
+        if (Input.GetMouseButtonDown(1))
+        {
+            _playerAnimator.SetBool("isSpecialAttack", true);
+            _playerAnimator.SetBool("isBlocking", true);
+
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            _playerAnimator.SetBool("isSpecialAttack", false);
+            _playerAnimator.SetBool("isBlocking", false);
+
+        }
+    }
+    void OnClick()
+    {
+        _playerAnimator.SetBool("isBlocking", false);
+        //Record time of last button click
+        lastClick = combatDelay;
+        numOfClicks++;
+        _playerAnimator.SetInteger("numberOfClicks", numOfClicks);
+        if (numOfClicks >= 1) _playerAnimator.SetBool("AttackOne", true);
+        else if (numOfClicks < 2) _playerAnimator.SetBool("AttackTwo", false);
+        //Limit the number of combos by clamping
+        numOfClicks = Mathf.Clamp(numOfClicks, 0, 3);
+       
     }
 
-
-   
+    public int GetNumOfClicks()
+    { return numOfClicks; }
+    public static void ResetNumOfClicks() 
+    { numOfClicks = 0; }
     #endregion
 }
