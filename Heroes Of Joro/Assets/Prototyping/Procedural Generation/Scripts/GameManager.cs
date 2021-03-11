@@ -70,6 +70,22 @@ public class GameManager : MonoBehaviour
             _dungeonMusic.Play();
         }
 
+        _sessionCoins = 0;
+
+    }
+
+    public void StopMusic()
+    {
+
+        if (_loadingMusic)
+        {
+            _loadingMusic.Stop();
+        }
+
+        if (_dungeonMusic)
+        {
+            _dungeonMusic.Stop();
+        }
     }
 
     private int _sessionCoins;
@@ -82,6 +98,24 @@ public class GameManager : MonoBehaviour
     public void AddCoin()
     {
         _sessionCoins++;
+    }
+
+    public void SaveCoins()
+    {
+        if (PlayerPrefs.HasKey("Coins"))
+        {
+            var coins = PlayerPrefs.GetInt("Coins");
+
+            coins += _sessionCoins;
+
+            PlayerPrefs.SetInt("Coins",coins);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Coins",_sessionCoins);
+            PlayerPrefs.Save();
+        }
     }
 
     #endregion

@@ -363,7 +363,14 @@ public class Dungeon : MonoBehaviour
         {
             // Unlock cursor
             Cursor.lockState = CursorLockMode.None;
-            SceneManager.LoadScene("TBCScene");
+
+            // Save out the coin count
+            _gameManager.SaveCoins();
+
+            _gameManager.StopMusic();
+
+            // Switch back to hub
+            SceneManager.LoadScene("PreGameHub");
         }
         else
         {
