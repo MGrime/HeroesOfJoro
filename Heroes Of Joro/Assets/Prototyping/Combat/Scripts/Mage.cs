@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Mage : PlayerBase
@@ -37,6 +38,8 @@ public class Mage : PlayerBase
     // Store current health/mana
     private float _mana;
 
+    private bool _isAttacking;
+
     //Enemy Damage
     private int _enemyDamage;
     #endregion
@@ -55,6 +58,8 @@ public class Mage : PlayerBase
         }
 
         _mana = _maxMana;
+
+        _isAttacking = false;
 
         // Disable until we know targeting spell equiped
         _reticle.enabled = false;
@@ -133,12 +138,13 @@ public class Mage : PlayerBase
             }
 
             // Need to have enough mana
-            if (_mana >= selectedSpell.GetCost() && Input.GetKeyDown(KeyCode.Mouse0))
+            if (_mana >= selectedSpell.GetCost() && Input.GetKeyDown(KeyCode.Mouse0) && !_isAttacking)
             {
                 // Check type
                 if (selectedSpell.GetSpellType() == SpellBase.SpellType.Projectile)
                 {
-                    FireProjectileSpell();
+                    _isAttacking = true;
+                    StartCoroutine("FireProjectileSpellAnimated");
                 }
                 if (selectedSpell.GetSpellType() == SpellBase.SpellType.Targeting)
                 {
@@ -171,6 +177,15 @@ public class Mage : PlayerBase
         GameObject newSpellObject = Instantiate(_spells[_selectedSpellIndex].gameObject,_physicalPlayer.transform.position + new Vector3(0,2,0),_physicalPlayer.transform.rotation);
 
         // This spell script controls the behaviour. Thats the beauty of an extra level of abstraction
+    }
+
+    private IEnumerator FireProjectileSpellAnimated()
+    {
+        yield return new WaitForSeconds(0.8f);
+
+        FireProjectileSpell();
+
+        _isAttacking = false;
     }
 
     private void FireTargetingSpell()
