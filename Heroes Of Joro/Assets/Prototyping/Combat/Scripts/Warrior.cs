@@ -17,7 +17,7 @@ public class Warrior : PlayerBase
 
     #region Functions
 
-    override protected void Start()
+    protected override void Start()
     {
         Type = PlayerType.Warrior;
 
@@ -32,7 +32,7 @@ public class Warrior : PlayerBase
 
     }
 
-    override protected void Update()
+    protected override void Update()
     {
         base.Update();
 

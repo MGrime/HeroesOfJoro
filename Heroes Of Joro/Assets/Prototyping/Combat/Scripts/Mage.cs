@@ -124,7 +124,7 @@ public class Mage : PlayerBase
             SpellBase selectedSpell = _spells[_selectedSpellIndex];
             if (_activeSpell)
             {
-                _activeSpell.text = "Spell: " + selectedSpell.name;
+                _activeSpell.text = selectedSpell.name;
             }
 
 
