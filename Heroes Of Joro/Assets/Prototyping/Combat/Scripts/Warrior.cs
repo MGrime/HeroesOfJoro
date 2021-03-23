@@ -25,6 +25,13 @@ public class Warrior : PlayerBase
 
     }
 
+    // This fixes the ui thing. i have no idea what the real cause of the bug is
+    protected void Awake()
+    {
+        Type = PlayerType.Warrior;
+
+    }
+
     override protected void Update()
     {
         base.Update();

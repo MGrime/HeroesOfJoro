@@ -15,13 +15,9 @@ public class EnemyAnimation : MonoBehaviour
 
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-    public void LookAround()
-    {
-        //_enemyAnimator.SetBool("isWalking", !_lookAround);
-    }
+
+    //public void LookAround()
+    //{
+    //    //_enemyAnimator.SetBool("isWalking", !_lookAround);
+    //}
 }
