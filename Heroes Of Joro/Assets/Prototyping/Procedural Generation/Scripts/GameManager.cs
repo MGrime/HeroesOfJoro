@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,8 +15,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject[] _dungeons;
 
+    // Store the UI text output
+    [SerializeField] private Text _coinCounterText;
+    private int _coinsAtStart;
+
     public CursorMode _cursorMode;
     public Vector2 _hotSpot = Vector2.zero;
+
     #endregion
 
     #region Functions
@@ -50,6 +56,15 @@ public class GameManager : MonoBehaviour
             _dungeons[PlayerPrefs.GetInt("TargetDungeon")].SetActive(true);
         }
 
+        // Check for coins
+        if (PlayerPrefs.HasKey("Coins"))
+        {
+            _coinsAtStart = PlayerPrefs.GetInt("Coins");
+            if (_coinCounterText)
+            {
+                _coinCounterText.text = _sessionCoins.ToString() + '(' + _coinsAtStart + ')';
+            }
+        }
 
     }
 
@@ -98,6 +113,12 @@ public class GameManager : MonoBehaviour
     public void AddCoin()
     {
         _sessionCoins++;
+
+        // Update coin UI
+        if (_coinCounterText)
+        {
+            _coinCounterText.text = _sessionCoins.ToString() + '(' + _coinsAtStart + ')';
+        }
     }
 
     public void SaveCoins()
