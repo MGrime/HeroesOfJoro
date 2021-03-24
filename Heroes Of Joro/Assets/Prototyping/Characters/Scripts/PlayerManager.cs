@@ -82,15 +82,19 @@ public class PlayerManager : MonoBehaviour
         // Find type of player to modify UI
         if (_manaBar)
         {
+            Debug.Log(newPlayer.Type);
             if (newPlayer.Type == PlayerBase.PlayerType.Mage)
             {
                 _manaBar.SetActive(true);
                 _activeSpell.SetActive(true);
+
+                Debug.Log("Activated");
             }
             else
             {
                 _manaBar.SetActive(false);
                 _activeSpell.SetActive(false);
+                Debug.Log("Deactivated");
             }
         }
 

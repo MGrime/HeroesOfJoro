@@ -17,7 +17,7 @@ public class Warrior : PlayerBase
 
     #region Functions
 
-    override protected void Start()
+    protected override void Start()
     {
         Type = PlayerType.Warrior;
 
@@ -25,7 +25,14 @@ public class Warrior : PlayerBase
 
     }
 
-    override protected void Update()
+    // This fixes the ui thing. i have no idea what the real cause of the bug is
+    protected void Awake()
+    {
+        Type = PlayerType.Warrior;
+
+    }
+
+    protected override void Update()
     {
         base.Update();
 

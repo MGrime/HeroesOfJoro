@@ -10,9 +10,9 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private float _distanceTo = 1.0f;
     [SerializeField] private float _distanceAway = 2.0f;
 
-    [SerializeField] public int _enemyDamage = 5;
-    [SerializeField] public float _timeAlive = 3.0f;
-    [SerializeField] public float distanceToPlayer;
+    public int _enemyDamage = 5;
+    public float _timeAlive = 3.0f;
+    public float distanceToPlayer;
 
     private Transform _target;
     private Vector3 _targetPos;

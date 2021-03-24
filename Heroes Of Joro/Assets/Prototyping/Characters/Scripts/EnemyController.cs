@@ -8,9 +8,9 @@ public class EnemyController : MonoBehaviour
     #region Editor Fields
     [SerializeField] private float _lookRadius = 10.0f;
     [SerializeField] private float _smoothRotation = 5.0f;
-    [SerializeField] public GameObject _patrolPoint;
-    [SerializeField] public GameObject _enemyProjectile;
-    [SerializeField] public int _enemyHealth = 100;
+    public GameObject _patrolPoint;
+    public GameObject _enemyProjectile;
+    public int _enemyHealth = 100;
     [SerializeField] private float _setAttackTime = 2.0f;
     [SerializeField] private Animator _enemyAnimator;
     [SerializeField] private PickupBase _dropPickup;
