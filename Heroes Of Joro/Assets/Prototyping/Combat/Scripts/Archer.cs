@@ -17,6 +17,7 @@ public class Archer : PlayerBase
 
     private bool m_HoldingFire = false;
     private float m_TimeHeld = 0.0f;
+    private bool m_IsAnimating = false;
 
     #endregion
 
@@ -38,13 +39,19 @@ public class Archer : PlayerBase
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            _bow.FastFire();
+            if (!_animator.GetBool("isDrawn"))
+            {
+                _animator.SetBool("isDrawn", true);
+                _animator.speed *= 10.0f;
+                m_IsAnimating = true;
+            }
             firing = true;
+            
         }
 
         // Right click is slow but charged shot
         // Whilst held
-        if (Input.GetKey(KeyCode.Mouse1))
+        if (Input.GetKey(KeyCode.Mouse1) && !m_IsAnimating)
         {
             // While we have been holding it
             if (m_HoldingFire && m_TimeHeld <= _bow.HoldTime)
@@ -83,6 +90,20 @@ public class Archer : PlayerBase
                 m_HoldingFire = false;
                 m_TimeHeld = 0.0f;
             }
+        }
+
+        // Just clicked fast fire
+        if (m_IsAnimating)
+        {
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            {
+                _bow.FastFire();
+                _animator.SetBool("isDrawn", false);
+                _animator.speed = 1.0f;
+                firing = false;
+                m_IsAnimating = false;
+            }
+
         }
 
         base.Update();

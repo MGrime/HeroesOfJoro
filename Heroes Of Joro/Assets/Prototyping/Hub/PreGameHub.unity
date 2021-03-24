@@ -127,7 +127,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2280
+  m_Name: pb_Mesh-28310
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -745,6 +745,7 @@ MonoBehaviour:
   _dungeonMusic: {fileID: 0}
   _cursorTexture: {fileID: 0}
   _dungeons: []
+  _coinCounterText: {fileID: 0}
   _cursorMode: 0
   _hotSpot: {x: 0, y: 0}
 --- !u!114 &323161941
@@ -961,7 +962,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2296
+  m_Name: pb_Mesh-28326
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1124,7 +1125,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2298
+  m_Name: pb_Mesh-28328
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1770,7 +1771,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2290
+  m_Name: pb_Mesh-28320
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2513,6 +2514,11 @@ PrefabInstance:
       propertyPath: _healthBar
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 794518874886942356, guid: 5f40f0299cff7864887ba1cdd00bdc90,
+        type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 2025097909}
     - target: {fileID: 2221111641681067513, guid: 5f40f0299cff7864887ba1cdd00bdc90,
         type: 3}
       propertyPath: m_IsKinematic
@@ -3488,7 +3494,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2288
+  m_Name: pb_Mesh-28318
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3963,6 +3969,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &2025097909 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8640743090247738124, guid: 5f40f0299cff7864887ba1cdd00bdc90,
+    type: 3}
+  m_PrefabInstance: {fileID: 1400430092}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2041024418 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 360722363320360507, guid: 6b21b4ceb1b73474f887efb0b7aed52c,

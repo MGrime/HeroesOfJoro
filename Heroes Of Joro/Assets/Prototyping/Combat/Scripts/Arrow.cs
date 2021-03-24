@@ -23,7 +23,7 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "Player")
+        if (other.tag != "Player" && other.tag != "Projectile")
         {
             if (other.name == "EnemyControls")
             {

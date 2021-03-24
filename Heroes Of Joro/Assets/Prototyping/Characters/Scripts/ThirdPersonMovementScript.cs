@@ -129,7 +129,6 @@ public class ThirdPersonMovementScript : MonoBehaviour
         {
             _playerAnimator.SetBool("isAttacking", true);
             OnClick();
-            _playerAnimator.SetBool("isDrawn", true);
             _playerAnimator.SetBool("isRunningArcher", false);
 
 
@@ -137,8 +136,7 @@ public class ThirdPersonMovementScript : MonoBehaviour
         else if (Input.GetMouseButtonUp(0))
         {
             _playerAnimator.SetBool("isAttacking", false);
-            _playerAnimator.SetBool("isDrawn", false);
-           // _playerAnimator.SetBool("isRunningArcher", true);
+            // _playerAnimator.SetBool("isRunningArcher", true);
 
 
         }

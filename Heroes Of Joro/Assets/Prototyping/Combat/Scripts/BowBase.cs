@@ -36,7 +36,7 @@ public class BowBase : MonoBehaviour
         Debug.Log("Fast");
 
         // Create arrow
-        Arrow newArrow = Instantiate(_arrow, gameObject.transform.position, _arrow.transform.rotation).GetComponent<Arrow>();
+        Arrow newArrow = Instantiate(_arrow, gameObject.transform.position, gameObject.transform.rotation).GetComponent<Arrow>();
 
 
         newArrow.Fire(_fastDamage);
