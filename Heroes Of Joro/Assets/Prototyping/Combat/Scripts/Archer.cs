@@ -9,6 +9,8 @@ public class Archer : PlayerBase
     // Contains the bow object
     [SerializeField] private BowBase _bow;
 
+    [SerializeField] private Animator _animator;
+
     #endregion
 
     #region Private Data
@@ -58,6 +60,11 @@ public class Archer : PlayerBase
                 m_TimeHeld = 0.0f;
                 m_HoldingFire = true;
             }
+
+            if (!_animator.GetBool("isDrawn"))
+            {
+                _animator.SetBool("isDrawn", true);
+            }
         }
         // Not held OR we have held max time
         if (!Input.GetKey(KeyCode.Mouse1) || m_TimeHeld >= _bow.HoldTime)
@@ -66,6 +73,11 @@ public class Archer : PlayerBase
             if (m_HoldingFire)
             {
                 _bow.ChargedFire(m_TimeHeld);
+
+                if (_animator.GetBool("isDrawn"))
+                {
+                    _animator.SetBool("isDrawn",false);
+                }
 
                 // Reset bool
                 m_HoldingFire = false;

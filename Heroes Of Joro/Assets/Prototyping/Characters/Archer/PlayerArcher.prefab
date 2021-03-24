@@ -57,13 +57,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 88516658482199646}
-  m_LocalRotation: {x: -0.025726007, y: 0.025726007, z: 0.7066387, w: 0.7066387}
-  m_LocalPosition: {x: 0, y: 1.1799998, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.289, y: 1.468, z: 0.2}
   m_LocalScale: {x: 0.059999987, y: 0.059999995, z: 0.060000002}
   m_Children: []
   m_Father: {fileID: 6786446362492017277}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -4.17, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!33 &6294758274448561711
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7eca32545df8a34d9439ad121b4e52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _arrow: {fileID: 8561646255657111476, guid: 208c6de2b06e9ef46819ed2d7f69d3d6, type: 3}
+  _arrow: {fileID: 1667470530390146973, guid: 208c6de2b06e9ef46819ed2d7f69d3d6, type: 3}
   _fastDamage: 5
   _chargedBaseDamage: 20
   _holdTime: 2
@@ -1311,6 +1311,7 @@ MonoBehaviour:
   _maxHealth: 150
   _healthBar: {fileID: 0}
   _bow: {fileID: 1086317909365766812}
+  _animator: {fileID: 0}
 --- !u!1 &2515131375267291577
 GameObject:
   m_ObjectHideFlags: 0
