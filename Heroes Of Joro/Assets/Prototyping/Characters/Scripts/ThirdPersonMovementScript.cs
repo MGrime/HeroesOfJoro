@@ -84,15 +84,19 @@ public class ThirdPersonMovementScript : MonoBehaviour
             moveDirection.y = _vSpeed;
 
             //Transition to run animation
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) && !_playerAnimator.GetBool("isDrawn"))
             {
                 _moveSpeed = _runSpeed;
                 _playerAnimator.SetBool("isRunning",true);
+                _playerAnimator.SetBool("isRunningArcher", true);
+
             }
             else 
             {
                 _moveSpeed = _Speed;
                 _playerAnimator.SetBool("isRunning", false);
+                _playerAnimator.SetBool("isRunningArcher", false);
+
 
             }
 
@@ -125,10 +129,18 @@ public class ThirdPersonMovementScript : MonoBehaviour
         {
             _playerAnimator.SetBool("isAttacking", true);
             OnClick();
+            _playerAnimator.SetBool("isDrawn", true);
+            _playerAnimator.SetBool("isRunningArcher", false);
+
+
         }
         else if (Input.GetMouseButtonUp(0))
         {
             _playerAnimator.SetBool("isAttacking", false);
+            _playerAnimator.SetBool("isDrawn", false);
+           // _playerAnimator.SetBool("isRunningArcher", true);
+
+
         }
         else if (lastClick <= 0.0f) ResetNumOfClicks();
         /**Special animation for the Mage Sap attack:
