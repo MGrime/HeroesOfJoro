@@ -173,7 +173,8 @@ public class EnemyController : MonoBehaviour
 
                 for (int i = 0; i < dropAmount; ++i)
                 {
-                    Instantiate(_dropPickup.gameObject, transform.position + new Vector3(0.0f,2.0f), Quaternion.identity);
+                    GameObject coin = Instantiate(_dropPickup.gameObject, transform.position + new Vector3(0.0f,2.0f), Quaternion.identity);
+                    coin.transform.SetParent(transform.parent);
                 }
 
                 Destroy(gameObject);
