@@ -74,6 +74,10 @@ public class PlayerManager : MonoBehaviour
                 SwitchCharacter(ref PlayerTrackers[2]);
             }
         }
+
+        // Update this pos to be same as character
+        gameObject.transform.position = ActivePlayer.transform.position;
+
         AimTowardMouse();
     }
 

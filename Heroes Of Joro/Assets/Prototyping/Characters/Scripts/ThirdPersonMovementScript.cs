@@ -15,6 +15,7 @@ public class ThirdPersonMovementScript : MonoBehaviour
     [SerializeField] private float _gravity = 5.0f;
     [SerializeField] private float _vSpeed = 0.0f;
     [SerializeField] private bool _isTouching = false;
+    [SerializeField] private AudioSource _footstepSound;
 
     [SerializeField] private Animator _playerAnimator;
    
@@ -63,6 +64,11 @@ public class ThirdPersonMovementScript : MonoBehaviour
         // If the direction is not null we are moving
         if (direction.magnitude >= 0.1f)
         {
+            if (!_footstepSound.isPlaying)
+            {
+                _footstepSound.Play();
+            }
+
             // Calculate the angle we will finish at
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _playerCamera.eulerAngles.y;
 
@@ -110,6 +116,8 @@ public class ThirdPersonMovementScript : MonoBehaviour
         {
             moveDirection.x = 0.0f;
             moveDirection.z = 0.0f;
+            if (_footstepSound.isPlaying)
+                _footstepSound.Stop();
         }
 
 
