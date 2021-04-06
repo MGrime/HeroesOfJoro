@@ -22,7 +22,7 @@ public class Archer : PlayerBase
     #endregion
 
     // Start is called before the first frame update
-    override protected void Start()
+    protected override void Start()
     {
         Type = PlayerType.Archer;
 

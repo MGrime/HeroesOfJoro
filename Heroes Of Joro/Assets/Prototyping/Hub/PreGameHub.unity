@@ -284,6 +284,18 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &135259208 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1568351681503825214, guid: 5f40f0299cff7864887ba1cdd00bdc90,
+    type: 3}
+  m_PrefabInstance: {fileID: 1400430092}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d915fb05f66f5044895d8628cdeae03c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &136262240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -761,7 +773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerTrackers:
-  - {fileID: 906945103}
+  - {fileID: 135259208}
   - {fileID: 2041024418}
   - {fileID: 278575569}
   ActivePlayer: {fileID: 0}
@@ -1617,18 +1629,6 @@ Transform:
   m_Father: {fileID: 189895555}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &906945103 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 794518874886942356, guid: 5f40f0299cff7864887ba1cdd00bdc90,
-    type: 3}
-  m_PrefabInstance: {fileID: 1400430092}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40284f95c04b8774bbb751b510e22d56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &931573115
 GameObject:
   m_ObjectHideFlags: 0
@@ -2589,7 +2589,8 @@ PrefabInstance:
       propertyPath: _playerCamera
       value: 
       objectReference: {fileID: 1300915613}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9204394838980840653, guid: 5f40f0299cff7864887ba1cdd00bdc90, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5f40f0299cff7864887ba1cdd00bdc90, type: 3}
 --- !u!4 &1400430093 stripped
 Transform:

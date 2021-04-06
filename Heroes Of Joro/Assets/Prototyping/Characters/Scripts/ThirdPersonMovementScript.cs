@@ -151,14 +151,12 @@ public class ThirdPersonMovementScript : MonoBehaviour
         {
             _playerAnimator.SetBool("isSpecialAttack", true);
             _playerAnimator.SetBool("isBlocking", true);
-            _playerAnimator.SetBool("isDrawn", true);
 
         }
         else if (Input.GetMouseButtonUp(1))
         {
             _playerAnimator.SetBool("isSpecialAttack", false);
             _playerAnimator.SetBool("isBlocking", false);
-            _playerAnimator.SetBool("isDrawn", false);
 
         }
     }
