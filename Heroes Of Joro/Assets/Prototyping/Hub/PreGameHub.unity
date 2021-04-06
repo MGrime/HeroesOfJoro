@@ -127,7 +127,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-28310
+  m_Name: pb_Mesh-34028
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -974,7 +974,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-28326
+  m_Name: pb_Mesh-34044
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1137,7 +1137,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-28328
+  m_Name: pb_Mesh-34046
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1771,7 +1771,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-28320
+  m_Name: pb_Mesh-34038
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2589,6 +2589,21 @@ PrefabInstance:
       propertyPath: _playerCamera
       value: 
       objectReference: {fileID: 1300915613}
+    - target: {fileID: 9190815570375159653, guid: 5f40f0299cff7864887ba1cdd00bdc90,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9190815570375159653, guid: 5f40f0299cff7864887ba1cdd00bdc90,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.158
+      objectReference: {fileID: 0}
+    - target: {fileID: 9190815570375159653, guid: 5f40f0299cff7864887ba1cdd00bdc90,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.239
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9204394838980840653, guid: 5f40f0299cff7864887ba1cdd00bdc90, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5f40f0299cff7864887ba1cdd00bdc90, type: 3}
@@ -3495,7 +3510,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-28318
+  m_Name: pb_Mesh-34036
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
