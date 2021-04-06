@@ -55,21 +55,21 @@ public class PlayerManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (ActivePlayer != PlayerTrackers[0])
+            if (ActivePlayer != PlayerTrackers[0] && PlayerTrackers[0].Health > 0)
             {
                 SwitchCharacter(ref PlayerTrackers[0]);
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (ActivePlayer != PlayerTrackers[1])
+            if (ActivePlayer != PlayerTrackers[1] && PlayerTrackers[1].Health > 0)
             {
                 SwitchCharacter(ref PlayerTrackers[1]);
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (ActivePlayer != PlayerTrackers[2])
+            if (ActivePlayer != PlayerTrackers[2] && PlayerTrackers[2].Health > 0)
             {
                 SwitchCharacter(ref PlayerTrackers[2]);
             }
@@ -127,6 +127,29 @@ public class PlayerManager : MonoBehaviour
         player.GetComponentInChildren<ThirdPersonMovementScript>().enabled = false;
         //player.gameObject.GetComponent<AnimationScript>().enabled = false;
         player.gameObject.SetActive(false);
+    }
+
+    // Called by player when a death happens
+    public void PlayerDied()
+    {
+        // Check players to find first one still alive
+        bool foundPlayer = false;
+        for (int i = 0; i < PlayerTrackers.Length; ++i)
+        {
+            if (PlayerTrackers[i].Health > 0.0f)
+            {
+                foundPlayer = true;
+                SwitchCharacter(ref PlayerTrackers[i]);
+                break;
+            }
+        }
+
+        // If no players alive
+        if (!foundPlayer)
+        {
+            // End game
+            Debug.Log("haha game done brr");
+        }
     }
 
 

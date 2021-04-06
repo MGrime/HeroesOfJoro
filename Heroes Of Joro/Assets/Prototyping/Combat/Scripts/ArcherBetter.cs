@@ -34,6 +34,7 @@ public class ArcherBetter : PlayerBase
     // Update is called once per frame
     protected override void Update()
     {
+        base.Update();
         // Left click hold to change fire
         if (Input.GetKey(KeyCode.Mouse0))
         {

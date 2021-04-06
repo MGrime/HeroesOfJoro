@@ -46,6 +46,9 @@ public class PlayerBase : MonoBehaviour
 
     private GameManager _manager;
 
+    // Store a reference to the player manager
+    private PlayerManager _playerManager;
+
     #endregion
 
     #region Functions
@@ -56,6 +59,9 @@ public class PlayerBase : MonoBehaviour
 
         _manager = null;
         _manager = GameObject.FindObjectOfType<GameManager>();
+
+        _playerManager = null;
+        _playerManager = FindObjectOfType<PlayerManager>();
     }
 
     protected virtual void Update()
@@ -75,11 +81,12 @@ public class PlayerBase : MonoBehaviour
             _health -= damage;
             Debug.Log("Damage received:" + damage);
 
-        }
-        else if (_health <= 0)
-        {
-            //Destroy(gameObject);
-            //TO DO: change this so it sends a message to GameOver function in the GameManager class
+            if (_health <= 0)
+            {
+                // Let player manager know the player has died
+                _playerManager.PlayerDied();
+            }
+
         }
     }
     public void PickupHealth()
