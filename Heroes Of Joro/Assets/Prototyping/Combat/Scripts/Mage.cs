@@ -45,7 +45,7 @@ public class Mage : PlayerBase
     #endregion
 
     #region Functions
-    override protected void Start()
+    protected override void Start()
     {
         Type = PlayerType.Mage;
 
@@ -66,7 +66,7 @@ public class Mage : PlayerBase
     }
 
 
-    override protected void Update()
+    protected override void Update()
     {
         base.Update();
 

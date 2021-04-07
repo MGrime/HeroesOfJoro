@@ -19,6 +19,8 @@ public class PlayerManager : MonoBehaviour
 
     public Camera MinimapCamera;
 
+    private bool CameraIsActive = true;
+
     #region Private Data
 
     private GameObject _manaBar;  // Find it with find
@@ -31,7 +33,7 @@ public class PlayerManager : MonoBehaviour
     {
         _instance = this;
         // TODO: THIS IS BECAUSE OF SOMETHING I DID IN PROC GEN. OBVIOUSLY NEEDS TO TWEAK FOR OTHER PLAYER TYPES. ADD A BASE CLASS FOR PLAYER TYPES
-
+        
         foreach (var player in PlayerTrackers)
         {
             DisablePlayer(player);
@@ -53,32 +55,40 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (CameraIsActive)
         {
-            if (ActivePlayer != PlayerTrackers[0] && PlayerTrackers[0].Health > 0)
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                SwitchCharacter(ref PlayerTrackers[0]);
+                if (ActivePlayer != PlayerTrackers[0] && PlayerTrackers[0].Health > 0)
+                {
+                    SwitchCharacter(ref PlayerTrackers[0]);
+                }
             }
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            if (ActivePlayer != PlayerTrackers[1] && PlayerTrackers[1].Health > 0)
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                SwitchCharacter(ref PlayerTrackers[1]);
+                if (ActivePlayer != PlayerTrackers[1] && PlayerTrackers[1].Health > 0)
+                {
+                    SwitchCharacter(ref PlayerTrackers[1]);
+                }
             }
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            if (ActivePlayer != PlayerTrackers[2] && PlayerTrackers[2].Health > 0)
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                SwitchCharacter(ref PlayerTrackers[2]);
+                if (ActivePlayer != PlayerTrackers[2] && PlayerTrackers[2].Health > 0)
+                {
+                    SwitchCharacter(ref PlayerTrackers[2]);
+                }
             }
-        }
 
-        // Update this pos to be same as character
-        gameObject.transform.position = ActivePlayer.transform.position;
+            // Update this pos to be same as character
+            gameObject.transform.position = ActivePlayer.transform.position;
+            AimTowardMouse();
+        }
+    }
 
-        AimTowardMouse();
+    public void SetCameraRotation(bool state)
+    {
+        CameraIsActive = state;
+        CameraFreeLook.enabled = state;
     }
 
     void SwitchCharacter(ref PlayerBase newPlayer)
