@@ -55,13 +55,37 @@ public class PlayerBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        _health = _maxHealth;
-
         _manager = null;
         _manager = GameObject.FindObjectOfType<GameManager>();
 
         _playerManager = null;
         _playerManager = FindObjectOfType<PlayerManager>();
+
+        // This is called after the higher up variants have set their type
+        // So we can check type here
+        switch (Type)
+        {
+            case PlayerType.Warrior:
+                if (PlayerPrefs.HasKey("Warrior_MaxHealth"))
+                {
+                    _maxHealth = PlayerPrefs.GetFloat("Warrior_MaxHealth");
+                }
+                break;
+            case PlayerType.Archer:
+                if (PlayerPrefs.HasKey("Archer_MaxHealth"))
+                {
+                    _maxHealth = PlayerPrefs.GetFloat("Archer_MaxHealth");
+                }
+                break;
+            case PlayerType.Mage:
+                if (PlayerPrefs.HasKey("Mage_MaxHealth"))
+                {
+                    _maxHealth = PlayerPrefs.GetFloat("Mage_MaxHealth");
+                }
+                break;
+        }
+
+        _health = _maxHealth;
     }
 
     protected virtual void Update()
