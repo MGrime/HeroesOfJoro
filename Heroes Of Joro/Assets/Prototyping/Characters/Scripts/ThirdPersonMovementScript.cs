@@ -65,6 +65,7 @@ public class ThirdPersonMovementScript : MonoBehaviour
         // If the direction is not null we are moving
         if (direction.magnitude >= 0.1f)
         {
+            _playerAnimator.SetBool("isIdle", false);
             if (!_footstepSound.isPlaying)
             {
                 _footstepSound.Play();
@@ -117,6 +118,8 @@ public class ThirdPersonMovementScript : MonoBehaviour
         {
             moveDirection.x = 0.0f;
             moveDirection.z = 0.0f;
+            _playerAnimator.SetBool("isIdle", true);
+
             if (_footstepSound.isPlaying)
                 _footstepSound.Stop();
         }
@@ -167,9 +170,13 @@ public class ThirdPersonMovementScript : MonoBehaviour
          * Maybe allow Sap to be used only while the player is not moving 
          * To compensate we could increase Sap's damage
         **/
-        if (Input.GetMouseButtonDown(1) && !_playerAnimator.GetBool("isRunning"))
+        if (Input.GetMouseButtonDown(1) && _playerAnimator.GetBool("isIdle"))
         {
             _playerAnimator.SetBool("isSpecialAttack", true);
+        }
+
+        if (Input.GetMouseButtonDown(1) && !_playerAnimator.GetBool("isRunning"))
+        {
             _playerAnimator.SetBool("isBlocking", true);
 
         }
@@ -178,6 +185,11 @@ public class ThirdPersonMovementScript : MonoBehaviour
             _playerAnimator.SetBool("isSpecialAttack", false);
             _playerAnimator.SetBool("isBlocking", false);
 
+        }
+        if (_playerAnimator.GetBool("isRunning"))
+        {
+            _playerAnimator.SetBool("isSpecialAttack", false);
+            _playerAnimator.SetBool("isBlocking", false);
         }
     }
     void OnClick()
