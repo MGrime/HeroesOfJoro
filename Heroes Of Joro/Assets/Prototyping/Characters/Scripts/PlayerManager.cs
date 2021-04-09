@@ -81,8 +81,8 @@ public class PlayerManager : MonoBehaviour
 
             // Update this pos to be same as character
             gameObject.transform.position = ActivePlayer.transform.position;
-            AimTowardMouse();
         }
+            AimTowardMouse();
     }
 
     public void SetCameraRotation(bool state)
@@ -177,7 +177,7 @@ public class PlayerManager : MonoBehaviour
         if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, _aimLayerMask))
         {
             var _direction = hitInfo.point - ActivePlayer.transform.position;
-            _direction.y = 0.0f;
+            //_direction.y = 0.0f;
             _direction.Normalize();
             ActivePlayer.transform.forward = _direction;
         }

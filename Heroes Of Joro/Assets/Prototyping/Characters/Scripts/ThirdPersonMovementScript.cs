@@ -31,8 +31,9 @@ public class ThirdPersonMovementScript : MonoBehaviour
     public static int numOfClicks = 0;
     //Time the button was last clicked
     float lastClick = 0.0f;
+    float lastAttack = 0.0f;
     //Delay between each click
-    float combatDelay = 5.0f;
+    float combatDelay = 1.0f;
 
     #endregion
 
@@ -132,7 +133,9 @@ public class ThirdPersonMovementScript : MonoBehaviour
         _playerAnimator.SetFloat("VelocityZ", velocityZ, 0.2f, Time.deltaTime);
         _playerAnimator.SetFloat("VelocityX", velocityX, 0.2f, Time.deltaTime);
         //Attacking
-        lastClick -= Time.deltaTime;
+        lastClick -=Time.deltaTime;
+        lastAttack += Time.deltaTime;
+        if (numOfClicks < 0) SetNumOfClicks();
         if (Input.GetMouseButtonDown(0))
         {
             _playerAnimator.SetBool("isAttacking", true);
@@ -145,17 +148,26 @@ public class ThirdPersonMovementScript : MonoBehaviour
         {
             _playerAnimator.SetBool("isAttacking", false);
             // _playerAnimator.SetBool("isRunningArcher", true);
+            lastAttack = 0.0f;
+        }
+        else if (lastClick <= 0.0f) ResetNumOfClicks();
+        else if (lastAttack > 0.2f)
+        {
+            _playerAnimator.SetBool("Attack1", false);
+            _playerAnimator.SetBool("Attack2", false);
+            _playerAnimator.SetBool("Attack3", false);
+            ResetNumOfClicks();
+            _playerAnimator.SetInteger("numberOfClicks", numOfClicks);
 
 
         }
-        else if (lastClick <= 0.0f) ResetNumOfClicks();
         /**Special animation for the Mage Sap attack:
          * Conditions to make it work:
          * Get a message to know which attack the mage is using
          * Maybe allow Sap to be used only while the player is not moving 
          * To compensate we could increase Sap's damage
         **/
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && !_playerAnimator.GetBool("isRunning"))
         {
             _playerAnimator.SetBool("isSpecialAttack", true);
             _playerAnimator.SetBool("isBlocking", true);
@@ -184,7 +196,14 @@ public class ThirdPersonMovementScript : MonoBehaviour
 
     public int GetNumOfClicks()
     { return numOfClicks; }
+    public void SetNumOfClicks()
+    {
+
+        _playerAnimator.SetInteger("numberOfClicks", numOfClicks);
+    }
     public static void ResetNumOfClicks() 
-    { numOfClicks = 0; }
+    { 
+        numOfClicks = 0;
+    }
     #endregion
 }
