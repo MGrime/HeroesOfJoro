@@ -38,9 +38,15 @@ public class Warrior : PlayerBase
 
         // Check inputs
         // Left click
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetMouseButtonDown(0))
         {
             SwingSword();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            _sword._swinging = false;
+
         }
 
     }

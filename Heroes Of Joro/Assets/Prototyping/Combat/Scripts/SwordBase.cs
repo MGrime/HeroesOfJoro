@@ -22,6 +22,7 @@ public class SwordBase : MonoBehaviour
     private bool _directionNegative;
     private float _previousAngle = 0.0f;    // Store previous angle to find flip
     private bool _flipped;
+    private float _attackTimer = 0.0f;
 
     #endregion
 
@@ -37,7 +38,7 @@ public class SwordBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_swinging)
+        /*if (_swinging)
         {
             float rotateAmount = _swingSpeed * Time.deltaTime;
             if (_directionNegative) // 45 - > -45
@@ -79,7 +80,8 @@ public class SwordBase : MonoBehaviour
                 _directionNegative = !_directionNegative;
                 _flipped = false;
             }
-        }
+        }*/
+
     }
 
     // Message functions
@@ -87,7 +89,7 @@ public class SwordBase : MonoBehaviour
     {
         if (_swinging)
         {
-            if (other.tag != "Player" && other.tag != "Spell")
+            if (other.CompareTag("Enemy") || other.CompareTag("Projectile"))
             {
                 if (other.name == "EnemyControls")
                 {
@@ -99,9 +101,17 @@ public class SwordBase : MonoBehaviour
                     other.gameObject.SendMessage("ReduceProjectileHealth", _attackDamage);
                 }
             }
-        }
+            
+        }  
+        
         
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _swinging = false;
+    }
+
 
     #endregion
 

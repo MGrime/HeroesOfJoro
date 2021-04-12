@@ -59,7 +59,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _target = PlayerManager._instance.ActivePlayer.transform; //Needs a FIX: Player position passed looks like few frames behind
+        _target = PlayerManager._instance.ActivePlayer.transform; 
         distanceToPlayer = Vector3.Distance(_target.position, transform.position);
         distanceToStart = Vector3.Distance(_startingPosition, transform.position);
         distanceToPoint = Vector3.Distance(_patrolPoint.transform.position, transform.position);
@@ -70,24 +70,33 @@ public class EnemyController : MonoBehaviour
         {
             _lookAround = false;
             _playerChased = true;
-            _enemyAnimator.SetBool("isWalking", true);
             //Start following the player
+            StartRunning();
             _agent.SetDestination(_target.position);
-            if (distanceToPlayer <= 5.0f)
+            if (distanceToPlayer <= _agent.stoppingDistance)
             {
+                 StopRunning();
+                 _enemyAnimator.SetBool("isAttacking", true);
+                //Need to create enemy type tags
                 if (_attackTime <= 0.0f)
-                {  
-                    Instantiate(_enemyProjectile, transform.position + new Vector3(0,2.0f,0), Quaternion.identity);
+                {
+                    //Instantiate(_enemyProjectile, transform.position + new Vector3(0,2.0f,0), Quaternion.identity);
                     _attackTime = _setAttackTime;
                 }
 
-                //Face the target
-                FaceTarget();
             }
+            else 
+            {
+                _enemyAnimator.SetBool("isAttacking", false);
+                StartRunning();
+            }
+             //Face the target
+             FaceTarget();
         }
         else //Patrol
         {
             Patrol();
+            StopRunning();
 
         }
     }
@@ -102,6 +111,7 @@ public class EnemyController : MonoBehaviour
         {
             if (_lastPPoint == null) _lastPPoint = _patrolPoint.transform.position;
             _agent.SetDestination(_lastPPoint);
+            _enemyAnimator.SetBool("isWalking", true);
             _playerChased = false;
         }
         else
@@ -140,13 +150,36 @@ public class EnemyController : MonoBehaviour
         return false;
 
     }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            int _enemyDamage = 5;
+            //_target.gameObject.SendMessage("ReceiveDamage", _enemyDamage);
+            Debug.Log("Player is hit!");
+        }
+    }
+
     void FaceTarget()
     {
         Vector3 direction = (_target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x,0,direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation,lookRotation,Time.deltaTime*_smoothRotation);
     }
+    void StartRunning()
+    {
+        _enemyAnimator.SetBool("isRunning", true);
+        _enemyAnimator.SetBool("isWalking", false);
+        _agent.speed = 5.0f;
+    }
 
+    void StopRunning()
+    {
+        _enemyAnimator.SetBool("isRunning", false);
+        _agent.speed = 2.0f;
+    }
+    
+    
     public void SetDamage(int damage)
     {
         _playerDamage = damage;
