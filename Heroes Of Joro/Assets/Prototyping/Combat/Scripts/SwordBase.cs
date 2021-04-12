@@ -107,12 +107,6 @@ public class SwordBase : MonoBehaviour
         
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        _swinging = false;
-    }
-
-
     #endregion
 
 }

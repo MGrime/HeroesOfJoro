@@ -13,6 +13,8 @@ public class Warrior : PlayerBase
     // Contains the sword object
     [SerializeField] private SwordBase _sword;
 
+    private float _swingTimer;
+
     #endregion
 
     #region Functions
@@ -22,6 +24,8 @@ public class Warrior : PlayerBase
         Type = PlayerType.Warrior;
 
         base.Start();
+
+        _swingTimer = 0.0f;
 
     }
 
@@ -43,10 +47,17 @@ public class Warrior : PlayerBase
             SwingSword();
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0))
+        if (_sword._swinging)
         {
-            _sword._swinging = false;
+            _swingTimer += Time.deltaTime;
 
+            if (_swingTimer >= 1.0f)
+            {
+                _swingTimer = 0.0f;
+                _sword._swinging = false;
+
+                Debug.Log("Sword not swinging!");
+            }
         }
 
     }
@@ -57,6 +68,8 @@ public class Warrior : PlayerBase
         {
             // This will trigger it in the sword function
             _sword._swinging = true;
+
+            Debug.Log("Sword swinging!");
         }
     }
 
