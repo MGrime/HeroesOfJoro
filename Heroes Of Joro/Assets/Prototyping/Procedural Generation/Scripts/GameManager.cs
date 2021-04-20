@@ -25,14 +25,15 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Functions
-    /*private void OnMouseEnter()
+    private void OnMouseEnter()
     {
         Cursor.SetCursor(_cursorTexture, _hotSpot, _cursorMode);
     }
+    
     private void OnMouseExit()
     {
         Cursor.SetCursor(null, Vector2.zero, _cursorMode);
-    }*/
+    }
     private void Start()
     {
         // Load prefs
@@ -49,7 +50,7 @@ public class GameManager : MonoBehaviour
         _cursorMode = CursorMode.ForceSoftware;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-
+       
         // Enable the correct dungeon
         if (_dungeons.Length != 0)
         {

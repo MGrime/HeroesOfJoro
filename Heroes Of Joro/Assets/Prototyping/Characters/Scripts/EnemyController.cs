@@ -14,9 +14,15 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float _setAttackTime = 2.0f;
     [SerializeField] private Animator _enemyAnimator;
     [SerializeField] private PickupBase _dropPickup;
-
+    [SerializeField] private EnemyType _enemyType;
     #endregion
     #region Private Data
+    private enum EnemyType
+    {
+        MutantOne = 0,
+        MutantTwo = 1,
+    }
+    
     private Transform _target;
     private float _attackTime;
     private float _lookTime;
@@ -70,33 +76,46 @@ public class EnemyController : MonoBehaviour
         {
             _lookAround = false;
             _playerChased = true;
-            //Start following the player
-            StartRunning();
             _agent.SetDestination(_target.position);
-            if (distanceToPlayer <= _agent.stoppingDistance)
-            {
-                 StopRunning();
-                 _enemyAnimator.SetBool("isAttacking", true);
-                //Need to create enemy type tags
-                if (_attackTime <= 0.0f)
-                {
-                    //Instantiate(_enemyProjectile, transform.position + new Vector3(0,2.0f,0), Quaternion.identity);
-                    _attackTime = _setAttackTime;
-                }
-
-            }
-            else 
-            {
-                _enemyAnimator.SetBool("isAttacking", false);
-                StartRunning();
-            }
              //Face the target
              FaceTarget();
+            //Start following the player
+            if (_enemyType == EnemyType.MutantOne)
+            {
+                if (distanceToPlayer <= _agent.stoppingDistance)
+                {
+                  
+                    //Need to create enemy type tags
+                    if (_attackTime <= 0.0f)
+                    {
+                        Instantiate(_enemyProjectile, transform.position + new Vector3(0,2.0f,0), Quaternion.identity);
+                        _attackTime = _setAttackTime;
+                    }
+
+                }
+            }
+            else if (_enemyType == EnemyType.MutantTwo)
+            {
+                StartRunning();
+                if (distanceToPlayer <= _agent.stoppingDistance)
+                {
+                    StopRunning();
+                    _enemyAnimator.SetBool("isAttacking", true);
+                   
+
+                }
+                else
+                {
+                    _enemyAnimator.SetBool("isAttacking", false);
+                    StartRunning();
+                }
+            }
+            
+            
         }
         else //Patrol
         {
             Patrol();
-            StopRunning();
 
         }
     }
@@ -107,6 +126,7 @@ public class EnemyController : MonoBehaviour
     #region Enemy Behaviour Functions
     void Patrol()
     {
+        if (_enemyType == EnemyType.MutantTwo) StopRunning();
         if (_playerChased)
         {
             if (_lastPPoint == null) _lastPPoint = _patrolPoint.transform.position;

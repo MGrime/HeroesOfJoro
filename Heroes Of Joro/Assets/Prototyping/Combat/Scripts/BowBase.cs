@@ -47,12 +47,13 @@ public class BowBase : MonoBehaviour
         Debug.Log("Charged");
 
         float percentage = _holdTime / heldTime;
-
+        Transform ArrowPos =
+            transform.Find("Hips").transform.Find("Spine").transform.Find("Spine1").transform.Find("Spine2").transform.Find("LeftShoulder").transform.Find("LeftArm").transform.Find("ArrowStartPos");
         // Create arrow
-        Arrow newArrow = Instantiate(_arrow, gameObject.transform.position, gameObject.transform.rotation).GetComponent<Arrow>();
+        Arrow newArrow = Instantiate(_arrow, ArrowPos.position, gameObject.transform.rotation).GetComponent<Arrow>();
 
         newArrow.Fire(_chargedBaseDamage * percentage);
     }
-
+   
     #endregion
 }

@@ -20,7 +20,7 @@ public class ManaPotion : PickupBase
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.name == "PlayerMage")
         {
             // Send message
             other.gameObject.SendMessage("PickupMana");

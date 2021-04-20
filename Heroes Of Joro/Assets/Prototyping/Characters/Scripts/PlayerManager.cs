@@ -177,7 +177,7 @@ public class PlayerManager : MonoBehaviour
         if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, _aimLayerMask))
         {
             var _direction = hitInfo.point - ActivePlayer.transform.position;
-            //_direction.y = 0.0f;
+            _direction.y = 0.0f;
             _direction.Normalize();
             ActivePlayer.transform.forward = _direction;
         }

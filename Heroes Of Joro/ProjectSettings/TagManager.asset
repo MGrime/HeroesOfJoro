@@ -9,6 +9,7 @@ TagManager:
   - Spell
   - Enemy
   - Projectile
+  - Arrow
   layers:
   - Default
   - TransparentFX

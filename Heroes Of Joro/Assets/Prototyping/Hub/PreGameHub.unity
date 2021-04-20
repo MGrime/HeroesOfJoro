@@ -629,7 +629,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_CommonLens: 1
   m_Lens:
-    FieldOfView: 79.611145
+    FieldOfView: 33.0859
     OrthographicSize: 10
     NearClipPlane: 0.01
     FarClipPlane: 5000
@@ -695,10 +695,10 @@ MonoBehaviour:
   m_BindingMode: 4
   m_SplineCurvature: 0.2
   m_Orbits:
-  - m_Height: 13.97
+  - m_Height: 14
     m_Radius: 12.08
-  - m_Height: 6.5
-    m_Radius: 8
+  - m_Height: 37.81
+    m_Radius: 18.7
   - m_Height: -1.5
     m_Radius: 12
   m_LegacyHeadingBias: 3.4028235e+38
@@ -742,12 +742,12 @@ MonoBehaviour:
   m_TransparentLayers:
     serializedVersion: 2
     m_Bits: 512
-  m_MinimumDistanceFromTarget: 2
+  m_MinimumDistanceFromTarget: 0.5
   m_AvoidObstacles: 1
   m_DistanceLimit: 0
   m_MinimumOcclusionTime: 0
   m_CameraRadius: 0.1
-  m_Strategy: 0
+  m_Strategy: 2
   m_MaximumEffort: 4
   m_SmoothingTime: 0.2
   m_Damping: 1
@@ -1855,7 +1855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 6.5, z: -8}
+  m_FollowOffset: {x: 0, y: 37.81, z: -18.7}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -2166,7 +2166,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 79.611145
+    FieldOfView: 33.0859
     OrthographicSize: 10
     NearClipPlane: 0.01
     FarClipPlane: 5000
@@ -3204,7 +3204,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 30, y: 20}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 12
+  m_FocalLength: 33.666737
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -3213,7 +3213,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 5000
-  field of view: 79.611145
+  field of view: 33.0859
   orthographic: 0
   orthographic size: 3.4289074
   m_Depth: 0
@@ -3393,6 +3393,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 416282388}
     m_Modifications:
+    - target: {fileID: 752959662832734233, guid: 5f40f0299cff7864887ba1cdd00bdc90,
+        type: 3}
+      propertyPath: m_TagString
+      value: Arrow
+      objectReference: {fileID: 0}
     - target: {fileID: 794518874886942356, guid: 5f40f0299cff7864887ba1cdd00bdc90,
         type: 3}
       propertyPath: _healthBar
@@ -4002,7 +4007,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 79.611145
+    FieldOfView: 33.0859
     OrthographicSize: 10
     NearClipPlane: 0.01
     FarClipPlane: 5000
@@ -4536,7 +4541,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 79.611145
+    FieldOfView: 33.0859
     OrthographicSize: 10
     NearClipPlane: 0.01
     FarClipPlane: 5000
@@ -5342,7 +5347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 6.5, z: -8}
+  m_FollowOffset: {x: 0, y: 37.81, z: -18.7}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -5563,7 +5568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 6.5, z: -8}
+  m_FollowOffset: {x: 0, y: 37.81, z: -18.7}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1

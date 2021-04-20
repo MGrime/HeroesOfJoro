@@ -67,7 +67,7 @@ public class ArcherBetter : PlayerBase
                     }
 
                     // Fire
-                    _bow.ChargedFire(m_TimeHeld);
+                    //_bow.ChargedFire(m_TimeHeld);
 
                 }
                 // Reset

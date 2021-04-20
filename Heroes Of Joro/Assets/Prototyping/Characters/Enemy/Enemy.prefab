@@ -285,6 +285,7 @@ MonoBehaviour:
   _enemyAnimator: {fileID: 1735266451}
   _dropPickup: {fileID: 8062157936487841846, guid: 64f11f7796616d14c9f0eca3b3dcceba,
     type: 3}
+  _enemyType: 0
   distanceToPlayer: 0
   distanceToStart: 0
   distanceToPoint: 0

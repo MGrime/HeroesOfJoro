@@ -9,7 +9,7 @@ public class ThirdPersonMovementScript : MonoBehaviour
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private Transform _playerCamera;
     [SerializeField] private const float _Speed = 5.0f;
-    [SerializeField] private const float _runSpeed = 15.0f;
+    [SerializeField] private const float _runSpeed = 12.0f;
     [SerializeField] private float _moveSpeed = 10.0f;
     [SerializeField] private float _turnSmoothTime = 0.1f;
     [SerializeField] private float _gravity = 5.0f;
@@ -94,7 +94,10 @@ public class ThirdPersonMovementScript : MonoBehaviour
             //Transition to run animation
             if (Input.GetKey(KeyCode.LeftShift) && !_playerAnimator.GetBool("isDrawn"))
             {
-                _moveSpeed = _runSpeed;
+                if (_moveSpeed < _runSpeed)
+                { 
+                    _moveSpeed +=10.0f*Time.deltaTime;
+                }
                 _playerAnimator.SetBool("isRunning",true);
                 _playerAnimator.SetBool("isRunningArcher", true);
 
