@@ -9,6 +9,7 @@ public class Archer : PlayerBase
     // Contains the bow object
     [SerializeField] private BowBase _bow;
 
+
     [SerializeField] private Animator _animator;
 
     #endregion

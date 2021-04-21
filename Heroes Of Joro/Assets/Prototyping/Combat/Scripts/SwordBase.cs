@@ -10,6 +10,13 @@ public class SwordBase : MonoBehaviour
     public bool _swinging;
 
     [SerializeField] private float _attackDamage;
+
+    public float Damage
+    {
+        get => _attackDamage;
+        set => _attackDamage = value;
+    }
+
     [SerializeField] private float _swingSpeed; // Degrees per frame
 
     #endregion

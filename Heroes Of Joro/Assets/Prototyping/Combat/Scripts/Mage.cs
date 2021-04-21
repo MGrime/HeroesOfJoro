@@ -20,6 +20,12 @@ public class Mage : PlayerBase
 
     [SerializeField] private float _maxMana = 100.0f;
 
+    public float MaxMana
+    {
+        get => _maxMana;
+        set => _maxMana = value;
+    }
+
     // UI
 
     [SerializeField] private Slider _manaBar;

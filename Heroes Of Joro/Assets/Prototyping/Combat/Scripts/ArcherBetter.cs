@@ -12,6 +12,12 @@ public class ArcherBetter : PlayerBase
     // Animator to control draw animations manually
     [SerializeField] private Animator _animator;
 
+    public float BowSpeed
+    {
+        get => _bow.HoldTime;
+        set => _bow.HoldTime = value;
+    }
+
     #endregion
 
     #region Private Data

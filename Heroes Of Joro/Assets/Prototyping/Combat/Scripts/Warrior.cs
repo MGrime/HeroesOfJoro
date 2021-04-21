@@ -13,6 +13,12 @@ public class Warrior : PlayerBase
     // Contains the sword object
     [SerializeField] private SwordBase _sword;
 
+    public float SwordDamage
+    {
+        get => _sword.Damage;
+        set => _sword.Damage = value;
+    }
+
     private float _swingTimer;
 
     #endregion

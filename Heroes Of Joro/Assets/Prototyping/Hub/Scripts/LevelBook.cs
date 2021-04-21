@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,15 +15,32 @@ public class LevelBook : MonoBehaviour
 
     private Text _healthText;
 
+    private Text _specialText;
 
     private PlayerManager _playerManager;
     private int _levelingPlayerIndex;   // The player we are editing
 
     private bool _isActive = false;
 
+    // Store count of how many upgrades have been applied to each player
+
+
     #region Level scaling config
 
+    // Can upgrade infinitely
     [SerializeField] private int _healthUpgradeCost = 5;
+
+    // Base costs
+    [SerializeField] private int _mageManaUpgradeCost = 10;
+    [SerializeField] private int _warriorDamageUpgradeCost = 7;
+    [SerializeField] private int _archerChargeSpeedUpgradeCost = 15;
+
+    // Get more expensive over time
+    [SerializeField] private float _scalingCostIncrease = 1.5f;
+
+    private int _mageManaUpgradeCount = 0;
+    private int _warriorDamageUpgradeCount = 0;
+    private int _archerChargeSpeedUpgradeCount = 0;
 
     #endregion
 
@@ -64,7 +82,17 @@ public class LevelBook : MonoBehaviour
             {
                 _healthText = text;
             }
+            else if (text.name == "Special Upgrade Text")
+            {
+                _specialText = text;
+            }
         }
+
+
+        // Read in pref values
+        _mageManaUpgradeCount = PlayerPrefs.GetInt("Mage_SpecialUpgradeCount", 0);
+        _archerChargeSpeedUpgradeCount = PlayerPrefs.GetInt("Archer_SpecialUpgradeCount", 0);
+        _warriorDamageUpgradeCount = PlayerPrefs.GetInt("Warrior_SpecialUpgradeCount", 0);
 
         UpdateStatsText();
     }
@@ -158,25 +186,102 @@ public class LevelBook : MonoBehaviour
         UpdateStatsText();
     }
 
+    public void IncreaseSpecial()
+    {
+        ref var player = ref _playerManager.PlayerTrackers[_levelingPlayerIndex];
+
+        switch (player.Type)
+        {
+            case PlayerBase.PlayerType.Mage:
+                if (_coins - Convert.ToInt32(_mageManaUpgradeCost * _scalingCostIncrease) < 0)
+                {
+                    if (_errorSound)
+                    {
+                        _errorSound.Play();
+                    }
+                }
+                else
+                {
+                    _mageManaUpgradeCount++;
+                    _coins -= Convert.ToInt32(_mageManaUpgradeCost * _scalingCostIncrease);
+                }
+                break;
+            case PlayerBase.PlayerType.Warrior:
+                if (_coins - Convert.ToInt32(_warriorDamageUpgradeCost * _scalingCostIncrease) < 0)
+                {
+                    if (_errorSound)
+                    {
+                        _errorSound.Play();
+                    }
+                }
+                else
+                {
+                    _warriorDamageUpgradeCount++;
+                    _coins -= Convert.ToInt32(_warriorDamageUpgradeCost * _scalingCostIncrease);
+                }
+                break;
+            case PlayerBase.PlayerType.Archer:
+                if (_coins - Convert.ToInt32(_archerChargeSpeedUpgradeCost * _scalingCostIncrease) < 0)
+                {
+                    if (_errorSound)
+                    {
+                        _errorSound.Play();
+                    }
+                }
+                else
+                {
+                    _archerChargeSpeedUpgradeCount++;
+                    _coins -= Convert.ToInt32(_archerChargeSpeedUpgradeCost * _scalingCostIncrease);
+                }
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
     #endregion
 
     #region UI Helpers
 
     public void UpdateStatsText()
     {
+        ref var player = ref _playerManager.PlayerTrackers[_levelingPlayerIndex];
+
         if (_playerTypeText)
         {
-            _playerTypeText.text = _playerManager.PlayerTrackers[_levelingPlayerIndex].Type.ToString();
+            _playerTypeText.text = player.Type.ToString();
         }
 
         if (_healthText)
         {
-            _healthText.text = "Health:     " + _playerManager.PlayerTrackers[_levelingPlayerIndex].MaxHealth;
+            _healthText.text = "Health:     " + player.MaxHealth;
         }
 
         if (_coinText)
         {
             _coinText.text = _coins.ToString();
+        }
+
+        if (_specialText)
+        {
+            switch (player.Type)
+            {
+                case PlayerBase.PlayerType.Mage:
+                    var mana = Convert.ToInt32(((Mage) player).MaxMana + 20 * _mageManaUpgradeCount);
+                    _specialText.text = "Mana:    " + mana.ToString();
+                    break;
+                case PlayerBase.PlayerType.Warrior:
+                    var damage = Convert.ToInt32(((Warrior) player).SwordDamage + 5 * _warriorDamageUpgradeCount);
+                    _specialText.text = "Damage:    " + damage.ToString();
+                    break;
+                case PlayerBase.PlayerType.Archer:
+                    var speed = Convert.ToInt32(
+                        ((ArcherBetter) player).BowSpeed - 0.15f * _archerChargeSpeedUpgradeCount);
+                    _specialText.text = "Bow Speed (Time):    " + speed.ToString();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 
@@ -191,16 +296,19 @@ public class LevelBook : MonoBehaviour
             if (player.Type == PlayerBase.PlayerType.Warrior)
             {
                 PlayerPrefs.SetFloat("Warrior_MaxHealth", player.MaxHealth);
+                PlayerPrefs.SetInt("Warrior_SpecialUpgradeCount",_warriorDamageUpgradeCount);
             }
             // Read and save archer stats
             if (player.Type == PlayerBase.PlayerType.Archer)
             {
                 PlayerPrefs.SetFloat("Archer_MaxHealth", player.MaxHealth);
+                PlayerPrefs.SetInt("Archer_SpecialUpgradeCount", _archerChargeSpeedUpgradeCount);
             }
             // Read and save mage stats
             if (player.Type == PlayerBase.PlayerType.Mage)
             {
                 PlayerPrefs.SetFloat("Mage_MaxHealth", player.MaxHealth);
+                PlayerPrefs.SetInt("Mage_SpecialUpgradeCount", _mageManaUpgradeCount);
             }
         }
 
