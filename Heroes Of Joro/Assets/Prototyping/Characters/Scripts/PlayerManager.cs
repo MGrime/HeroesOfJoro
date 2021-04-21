@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -157,8 +158,12 @@ public class PlayerManager : MonoBehaviour
         // If no players alive
         if (!foundPlayer)
         {
-            // End game
-            Debug.Log("haha game done brr");
+            // We lost so set in player pref
+            PlayerPrefs.SetInt("ReturnReason",(int)GameManager.DungeonEndReason.Lost);
+            PlayerPrefs.Save();
+
+            // Return to hub
+            SceneManager.LoadScene("PreGameHub");
         }
     }
 

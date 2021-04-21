@@ -22,6 +22,12 @@ public class GameManager : MonoBehaviour
     public CursorMode _cursorMode;
     public Vector2 _hotSpot = Vector2.zero;
 
+    public enum DungeonEndReason
+    {
+        Lost = 0,
+        Won = 1
+    };
+
     #endregion
 
     #region Functions

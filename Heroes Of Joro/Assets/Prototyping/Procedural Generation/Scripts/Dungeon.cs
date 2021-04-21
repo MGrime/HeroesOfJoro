@@ -369,6 +369,10 @@ public class Dungeon : MonoBehaviour
 
             _gameManager.StopMusic();
 
+            // We won so set in player pref
+            PlayerPrefs.SetInt("ReturnReason", (int)GameManager.DungeonEndReason.Won);
+            PlayerPrefs.Save();
+
             // Switch back to hub
             SceneManager.LoadScene("PreGameHub");
         }

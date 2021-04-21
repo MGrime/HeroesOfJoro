@@ -74,6 +74,10 @@ public class UIController : MonoBehaviour
 
     public void LoadGame()
     {
+        // Set return reason to -1 to signify in hub we have just started session
+        PlayerPrefs.SetInt("ReturnReason",-1);
+        PlayerPrefs.Save();
+
         SceneManager.LoadScene(_mainGameScene);
     }
 
