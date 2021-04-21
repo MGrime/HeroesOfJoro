@@ -26,11 +26,18 @@ public class BowBase : MonoBehaviour
         set => _holdTime = value;
     }
 
+    private Transform ArrowPos;
 
     #endregion
 
 
     #region Functions
+
+    public void Start()
+    {
+        ArrowPos =
+            transform.Find("Hips").transform.Find("Spine").transform.Find("Spine1").transform.Find("Spine2").transform.Find("LeftShoulder").transform.Find("LeftArm").transform.Find("ArrowStartPos");
+    }
     public void FastFire()
     {
         Debug.Log("Fast");
@@ -47,8 +54,6 @@ public class BowBase : MonoBehaviour
         Debug.Log("Charged");
 
         float percentage = _holdTime / heldTime;
-        Transform ArrowPos =
-            transform.Find("Hips").transform.Find("Spine").transform.Find("Spine1").transform.Find("Spine2").transform.Find("LeftShoulder").transform.Find("LeftArm").transform.Find("ArrowStartPos");
         // Create arrow
         Arrow newArrow = Instantiate(_arrow, ArrowPos.position, gameObject.transform.rotation).GetComponent<Arrow>();
 
