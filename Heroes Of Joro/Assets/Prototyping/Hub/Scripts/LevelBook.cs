@@ -268,16 +268,16 @@ public class LevelBook : MonoBehaviour
             {
                 case PlayerBase.PlayerType.Mage:
                     var mana = Convert.ToInt32(((Mage) player).MaxMana + 20 * _mageManaUpgradeCount);
-                    _specialText.text = "Mana:    " + mana.ToString();
+                    _specialText.text = "Mana: " + mana.ToString();
                     break;
                 case PlayerBase.PlayerType.Warrior:
                     var damage = Convert.ToInt32(((Warrior) player).SwordDamage + 5 * _warriorDamageUpgradeCount);
-                    _specialText.text = "Damage:    " + damage.ToString();
+                    _specialText.text = "Damage: " + damage.ToString();
                     break;
                 case PlayerBase.PlayerType.Archer:
                     var speed = Convert.ToInt32(
                         ((ArcherBetter) player).BowSpeed - 0.15f * _archerChargeSpeedUpgradeCount);
-                    _specialText.text = "Bow Speed (Time):    " + speed.ToString();
+                    _specialText.text = "Bow Speed (Secs): " + speed.ToString();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
