@@ -51,6 +51,18 @@ public class PlayerManager : MonoBehaviour
 
         CameraFreeLook.Follow = ActivePlayer.GetComponentInChildren<Animator>().transform;
         CameraFreeLook.LookAt = ActivePlayer.GetComponentInChildren<Animator>().transform;
+
+        // Correct volumes
+        foreach (var player in PlayerTrackers)
+        {
+            var thirdPersonComp = player.GetComponent<ThirdPersonMovementScript>();
+
+            if (thirdPersonComp)
+            {
+                thirdPersonComp.FootstepSound.volume = PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f);
+            }
+
+        }
    
     }
 

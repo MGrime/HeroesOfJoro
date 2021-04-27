@@ -44,18 +44,11 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         // Load prefs
-        if (PlayerPrefs.HasKey("MusicVolume"))
-        {
-            _musicVolume = PlayerPrefs.GetFloat("MusicVolume");
-            _musicSlider.value = _musicVolume;
-        }
+        _musicVolume = PlayerPrefs.GetFloat("MusicVolume",1.0f);
+        _musicSlider.value = _musicVolume;
 
-        if (PlayerPrefs.HasKey("SoundEffectVolume"))
-        {
-            _soundEffectVolume = PlayerPrefs.GetFloat("SoundEffectVolume");
-            _effectsSlider.value = _soundEffectVolume;
-        }
-
+        _soundEffectVolume = PlayerPrefs.GetFloat("SoundEffectVolume",1.0f); 
+        _effectsSlider.value = _soundEffectVolume;
 
         _titleMusic.volume = _musicVolume;
         _click.volume = _soundEffectVolume;

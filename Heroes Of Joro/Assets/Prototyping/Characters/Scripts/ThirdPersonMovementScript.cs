@@ -15,7 +15,13 @@ public class ThirdPersonMovementScript : MonoBehaviour
     [SerializeField] private float _gravity = 5.0f;
     [SerializeField] private float _vSpeed = 0.0f;
     [SerializeField] private bool _isTouching = false;
+
     [SerializeField] private AudioSource _footstepSound;
+    public AudioSource FootstepSound
+    {
+        get => _footstepSound;
+        set => _footstepSound = value;
+    }
 
     [SerializeField] private Animator _playerAnimator;
    
