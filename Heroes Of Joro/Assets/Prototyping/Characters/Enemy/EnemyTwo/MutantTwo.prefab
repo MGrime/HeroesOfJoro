@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1bd90f48ba467f428d51c8dfb069a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lookRadius: 10
+  _lookRadius: 5.5
   _smoothRotation: 5
   _patrolPoint: {fileID: 1652201750072655411}
   _enemyProjectile: {fileID: 5463877361342519328, guid: c317539141516664fbe11fffa2cc4a53,

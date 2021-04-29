@@ -2263,7 +2263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _arrow: {fileID: 1667470530390146973, guid: 208c6de2b06e9ef46819ed2d7f69d3d6, type: 3}
   _fastDamage: 5
-  _chargedBaseDamage: 60
+  _chargedBaseDamage: 80
   _holdTime: 2
 --- !u!1 &6249906949941210164
 GameObject:
