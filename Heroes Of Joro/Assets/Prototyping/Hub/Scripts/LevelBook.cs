@@ -7,6 +7,13 @@ using UnityEngine.UI;
 public class LevelBook : MonoBehaviour
 {
     [SerializeField] private GameObject _overlayCanvas;
+
+    // Images to load on switch
+    [SerializeField] private Sprite _warriorSpecialImage;
+    [SerializeField] private Sprite _mageSpecialImage;
+    [SerializeField] private Sprite _archerSpecialImage;
+
+
     // Extracted from overlay canvas as this is a specific one scene setup
     private Text _playerTypeText;
 
@@ -16,6 +23,8 @@ public class LevelBook : MonoBehaviour
     private Text _healthText;
 
     private Text _specialText;
+
+    private Image _specialImage;
 
     private PlayerManager _playerManager;
     private int _levelingPlayerIndex;   // The player we are editing
@@ -85,6 +94,14 @@ public class LevelBook : MonoBehaviour
             else if (text.name == "Special Upgrade Text")
             {
                 _specialText = text;
+            }
+        }
+
+        foreach (var image in _overlayCanvas.GetComponentsInChildren<Image>())
+        {
+            if (image.name == "Special Upgrade Image")
+            {
+                _specialImage = image;
             }
         }
 
@@ -259,7 +276,7 @@ public class LevelBook : MonoBehaviour
 
         if (_coinText)
         {
-            _coinText.text = _coins.ToString();
+            _coinText.text = "Coins remaining: " + _coins.ToString();
         }
 
         if (_specialText)
@@ -278,6 +295,24 @@ public class LevelBook : MonoBehaviour
                     var speed = Convert.ToInt32(
                         ((ArcherBetter) player).BowSpeed - 0.15f * _archerChargeSpeedUpgradeCount);
                     _specialText.text = "Bow Speed (Secs): " + speed.ToString();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        if (_specialImage)
+        {
+            switch (player.Type)
+            {
+                case PlayerBase.PlayerType.Mage:
+                    _specialImage.sprite = _mageSpecialImage;
+                    break;
+                case PlayerBase.PlayerType.Warrior:
+                    _specialImage.sprite = _warriorSpecialImage;
+                    break;
+                case PlayerBase.PlayerType.Archer:
+                    _specialImage.sprite = _archerSpecialImage;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
