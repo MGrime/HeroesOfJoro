@@ -32,6 +32,11 @@ public class ArcherBetter : PlayerBase
 
     #endregion
 
+    protected void Awake()
+    {
+        Start();
+    }
+
     // Start is called before the first frame update
     protected override void Start()
     {

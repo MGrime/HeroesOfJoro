@@ -20,8 +20,6 @@ public class PlayerManager : MonoBehaviour
 
     public Camera MinimapCamera;
 
-    private bool CameraIsActive = true;
-
     #region Private Data
 
     private GameObject _manaBar;  // Find it with find
@@ -68,39 +66,35 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        if (CameraIsActive)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (ActivePlayer != PlayerTrackers[0] && PlayerTrackers[0].Health > 0)
             {
-                if (ActivePlayer != PlayerTrackers[0] && PlayerTrackers[0].Health > 0)
-                {
-                    SwitchCharacter(ref PlayerTrackers[0]);
-                }
+                SwitchCharacter(ref PlayerTrackers[0]);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                if (ActivePlayer != PlayerTrackers[1] && PlayerTrackers[1].Health > 0)
-                {
-                    SwitchCharacter(ref PlayerTrackers[1]);
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                if (ActivePlayer != PlayerTrackers[2] && PlayerTrackers[2].Health > 0)
-                {
-                    SwitchCharacter(ref PlayerTrackers[2]);
-                }
-            }
-
-            // Update this pos to be same as character
-            gameObject.transform.position = ActivePlayer.transform.position;
         }
-            AimTowardMouse();
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (ActivePlayer != PlayerTrackers[1] && PlayerTrackers[1].Health > 0)
+            {
+                SwitchCharacter(ref PlayerTrackers[1]);
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (ActivePlayer != PlayerTrackers[2] && PlayerTrackers[2].Health > 0)
+            {
+                SwitchCharacter(ref PlayerTrackers[2]);
+            }
+        }
+
+        // Update this pos to be same as character
+        gameObject.transform.position = ActivePlayer.transform.position;
+        AimTowardMouse();
     }
 
     public void SetCameraRotation(bool state)
     {
-        CameraIsActive = state;
         CameraFreeLook.enabled = state;
     }
 

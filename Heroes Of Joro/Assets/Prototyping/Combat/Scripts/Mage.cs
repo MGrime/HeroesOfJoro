@@ -51,6 +51,11 @@ public class Mage : PlayerBase
     #endregion
 
     #region Functions
+
+    protected void Awake()
+    {
+        Start();
+    }
     protected override void Start()
     {
         Type = PlayerType.Mage;
