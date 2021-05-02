@@ -5135,6 +5135,11 @@ PrefabInstance:
       propertyPath: _healthBar
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8195748917732686282, guid: 39a0fd49b390fe44a9e3bc024a2c2949,
+        type: 3}
+      propertyPath: _soundDelay
+      value: 12000
+      objectReference: {fileID: 0}
     - target: {fileID: 8511612672534867196, guid: 39a0fd49b390fe44a9e3bc024a2c2949,
         type: 3}
       propertyPath: _playerCamera

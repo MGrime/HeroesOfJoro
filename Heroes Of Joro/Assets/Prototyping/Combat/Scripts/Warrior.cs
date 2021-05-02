@@ -13,6 +13,10 @@ public class Warrior : PlayerBase
     // Contains the sword object
     [SerializeField] private SwordBase _sword;
 
+    [SerializeField] private AudioSource[] _swingSounds;
+    [SerializeField] private ulong _soundDelay;
+    private int _swingSoundCounter;
+
     public float SwordDamage
     {
         get => _sword.Damage;
@@ -33,6 +37,15 @@ public class Warrior : PlayerBase
 
         _swingTimer = 0.0f;
 
+        _swingSoundCounter = 0;
+
+        // Set volume
+        float volume = PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f);
+
+        foreach (var sound in _swingSounds)
+        {
+            sound.volume = volume;
+        }
     }
 
     // This fixes the ui thing. i have no idea what the real cause of the bug is
@@ -48,9 +61,21 @@ public class Warrior : PlayerBase
 
         // Check inputs
         // Left click
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !_sword._swinging)
         {
             SwingSword();
+            // Play accopanying swing sound
+            if (_swingSounds.Length != 0)
+            {
+                _swingSounds[_swingSoundCounter].Play(_soundDelay);
+
+                _swingSoundCounter++;
+
+                if (_swingSoundCounter == _swingSounds.Length)
+                {
+                    _swingSoundCounter = 0;
+                }
+            }
         }
 
         if (_sword._swinging)
