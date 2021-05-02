@@ -15,6 +15,8 @@ public class ArcherBetter : PlayerBase
     [SerializeField] private AudioSource _bowDrawSound;
     private bool _manualPlayingTracker;
 
+    [SerializeField] private AudioSource _bowShootSound;
+
     public float BowSpeed
     {
         get => _bow.HoldTime;
@@ -49,6 +51,7 @@ public class ArcherBetter : PlayerBase
         float volume = PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f);
 
         _bowDrawSound.volume = volume;
+        _bowShootSound.volume = volume;
 
         base.Start();
     }
@@ -100,6 +103,11 @@ public class ArcherBetter : PlayerBase
                     if (_animator.GetBool("isDrawn"))
                     {
                         _animator.SetBool("isDrawn", false);
+                    }
+
+                    if (!_bowShootSound.isPlaying)
+                    {
+                        _bowShootSound.Play();
                     }
 
                     // Fire
