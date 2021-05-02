@@ -46,8 +46,15 @@ public class GameManager : MonoBehaviour
         // Load prefs
         if (PlayerPrefs.HasKey("MusicVolume"))
         {
-            _loadingMusic.volume = PlayerPrefs.GetFloat("MusicVolume");
-            _dungeonMusic.volume = PlayerPrefs.GetFloat("MusicVolume");
+            if (_loadingMusic)
+            {
+                _loadingMusic.volume = PlayerPrefs.GetFloat("MusicVolume");
+            }
+
+            if (_dungeonMusic)
+            {
+                _dungeonMusic.volume = PlayerPrefs.GetFloat("MusicVolume");
+            }
         }
 
         if (_loadingMusic)
