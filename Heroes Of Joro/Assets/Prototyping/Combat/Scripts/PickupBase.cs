@@ -2,17 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// This simply acts as an interface for easier to read code
 public class PickupBase : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -2,14 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Simple script to rotate player on the main menu
 public class MainMenuIdler : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _playersToRotate;
+    #region EDITOR FIELDS
 
-    [SerializeField] private float _timeBetweenSwitch;
+    [SerializeField] private GameObject[] _playersToRotate = null;
+    [SerializeField] private float _timeBetweenSwitch = 0.0f;
+
+    #endregion
+
+    #region VARIABLES
 
     private float _currentTime;
     private int _activeIndex;
+
+    #endregion
+
+    #region FUNCTIONS
 
     // Start is called before the first frame update
     private void Start()
@@ -49,4 +59,6 @@ public class MainMenuIdler : MonoBehaviour
 
         }
     }
+
+    #endregion
 }

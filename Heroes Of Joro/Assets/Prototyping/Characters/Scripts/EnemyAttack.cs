@@ -2,21 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Class to control enemy damage dealing
 public class EnemyAttack : MonoBehaviour
 {
-    // Start is called before the first frame update
+    #region EDITOR FIELDS
+
+    // Variables to tweak damage dealing rage
     [SerializeField] private float _projectileSpeed=10.0f;
-    [SerializeField] private float _projetileLife = 1.0f;
+    [SerializeField] private float _projectileLife = 1.0f;
     [SerializeField] private float _distanceTo = 1.0f;
     [SerializeField] private float _distanceAway = 2.0f;
 
-    public int _enemyDamage = 5;
-    public float _timeAlive = 3.0f;
-    public float distanceToPlayer;
+    // Variables to control effectiveness of enemy attack
+    [SerializeField] private int _enemyDamage = 5;
 
+    // Tracks duration of enemy attack
+    [SerializeField] private float _timeAlive = 3.0f;
+
+    // Shows how fast the enemy things the player is away
+    [SerializeField] private float _distanceToPlayer;
+
+    // Shows if the enemy is close enough to deal damage
+    [SerializeField] private bool _dealDamage = true;
+
+    #endregion
+
+    #region PRIVATE DATA
+
+    // Private tracking for the player
     private Transform _target;
     private Vector3 _targetPos;
-    public bool _dealDamage = true;
+
+    #endregion
+
+    #region FUNCTIONS
+
     void Start()
     {
         _target = PlayerManager._instance.ActivePlayer.transform;
@@ -28,46 +48,64 @@ public class EnemyAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Update the target in case player has changed
         _target = PlayerManager._instance.ActivePlayer.transform;
-        distanceToPlayer = Vector3.Distance(_target.position, _targetPos);
+
+        // Calculate the distance to the player
+        _distanceToPlayer = Vector3.Distance(_target.position, _targetPos);
+
+        // Update our position to move towards the player
         transform.position = Vector3.MoveTowards(transform.position, _targetPos, _projectileSpeed * Time.deltaTime);
-        if (distanceToPlayer < _distanceTo) _dealDamage = false;        
-        if (distanceToPlayer > _distanceAway) _dealDamage = true;
+
+        // Check if we are wishing damage range
+        _dealDamage = !(_distanceToPlayer < _distanceTo);
+
+        // Decrease time alive
         _timeAlive -= Time.deltaTime;
         if (_timeAlive <= 0.0f) DestroyProjectile();
        
 
     }
 
+    // Called when the something gets close enough to collide
     public void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collision entered!");
 
+        // Check if the collision is player
         if (other.CompareTag("Player"))
         {
-            //TODO: NON Projectile attack
-            //On Simple collision with enemy hurt the player every two seconds
-            //For complex sword/claw attack I'll implement the following:
-            //1. Attach a collider to the claw/sword
-            //2. Set attack time for the enemy
-            //3. Hurt player when the sword/claw collider hits him
+            // If we are within range
             if (_dealDamage )
             {
+                // Deal damage
                 AttackPlayer();
             }
         }
     }
+    
+    // Wrapper to send damage to player
     public void AttackPlayer()
     {
+        // Messaging allows easy code, everything other than the player will ignore it
         _target.gameObject.SendMessage("ReceiveDamage", _enemyDamage);
     }
+
+    // Called when player hits the enemy's projectile 
     void ReduceProjectileHealth(int amount)
     {
-        _projetileLife -= amount;
-        if (_projetileLife <= 0) DestroyProjectile();
+        _projectileLife -= amount;
+        if (_projectileLife <= 0)
+        {
+            DestroyProjectile();
+        }
     }
+
+    // Removes this game object
     void DestroyProjectile()
     {
         Destroy(gameObject);
     }
+
+    #endregion
 }

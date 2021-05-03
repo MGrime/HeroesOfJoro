@@ -6,34 +6,38 @@ using UnityEngine.UI;
 
 public class LevelBook : MonoBehaviour
 {
-    [SerializeField] private GameObject _overlayCanvas;
+    [SerializeField] private GameObject _overlayCanvas = null;
 
     // Images to load on switch
-    [SerializeField] private Sprite _warriorSpecialImage;
-    [SerializeField] private Sprite _mageSpecialImage;
-    [SerializeField] private Sprite _archerSpecialImage;
+    [SerializeField] private Sprite _warriorSpecialImage = null;
+    [SerializeField] private Sprite _mageSpecialImage = null;
+    [SerializeField] private Sprite _archerSpecialImage = null;
 
 
     // Extracted from overlay canvas as this is a specific one scene setup
+
+    // Update with warrior/mage etc
     private Text _playerTypeText;
 
+    // Display current ocin count
     private Text _coinText;
     private int _coins;
 
+    // Display how much health the selected player has
     private Text _healthText;
 
+    // Display special upgrade count (varies from player to playeR)
     private Text _specialText;
-
     private Image _specialImage;
 
+    // Reference to the player data to manipulate
     private PlayerManager _playerManager;
     private int _levelingPlayerIndex;   // The player we are editing
 
-    private bool _isActive = false;
+    // Track the books state
+    private bool _isActive;
 
     // Store count of how many upgrades have been applied to each player
-
-
     #region Level scaling config
 
     // Can upgrade infinitely
@@ -293,7 +297,7 @@ public class LevelBook : MonoBehaviour
                     break;
                 case PlayerBase.PlayerType.Archer:
                     var speed = Convert.ToInt32(
-                        ((ArcherBetter) player).BowSpeed - 0.15f * _archerChargeSpeedUpgradeCount);
+                        ((Archer) player).BowSpeed - 0.15f * _archerChargeSpeedUpgradeCount);
                     _specialText.text = "Bow Speed (Secs): " + speed.ToString();
                     break;
                 default:

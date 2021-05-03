@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class HubSummaryLoader : MonoBehaviour
 {
-    [SerializeField] private Canvas _wonCanvas;
-    [SerializeField] private Canvas _lostCanvas;
+    // References to canvas's to trigger on return
+    [SerializeField] private Canvas _wonCanvas = null;
+    [SerializeField] private Canvas _lostCanvas = null;
 
     // Start is called before the first frame update
     public void Start()
@@ -14,7 +15,7 @@ public class HubSummaryLoader : MonoBehaviour
         // Check if player prefs has the key
         if (PlayerPrefs.HasKey("ReturnReason"))
         {
-            int returnValue = PlayerPrefs.GetInt("ReturnReason");
+            var returnValue = PlayerPrefs.GetInt("ReturnReason");
 
             if (returnValue != -1)
             {

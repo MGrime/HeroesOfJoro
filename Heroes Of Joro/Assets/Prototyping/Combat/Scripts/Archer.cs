@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherBetter : PlayerBase
+public class Archer : PlayerBase
 {
-    #region Editor Fields
+    #region EDITOR FIELDS
 
     // Bow object that actually fires the arrow
-    [SerializeField] private BowBase _bow;
+    [SerializeField] private BowBase _bow = null;
 
     // Animator to control draw animations manually
-    [SerializeField] private Animator _animator;
+    [SerializeField] private Animator _animator = null;
 
-    [SerializeField] private AudioSource _bowDrawSound;
+    // Reference to control the bow draw sound effect
+    [SerializeField] private AudioSource _bowDrawSound = null;
     private bool _manualPlayingTracker;
 
-    [SerializeField] private AudioSource _bowShootSound;
+    // Reference to the thwang sound 
+    [SerializeField] private AudioSource _bowShootSound = null;
 
+    // Accessor for bow speed in code
     public float BowSpeed
     {
         get => _bow.HoldTime;
@@ -25,13 +28,16 @@ public class ArcherBetter : PlayerBase
 
     #endregion
 
-    #region Private Data
+    #region PRIVATE DATA
 
     // Track how long we have been holding the mouse button and if we are currently charging
-    private float   m_TimeHeld;
+    private float _timeHeld;
 
     #endregion
 
+    #region FUNCTIONS
+
+    // Force start on awake as it can be hit or miss due to the external switching logic
     protected void Awake()
     {
         Start();
@@ -42,7 +48,7 @@ public class ArcherBetter : PlayerBase
     {
         Type = PlayerType.Archer;
 
-        m_TimeHeld = 0.0f;
+        _timeHeld = 0.0f;
 
         // The sound clip is .8 seconds.
         // We need to match it to the current bow speed
@@ -76,13 +82,13 @@ public class ArcherBetter : PlayerBase
                 _manualPlayingTracker = true;
             }
             // Increase upto the bow max
-            if (m_TimeHeld < _bow.HoldTime)
+            if (_timeHeld < _bow.HoldTime)
             {
-                m_TimeHeld += Time.deltaTime;
+                _timeHeld += Time.deltaTime;
             }
 
             // Trigger animation after a fractional delay to stop gltichy spam
-            if (m_TimeHeld > _bow.HoldTime / 10.0f)
+            if (_timeHeld > _bow.HoldTime / 10.0f)
             {
                 if (!_animator.GetBool("isDrawn"))
                 {
@@ -102,7 +108,7 @@ public class ArcherBetter : PlayerBase
 
                 _manualPlayingTracker = false;
 
-                if (m_TimeHeld > _bow.HoldTime / 10.0f)
+                if (_timeHeld > _bow.HoldTime / 10.0f)
                 {
                     // Switch out the animation
                     if (_animator.GetBool("isDrawn"))
@@ -120,8 +126,10 @@ public class ArcherBetter : PlayerBase
 
                 }
                 // Reset
-                m_TimeHeld = 0.0f;
+                _timeHeld = 0.0f;
             }
         }
     }
+
+    #endregion
 }

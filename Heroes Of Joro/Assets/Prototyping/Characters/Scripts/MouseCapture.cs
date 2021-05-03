@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Simple class to lock the cursor in UI scene
+// May not always be in use but has been useful
 public class MouseCapture : MonoBehaviour
 {
     void Update()

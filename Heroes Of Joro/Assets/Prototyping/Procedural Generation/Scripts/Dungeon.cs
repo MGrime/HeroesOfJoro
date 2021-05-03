@@ -180,7 +180,7 @@ public class Dungeon : MonoBehaviour
         {
             _enemyClones.Add(Instantiate(_enemyPrefab, floor.BuiltPieces[i].Pivot.transform.position, Quaternion.identity));
             _enemyClones[_enemyClones.Count - 1].GetComponentInChildren<EnemyController>().Enable();
-            _enemyClones[_enemyClones.Count - 1].GetComponentInChildren<EnemyController>()._patrolPoint.transform.position = floor.BuiltPieces[i + 1].Pivot.transform.position;
+            _enemyClones[_enemyClones.Count - 1].GetComponentInChildren<EnemyController>().PatrolPoint.transform.position = floor.BuiltPieces[i + 1].Pivot.transform.position;
             if (i == 0)//Temporary to get rid of enemy that spawn in main room
             {
                 _enemyClones[_enemyClones.Count - 1].transform.position = floor.BuiltPieces[i + 1].Pivot.transform.position;

@@ -7,17 +7,15 @@ public class Mage : PlayerBase
     #region Editor Fields
 
     // Contains the camera and the 3D model
-    [SerializeField] private ThirdPersonMovementScript _physicalPlayer;
+    [SerializeField] private ThirdPersonMovementScript _physicalPlayer = null;
     
     // Contains the projectile objects for each spell
-    [SerializeField] private SpellBase[] _spells;
+    [SerializeField] private SpellBase[] _spells = null;
 
     // Contains the targeting sprite for targeting spells
-    [SerializeField] private SpriteRenderer _reticle;
+    [SerializeField] private SpriteRenderer _reticle = null;
 
-    // How long between spells
-    [SerializeField] private float _castCooldown = 2.0f;
-
+    // How much mana the mage starts with when no upgrades active
     [SerializeField] private float _maxMana = 100.0f;
 
     public float MaxMana
@@ -27,9 +25,8 @@ public class Mage : PlayerBase
     }
 
     // UI
-
-    [SerializeField] private Slider _manaBar;
-    [SerializeField] private Text _activeSpell;
+    [SerializeField] private Slider _manaBar = null;
+    [SerializeField] private Text _activeSpell = null;
 
     #endregion
 
@@ -44,10 +41,9 @@ public class Mage : PlayerBase
     // Store current health/mana
     private float _mana;
 
+    // Track if we are currently in an attack state
     private bool _isAttacking;
 
-    //Enemy Damage
-    private int _enemyDamage;
     #endregion
 
     #region Functions
@@ -59,8 +55,6 @@ public class Mage : PlayerBase
     protected override void Start()
     {
         Type = PlayerType.Mage;
-
-        base.Start();
 
         // Start at the base of the spell array
         if (_spells.Length > 0)
@@ -74,6 +68,8 @@ public class Mage : PlayerBase
 
         // Disable until we know targeting spell equiped
         _reticle.enabled = false;
+
+        base.Start();
     }
 
 
@@ -185,9 +181,9 @@ public class Mage : PlayerBase
     private void FireProjectileSpell()
     {
         // Create a new spell object
-        GameObject newSpellObject = Instantiate(_spells[_selectedSpellIndex].gameObject,_physicalPlayer.transform.position + new Vector3(0,2,0),_physicalPlayer.transform.rotation);
+        Instantiate(_spells[_selectedSpellIndex].gameObject,_physicalPlayer.transform.position + new Vector3(0,2,0),_physicalPlayer.transform.rotation);
 
-        // This spell script controls the behaviour. Thats the beauty of an extra level of abstraction
+        // The spell script controls the behaviour. That's the beauty of an extra level of abstraction
     }
 
     private IEnumerator FireProjectileSpellAnimated()
@@ -202,7 +198,7 @@ public class Mage : PlayerBase
     private void FireTargetingSpell()
     {
         // Create spell object at reticle position
-        GameObject newSpellObject = Instantiate(_spells[_selectedSpellIndex].gameObject, _reticle.gameObject.transform.position, Quaternion.identity);
+        Instantiate(_spells[_selectedSpellIndex].gameObject, _reticle.gameObject.transform.position, Quaternion.identity);
     }
 
 

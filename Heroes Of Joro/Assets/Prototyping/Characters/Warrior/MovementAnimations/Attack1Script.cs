@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Attack1Script : StateMachineBehaviour
 {
-  
-   
-   
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetBool("AttackOne", false);
         Debug.Log("Attack 1 set to false!");
-        Debug.Log(ThirdPersonMovementScript.numOfClicks);
+        Debug.Log(ThirdPersonMovementScript.NumOfClicks);
 
-        if (ThirdPersonMovementScript.numOfClicks >= 2)
+        if (ThirdPersonMovementScript.NumOfClicks >= 2)
         {
             animator.SetBool("AttackTwo", true);
         }

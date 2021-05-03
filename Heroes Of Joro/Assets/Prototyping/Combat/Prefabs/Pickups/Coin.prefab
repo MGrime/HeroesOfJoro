@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09a60078066ac94fb12ffcc40f818ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 3659160173764630097}
+  _rigidBody: {fileID: 3659160173764630097}
   _sphereCollider: {fileID: 8342371875182734705}
 --- !u!54 &3659160173764630097
 Rigidbody:

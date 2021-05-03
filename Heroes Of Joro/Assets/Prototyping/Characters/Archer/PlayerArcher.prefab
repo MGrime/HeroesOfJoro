@@ -1319,11 +1319,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterController: {fileID: 4470999408544031370}
   _playerCamera: {fileID: 0}
-  _moveSpeed: 10
   _turnSmoothTime: 0.1
   _gravity: 10
   _vSpeed: 0
-  _isTouching: 0
   _footstepSound: {fileID: 0}
   _playerAnimator: {fileID: 8640743090247738124}
 --- !u!114 &9204394838980840653
@@ -2425,7 +2423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _arrow: {fileID: 1667470530390146973, guid: 208c6de2b06e9ef46819ed2d7f69d3d6, type: 3}
   _fastDamage: 5
-  _chargedBaseDamage: 80
+  _chargedBaseDamage: 120
   _holdTime: 2
 --- !u!1 &6249906949941210164
 GameObject:

@@ -5,11 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class HubPortal : MonoBehaviour
 {
-    public string _mainGameScene;
-    public AudioSource _teleportSound;
-    public int _targetDungeon;
+    // Configure where this portal sends us to
+    // First variable sets scene. Second variable signals in scene load which dungeon to activate
+    [SerializeField] private string _mainGameScene = "";
+    [SerializeField] private int _targetDungeon = 0;
 
-    public bool _isExit;
+    // Optional sound effect for teleportation
+    [SerializeField] private AudioSource _teleportSound = null;
+
+    // Marks if this portal exits the game
+    [SerializeField] private bool _isExit = false;
 
     public void OnTriggerEnter(Collider other)
     {

@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
                     case PlayerBase.PlayerType.Archer:
                     {
                         // Convert to type
-                        var archer = (ArcherBetter) player;
+                        var archer = (Archer) player;
 
                         // Read in values, default values are the standarsd
                         var maxHealth = PlayerPrefs.GetFloat("Archer_MaxHealth", archer.MaxHealth);

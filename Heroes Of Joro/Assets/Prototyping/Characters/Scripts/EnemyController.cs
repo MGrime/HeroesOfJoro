@@ -5,51 +5,79 @@ using UnityEngine;
 using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
-    #region Editor Fields
+    #region EDITOR FIELDS
+
+    // Controls how much the enemy can see in front
     [SerializeField] private float _lookRadius = 10.0f;
+
+    // Controls the granularity of the rotation
     [SerializeField] private float _smoothRotation = 5.0f;
-    public GameObject _patrolPoint;
-    public GameObject _enemyProjectile;
-    public int _enemyHealth = 100;
+
+    // Tracking variables for objects in the world used by the enemy
+    [SerializeField] private GameObject _patrolPoint = null;
+    [SerializeField] private GameObject _enemyProjectile = null;
+
+    // Standard variables to control enemy stats
+    [SerializeField] private int _enemyHealth = 100;
     [SerializeField] private float _setAttackTime = 2.0f;
-    [SerializeField] private Animator _enemyAnimator;
-    [SerializeField] private PickupBase _dropPickup;
-    [SerializeField] private EnemyType _enemyType;
+
+    // Tracking variables for other parts of the enemy object this script needs
+    [SerializeField] private Animator _enemyAnimator = null;
+    [SerializeField] private PickupBase _dropPickup = null;
+    [SerializeField] private EnemyType _enemyType = EnemyType.MutantOne;
+
     #endregion
-    #region Private Data
+
+    #region PUBLIC ACCESSORS
+
+    public GameObject PatrolPoint => _patrolPoint;
+
+    #endregion
+
+    #region PRIVATE DATA
+
+    // Same controller shared between enemies
     private enum EnemyType
     {
         MutantOne = 0,
         MutantTwo = 1,
     }
     
+    // Variables to track how long between state changes and the object that is our current target
     private Transform _target;
     private float _attackTime;
     private float _lookTime;
-    private const float _bufferTime = 3.0f;
-    private const float _waitTime = 5.0f;
+
+    // Constants of how long to wait after finishing a state. Different based on if looking around or not
+    private const float BufferTime = 3.0f;
+    private const float WaitTime = 5.0f;
+
+    // Variables to store information needed for navigation
     private NavMeshAgent _agent;
     private Vector3 _startingPosition;
     private Vector3 _lastPPoint;
-    private bool _lookAround = false;
+
+    // State variables to store what the enemy should be doing and if we have recently taken damage
+    private bool _lookAround;
     private int _playerDamage;
-    private bool _playerChased = false;
-    private bool _patrolSwitch = false;
-    //Will change them to private later need them there for debugging
-    public float distanceToPlayer;
-    public float distanceToStart;
-    public float distanceToPoint;
-    private const float _minDistance = 3.0f;
+    private bool _playerChased;
+
+    // Variables to track distances to key important things for the enemy to know about
+    private const float MinDistance = 3.0f;
+    private float _distanceToPlayer;
+    private float _distanceToStart;
+    private float _distanceToPoint;
+    
     #endregion
+
     #region Functions
+
     // Start is called before the first frame update
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
         _startingPosition = transform.position;
         _attackTime = _setAttackTime;
-        //enabled = false;
-        //_target = PlayerManager._instance.PlayerTracker.transform;//Give as weird error that its null
 
     }
 
@@ -66,13 +94,13 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         _target = PlayerManager._instance.ActivePlayer.transform; 
-        distanceToPlayer = Vector3.Distance(_target.position, transform.position);
-        distanceToStart = Vector3.Distance(_startingPosition, transform.position);
-        distanceToPoint = Vector3.Distance(_patrolPoint.transform.position, transform.position);
+        _distanceToPlayer = Vector3.Distance(_target.position, transform.position);
+        _distanceToStart = Vector3.Distance(_startingPosition, transform.position);
+        _distanceToPoint = Vector3.Distance(_patrolPoint.transform.position, transform.position);
 
         _attackTime -= Time.deltaTime;
         _lookTime -= Time.deltaTime;
-        if (distanceToPlayer <= _lookRadius)
+        if (_distanceToPlayer <= _lookRadius)
         {
             _lookAround = false;
             _playerChased = true;
@@ -82,7 +110,7 @@ public class EnemyController : MonoBehaviour
             //Start following the player
             if (_enemyType == EnemyType.MutantOne)
             {
-                if (distanceToPlayer <= _agent.stoppingDistance)
+                if (_distanceToPlayer <= _agent.stoppingDistance)
                 {
                   
                     //Need to create enemy type tags
@@ -97,12 +125,10 @@ public class EnemyController : MonoBehaviour
             else if (_enemyType == EnemyType.MutantTwo)
             {
                 StartRunning();
-                if (distanceToPlayer <= _agent.stoppingDistance)
+                if (_distanceToPlayer <= _agent.stoppingDistance)
                 {
                     StopRunning();
                     _enemyAnimator.SetBool("isAttacking", true);
-                   
-
                 }
                 else
                 {
@@ -123,13 +149,13 @@ public class EnemyController : MonoBehaviour
 
 
     #endregion
+
     #region Enemy Behaviour Functions
     void Patrol()
     {
         if (_enemyType == EnemyType.MutantTwo) StopRunning();
         if (_playerChased)
         {
-            if (_lastPPoint == null) _lastPPoint = _patrolPoint.transform.position;
             _agent.SetDestination(_lastPPoint);
             _enemyAnimator.SetBool("isWalking", true);
             _playerChased = false;
@@ -137,13 +163,13 @@ public class EnemyController : MonoBehaviour
         else
         {
             //Return to starting position
-            if (distanceToStart <= _minDistance)//Go to patrol point
+            if (_distanceToStart <= MinDistance)//Go to patrol point
             {
                 _lastPPoint = _patrolPoint.transform.position;
                 if (LookAround()) _agent.SetDestination(_patrolPoint.transform.position);
             }
 
-            if (distanceToPoint <= _minDistance)//Go to start point
+            if (_distanceToPoint <= MinDistance)//Go to start point
             {
                 _lastPPoint = _startingPosition;
                 if (LookAround()) _agent.SetDestination(_startingPosition);
@@ -157,14 +183,14 @@ public class EnemyController : MonoBehaviour
         {
             _enemyAnimator.SetBool("isWalking", false);
             _lookAround = true;
-            _lookTime = _waitTime;
+            _lookTime = WaitTime;
             return false;
         }
         if (_lookAround && _lookTime <= 0.0f)
         {
             _enemyAnimator.SetBool("isWalking", true);
             _lookAround = false;
-            _lookTime = _bufferTime;
+            _lookTime = BufferTime;
             return true;
         }
         return false;
@@ -174,8 +200,6 @@ public class EnemyController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            int _enemyDamage = 5;
-            //_target.gameObject.SendMessage("ReceiveDamage", _enemyDamage);
             Debug.Log("Player is hit!");
         }
     }
@@ -205,8 +229,8 @@ public class EnemyController : MonoBehaviour
         _playerDamage = damage;
 
         // Flash the enemy red when they get hit
-        Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
-        foreach (Renderer r in renderers)
+        Renderer[] rendererObjects = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in rendererObjects)
         {
             r.material.color = Color.red;
         }
@@ -240,8 +264,8 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         // Now after a second set back to wait
-        Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
-        foreach (Renderer r in renderers)
+        Renderer[] rendererObjects = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in rendererObjects)
         {
             r.material.color = Color.white;
         }

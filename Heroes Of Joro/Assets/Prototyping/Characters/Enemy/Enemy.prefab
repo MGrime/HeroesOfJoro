@@ -187,7 +187,6 @@ GameObject:
   - component: {fileID: 8038513665255999477}
   - component: {fileID: 8716310828353987110}
   - component: {fileID: 8716310828353987130}
-  - component: {fileID: 1965584461}
   m_Layer: 9
   m_Name: EnemyControls
   m_TagString: Enemy
@@ -289,19 +288,6 @@ MonoBehaviour:
   distanceToPlayer: 0
   distanceToStart: 0
   distanceToPoint: 0
---- !u!114 &1965584461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8716310828353987111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94471af576e3be14ebe1fd8df555afa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyAnimator: {fileID: 1735266451}
 --- !u!1001 &2138021150997098764
 PrefabInstance:
   m_ObjectHideFlags: 0

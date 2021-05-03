@@ -70,21 +70,21 @@ public class PlayerManager : MonoBehaviour
         {
             if (ActivePlayer != PlayerTrackers[0] && PlayerTrackers[0].Health > 0)
             {
-                SwitchCharacter(ref PlayerTrackers[0]);
+                SwitchCharacter(PlayerTrackers[0]);
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             if (ActivePlayer != PlayerTrackers[1] && PlayerTrackers[1].Health > 0)
             {
-                SwitchCharacter(ref PlayerTrackers[1]);
+                SwitchCharacter(PlayerTrackers[1]);
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             if (ActivePlayer != PlayerTrackers[2] && PlayerTrackers[2].Health > 0)
             {
-                SwitchCharacter(ref PlayerTrackers[2]);
+                SwitchCharacter(PlayerTrackers[2]);
             }
         }
 
@@ -98,7 +98,7 @@ public class PlayerManager : MonoBehaviour
         CameraFreeLook.enabled = state;
     }
 
-    void SwitchCharacter(ref PlayerBase newPlayer)
+    void SwitchCharacter(PlayerBase newPlayer)
     {
         // Find type of player to modify UI
         if (_manaBar)
@@ -156,7 +156,7 @@ public class PlayerManager : MonoBehaviour
             if (PlayerTrackers[i].Health > 0.0f)
             {
                 foundPlayer = true;
-                SwitchCharacter(ref PlayerTrackers[i]);
+                SwitchCharacter(PlayerTrackers[i]);
                 break;
             }
         }
