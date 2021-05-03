@@ -55,9 +55,8 @@ public class ThirdPersonMovementScript : MonoBehaviour
 
     #endregion
 
-    #region FUNCTIONS
-
-    private void Start()
+    #region FUNCTION
+    private void Awake()
     {
         // Start with no control. Dungeon will enable when complete
         enabled = false;
