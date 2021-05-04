@@ -19,6 +19,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8326542930998312008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255008107125869661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1954f18171a4f374b8fc2f2064fc5df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyProjectile: {fileID: 5463877361342519328, guid: c317539141516664fbe11fffa2cc4a53,
+    type: 3}
 --- !u!1 &2979483344603667066
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +238,7 @@ NavMeshAgent:
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 220
-  m_StoppingDistance: 2
+  m_StoppingDistance: 4
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -285,9 +299,6 @@ MonoBehaviour:
   _dropPickup: {fileID: 8062157936487841846, guid: 64f11f7796616d14c9f0eca3b3dcceba,
     type: 3}
   _enemyType: 0
-  distanceToPlayer: 0
-  distanceToStart: 0
-  distanceToPoint: 0
 --- !u!1001 &2138021150997098764
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,7 +15,6 @@ public class EnemyController : MonoBehaviour
 
     // Tracking variables for objects in the world used by the enemy
     [SerializeField] private GameObject _patrolPoint = null;
-    [SerializeField] private GameObject _enemyProjectile = null;
 
     // Standard variables to control enemy stats
     [SerializeField] private int _enemyHealth = 100;
@@ -112,14 +111,14 @@ public class EnemyController : MonoBehaviour
             {
                 if (_distanceToPlayer <= _agent.stoppingDistance)
                 {
-                  
-                    //Need to create enemy type tags
-                    if (_attackTime <= 0.0f)
-                    {
-                        Instantiate(_enemyProjectile, transform.position + new Vector3(0,2.0f,0), Quaternion.identity);
-                        _attackTime = _setAttackTime;
-                    }
+                    _enemyAnimator.SetBool("Attacking", true);
+                    _enemyAnimator.SetBool("isWalking", false);
 
+                }
+                else
+                {
+                    _enemyAnimator.SetBool("Attacking", false);
+                    _enemyAnimator.SetBool("isWalking", true);
                 }
             }
             else if (_enemyType == EnemyType.MutantTwo)
@@ -157,6 +156,7 @@ public class EnemyController : MonoBehaviour
         if (_playerChased)
         {
             _agent.SetDestination(_lastPPoint);
+            _enemyAnimator.SetBool("Attacking", false);
             _enemyAnimator.SetBool("isWalking", true);
             _playerChased = false;
         }
@@ -177,6 +177,8 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+
+   
     bool LookAround()
     {
         if (!_lookAround && _lookTime <= 0.0f)
@@ -201,6 +203,7 @@ public class EnemyController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Player is hit!");
+            other.gameObject.SendMessage("ReceiveDamage", 5);
         }
     }
 

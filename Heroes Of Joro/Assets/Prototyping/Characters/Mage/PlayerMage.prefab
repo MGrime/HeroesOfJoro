@@ -87,7 +87,6 @@ MonoBehaviour:
   - {fileID: 4569553060908324738, guid: 0206dcf957e351b45a1489a29b4966cd, type: 3}
   - {fileID: 1787956836036324107, guid: 5191bfcd4a3960f4fbecf09661c02b18, type: 3}
   _reticle: {fileID: 5625150739552635643}
-  _castCooldown: 2
   _maxMana: 100
   _manaBar: {fileID: 0}
   _activeSpell: {fileID: 0}
@@ -153,11 +152,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterController: {fileID: 1936980736311625733}
   _playerCamera: {fileID: 0}
-  _moveSpeed: 10
   _turnSmoothTime: 0.1
   _gravity: 10
   _vSpeed: 0
-  _isTouching: 0
+  _footstepSound: {fileID: 0}
   _playerAnimator: {fileID: 1936980737245572803}
 --- !u!114 &6580097324133574210
 MonoBehaviour:
@@ -1516,7 +1514,7 @@ Transform:
   m_GameObject: {fileID: 5512457064995783231}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.05, y: 0.05, z: 0.88}
-  m_LocalScale: {x: 2.1, y: 2.1000001, z: 2.1000001}
+  m_LocalScale: {x: 0.1499524, y: 0.14995241, z: 0.14995241}
   m_Children: []
   m_Father: {fileID: 2119841696426619067}
   m_RootOrder: 2
@@ -1560,7 +1558,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: ca3207f2293287245b5f31cd65e47ffd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
