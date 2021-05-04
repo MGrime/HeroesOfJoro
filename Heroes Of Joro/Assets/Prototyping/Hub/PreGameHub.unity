@@ -861,16 +861,16 @@ MonoBehaviour:
   m_CollideAgainst:
     serializedVersion: 2
     m_Bits: 311
-  m_IgnoreTag: Player
+  m_IgnoreTag: Environment
   m_TransparentLayers:
     serializedVersion: 2
     m_Bits: 512
   m_MinimumDistanceFromTarget: 0.5
-  m_AvoidObstacles: 1
+  m_AvoidObstacles: 0
   m_DistanceLimit: 0
   m_MinimumOcclusionTime: 0
   m_CameraRadius: 0.1
-  m_Strategy: 2
+  m_Strategy: 0
   m_MaximumEffort: 4
   m_SmoothingTime: 0.2
   m_Damping: 1
@@ -2253,7 +2253,7 @@ MonoBehaviour:
   m_VerticalDamping: 0
   m_ScreenX: 0.5
   m_ScreenY: 0.55
-  m_DeadZoneWidth: 0
+  m_DeadZoneWidth: 0.1024499
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
   m_SoftZoneHeight: 0.8
@@ -3840,8 +3840,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainGameScene: 
-  _teleportSound: {fileID: 0}
   _targetDungeon: 0
+  _teleportSound: {fileID: 0}
   _isExit: 1
 --- !u!1 &1300915612
 GameObject:
@@ -5254,8 +5254,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainGameScene: PGSandbox
-  _teleportSound: {fileID: 0}
   _targetDungeon: 0
+  _teleportSound: {fileID: 0}
   _isExit: 0
 --- !u!1001 &1653660555
 PrefabInstance:
@@ -5572,8 +5572,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainGameScene: PGSandbox
-  _teleportSound: {fileID: 0}
   _targetDungeon: 1
+  _teleportSound: {fileID: 0}
   _isExit: 0
 --- !u!1 &1780591073 stripped
 GameObject:
@@ -5594,8 +5594,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainGameScene: PGSandbox
-  _teleportSound: {fileID: 0}
   _targetDungeon: 2
+  _teleportSound: {fileID: 0}
   _isExit: 0
 --- !u!1 &1803541714
 GameObject:

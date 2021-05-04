@@ -88,7 +88,7 @@ public class EnemyAttack : MonoBehaviour
     public void AttackPlayer()
     {
         // Messaging allows easy code, everything other than the player will ignore it
-       // _target.gameObject.SendMessage("ReceiveDamage", _enemyDamage);
+        _target.gameObject.SendMessage("ReceiveDamage", _enemyDamage);
     }
 
     // Called when player hits the enemy's projectile 
